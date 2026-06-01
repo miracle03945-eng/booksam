@@ -169,9 +169,12 @@
       <div id="panel-materials">
         <h2 class="cs-content-title">📋 교재 자료실</h2>
         <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
-          <select class="sort-select"><option>전체 카테고리</option><option>초등</option><option>중학</option><option>고등</option></select>
-          <select class="sort-select"><option>전체 과목</option><option>영어</option><option>수학</option></select>
-          <select class="sort-select"><option>자료 유형</option><option>정답지</option><option>MP3</option><option>보충자료</option></select>
+          <select id="matFilterCat"  class="sort-select" onchange="applyMatFilter()">
+            <option value="">전체 카테고리</option><option value="초등">초등</option><option value="중학">중학</option><option value="고등">고등</option>
+          </select>
+          <select id="matFilterType" class="sort-select" onchange="applyMatFilter()">
+            <option value="">자료 유형 전체</option><option value="정오표">정오표</option><option value="정답지">정답 및 해석</option><option value="MP3">MP3 바로 듣기</option><option value="PDF">본문 PDF</option><option value="MP3파일">MP3 파일</option>
+          </select>
         </div>
         <table class="notice-table">
           <thead>
@@ -650,30 +653,107 @@ function setCurricLevel(btn, level) {
 
 function downloadFile(name) { Toast.show(`"${name}" 다운로드가 시작됩니다.`,'success'); }
 
-// ── 교재 자료실 ──
-const MATERIALS = [
-  {id:10, title:'초등 영어 어휘 완성 1단계 - 정답지',     type:'정답지',  cat:'초등', date:'2026.03.01', link:'books.html?cat=elementary&subject=영어'},
-  {id:9,  title:'초등 영어 어휘 완성 1단계 - MP3 음원',   type:'MP3',     cat:'초등', date:'2026.03.01', link:'books.html?cat=elementary&subject=영어'},
-  {id:8,  title:'중등 영어 어휘 마스터 1 - 정답지',       type:'정답지',  cat:'중학', date:'2026.02.20', link:'book-detail.html?id=6'},
-  {id:7,  title:'중학수학 개념+유형 - 보충 연습 문제',    type:'보충자료',cat:'중학', date:'2026.02.15', link:'books.html?cat=middle&subject=수학'},
-  {id:6,  title:'수능 영어 어휘 2000 - 단어장 PDF',      type:'PDF',     cat:'고등', date:'2026.02.10', link:'books.html?cat=high&subject=영어'},
-  {id:5,  title:'파닉스 마스터 기초편 - 음원 파일',      type:'MP3',     cat:'초등', date:'2026.02.05', link:'book-detail.html?id=1'},
-  {id:4,  title:'고등 수학Ⅰ 개념 완성 - 정답 및 해설',  type:'정답지',  cat:'고등', date:'2026.01.30', link:'books.html?cat=high&subject=수학'},
-  {id:3,  title:'수능 영어 독해 실전 모의고사 - 해설지', type:'정답지',  cat:'고등', date:'2026.01.25', link:'books.html?cat=high&subject=영어'},
-  {id:2,  title:'중등 영어 어휘 마스터 2 - 정답지',      type:'정답지',  cat:'중학', date:'2026.01.20', link:'book-detail.html?id=7'},
-  {id:1,  title:'초등 영어 독해 Ready Go 1 - 정답지',    type:'정답지',  cat:'초등', date:'2026.01.15', link:'books.html?cat=elementary&subject=영어'},
-];
-document.getElementById('materialsBody').innerHTML = MATERIALS.map(r => `
-  <tr style="cursor:pointer;" onclick="location.href='${r.link}'" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
-    <td style="color:var(--muted);text-align:center;">${r.id}</td>
-    <td style="font-weight:600;color:var(--navy);">${r.title}</td>
-    <td><span style="background:var(--bg2);padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600;">${r.type}</span></td>
-    <td style="font-size:12px;color:var(--muted);">${r.cat}</td>
-    <td style="color:var(--muted);font-size:12px;">${r.date}</td>
-    <td style="text-align:center;" onclick="event.stopPropagation()">
-      <button onclick="downloadFile('${r.title}')" style="background:var(--navy);color:white;border:none;padding:5px 10px;border-radius:4px;font-size:11px;cursor:pointer;font-weight:700;">⬇ 받기</button>
-    </td>
-  </tr>`).join('');
+// ── 교재 자료실 (실제 BOOKS 기반 자동 생성) ──
+const _CLAB = {elementary:'초등', middle:'중학', high:'고등'};
+
+function _matTypes(book) {
+  const rows = [
+    {type:'정오표',  label:'정오표',          login:false, stream:false},
+    {type:'정답지',  label:'정답 및 해석',     login:false, stream:false},
+  ];
+  if (book.subject === '영어') {
+    rows.push({type:'MP3',     label:'MP3 바로 듣기', login:false, stream:true});
+    rows.push({type:'MP3파일', label:'MP3 파일',      login:true,  stream:false});
+  }
+  rows.push({type:'PDF', label:'본문 (PDF)', login:true, stream:false});
+  return rows;
+}
+
+const ALL_MATS = [];
+BOOKS.forEach(book => {
+  _matTypes(book).forEach(m => {
+    ALL_MATS.push({
+      bookId:    book.id,
+      bookTitle: book.title,
+      fullTitle: `${book.title} — ${m.label}`,
+      type:      m.type,
+      cat:       _CLAB[book.cat],
+      date:      book.date || '2026.01.01',
+      login:     m.login,
+      stream:    m.stream,
+    });
+  });
+});
+
+function renderMaterials(list) {
+  if (!list.length) {
+    document.getElementById('materialsBody').innerHTML =
+      '<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--muted);">해당 자료가 없습니다.</td></tr>';
+    return;
+  }
+  document.getElementById('materialsBody').innerHTML = list.map((r, i) => {
+    const idx = ALL_MATS.indexOf(r);
+    const loginBadge = r.login
+      ? '<span style="font-size:10px;background:#fff3e0;color:#e65c00;padding:1px 6px;border-radius:2px;margin-left:6px;font-weight:700;">🔒 로그인</span>'
+      : '';
+    const btnColor = r.login ? '#888' : 'var(--navy)';
+    const btnText  = r.stream ? '▶ 듣기' : '⬇ 받기';
+    return `
+      <tr style="cursor:pointer;" onclick="location.href='book-detail.html?id=${r.bookId}'"
+          onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+        <td style="color:var(--muted);text-align:center;">${i+1}</td>
+        <td style="font-weight:600;color:var(--navy);">${r.fullTitle}${loginBadge}</td>
+        <td><span style="background:var(--bg2);padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600;">${r.type}</span></td>
+        <td style="font-size:12px;color:var(--muted);">${r.cat}</td>
+        <td style="color:var(--muted);font-size:12px;">${r.date}</td>
+        <td style="text-align:center;" onclick="event.stopPropagation()">
+          <button onclick="matDownload(${idx})"
+            style="background:${btnColor};color:white;border:none;padding:5px 10px;border-radius:4px;font-size:11px;cursor:pointer;font-weight:700;">${btnText}</button>
+        </td>
+      </tr>`;
+  }).join('');
+}
+
+function matDownload(idx) {
+  const r = ALL_MATS[idx];
+  if (r.login && localStorage.getItem('isLoggedIn') !== 'true') {
+    document.getElementById('_matLoginOv')?.remove();
+    const ov = document.createElement('div');
+    ov.id = '_matLoginOv';
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center;';
+    ov.innerHTML = `
+      <div style="background:#fff;border-radius:14px;padding:36px 32px;max-width:320px;width:90%;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.18);">
+        <div style="font-size:36px;margin-bottom:12px;">🔒</div>
+        <div style="font-size:16px;font-weight:800;color:#1a2e44;margin-bottom:8px;">로그인이 필요합니다</div>
+        <div style="font-size:13px;color:#888;margin-bottom:24px;line-height:1.7;">본문 PDF · MP3 파일은<br>로그인 후 이용하실 수 있습니다.</div>
+        <div style="display:flex;gap:10px;">
+          <button onclick="document.getElementById('_matLoginOv').remove()"
+            style="flex:1;padding:12px;border:1.5px solid #ddd;border-radius:8px;background:#fff;font-size:14px;font-weight:700;cursor:pointer;color:#555;">닫기</button>
+          <button onclick="localStorage.setItem('redirectAfterLogin',location.href);location.href='login.html';"
+            style="flex:1;padding:12px;border:none;border-radius:8px;background:#dc2626;color:#fff;font-size:14px;font-weight:700;cursor:pointer;">로그인 바로가기</button>
+        </div>
+      </div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+    return;
+  }
+  if (r.stream) {
+    location.href = `book-detail.html?id=${r.bookId}`;
+    return;
+  }
+  Toast.show(`"${r.fullTitle}" 다운로드가 시작됩니다.`, 'success');
+}
+
+function applyMatFilter() {
+  const cat  = document.getElementById('matFilterCat').value;
+  const type = document.getElementById('matFilterType').value;
+  renderMaterials(ALL_MATS.filter(m =>
+    (!cat  || m.cat  === cat) &&
+    (!type || m.type === type)
+  ));
+}
+
+renderMaterials(ALL_MATS);
 
 // ── 데일리 외국어 ──
 const DAILY_RES = {
