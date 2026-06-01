@@ -54,9 +54,16 @@ const Cart = {
   }
 };
 
+// 비로그인 시 잔존 wishlist 데이터 제거
+if (localStorage.getItem('isLoggedIn') !== 'true') {
+  localStorage.removeItem('booksam_wish');
+}
+
 // Wishlist
 const Wish = {
-  items: JSON.parse(localStorage.getItem('booksam_wish') || '[]'),
+  items: localStorage.getItem('isLoggedIn') === 'true'
+    ? JSON.parse(localStorage.getItem('booksam_wish') || '[]')
+    : [],
 
   toggle(id) {
     if (this.has(id)) {
