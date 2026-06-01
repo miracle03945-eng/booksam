@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>도서 목록 - 북샘</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- TOP UTILITY BAR -->
+<div class="util-topbar">
+  <div class="util-topbar-inner">
+    <div class="util-links">
+      <a href="login.html" class="util-link">로그인</a>
+      <a href="login.html" class="util-link">회원가입</a>
+      <a href="customer.html" class="util-link">고객센터</a>
+      <a href="cart.html" class="util-link">장바구니 <span class="cart-badge" style="display:none">0</span></a>
+      <a href="mypage.html" class="util-link">마이페이지</a>
+    </div>
+  </div>
+</div>
+<div class="util-bar">
+  <div class="util-bar-inner">
+    <a href="index.html" class="util-logo">
+      <span class="logo-mark">YBM북스</span>
+
+      <span class="logo-badge">초중고</span>
+    </a>
+    <div class="header-search">
+      <div class="search-wrap">
+        <select class="search-select" id="searchCat">
+          <option value="">카테고리 전체</option>
+          <option value="elementary">초등</option>
+          <option value="middle">중학</option>
+          <option value="high">고등</option>
+        </select>
+        <select class="search-select2" id="searchType">
+          <option value="">전체</option>
+          <option value="참고서">참고서</option>
+          <option value="교과서">교과서</option>
+          <option value="ELT">ELT</option>
+          <option value="일반">일반/수험서</option>
+        </select>
+        <input type="text" class="search-input" id="searchInput" placeholder="초등, 중등, 고등 교재명을 입력하세요">
+        <button class="search-btn" onclick="applyFilter()">🔍</button>
+      </div>
+    </div>
+    <div class="gnb-special">
+      <a href="https://www.ybmbooksam.com/html/main/index" target="_blank" class="btn-orange">강사용 Y튜터 ↗</a>
+      <a href="books.html" class="btn-blue">YBM북스-성인 ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- GNB -->
+<nav class="gnb-bar">
+  <div class="gnb-inner">
+    <button class="gnb-all"><span class="hamburger">☰</span> 전체 카테고리</button>
+    <div class="gnb-nav">
+      <div class="gnb-item" data-cat="elementary">
+        <a href="books.html?cat=elementary" class="gnb-link">초등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--elem);">
+            <span class="dropdown-cat-icon">🎒</span>
+            <span class="dropdown-cat-label">초등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=elementary&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=elementary&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=elementary&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=elementary&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=elementary&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=elementary&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=elementary&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="middle">
+        <a href="books.html?cat=middle" class="gnb-link">중학</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--mid);">
+            <span class="dropdown-cat-icon">📚</span>
+            <span class="dropdown-cat-label">중학</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=middle&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=middle&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=middle&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=middle&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=middle&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=middle&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=middle&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=middle&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=middle&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="high">
+        <a href="books.html?cat=high" class="gnb-link">고등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--high);">
+            <span class="dropdown-cat-icon">🎓</span>
+            <span class="dropdown-cat-label">고등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=high&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=high&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=high&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=high&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=high&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=high&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=high&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=high&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=high&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="resources">
+        <a href="resources.html" class="gnb-link">자료실</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--res);">
+            <span class="dropdown-cat-icon">📂</span>
+            <span class="dropdown-cat-label">자료실</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="resources.html?tab=materials" class="mega-group-title">교재 자료실</a>
+            <a href="resources.html?tab=daily" class="mega-group-title">데일리 외국어</a>
+            <a href="resources.html?tab=howto" class="mega-group-title">교재 활용법</a>
+            <a href="resources.html?tab=curation" class="mega-group-title">큐레이션</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="events">
+        <a href="events.html" class="gnb-link">이벤트</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--red);">
+            <span class="dropdown-cat-icon">🎁</span>
+            <span class="dropdown-cat-label">이벤트</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="events.html" class="mega-group-title">이벤트</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div id="pageHero" class="page-hero default">
+  <div class="page-hero-inner">
+    <h1 class="page-hero-title" id="heroTitle">도서 목록</h1>
+    <p class="page-hero-desc" id="heroDesc">북샘의 다양한 교재를 만나보세요</p>
+  </div>
+</div>
+
+<div class="container" style="padding-bottom:80px;">
+  <nav class="breadcrumb">
+    <a href="index.html">홈</a>
+    <span class="breadcrumb-sep">›</span>
+    <span id="breadCat">전체 도서</span>
+    <span class="breadcrumb-sep" id="breadSep2" style="display:none">›</span>
+    <span class="breadcrumb-current" id="breadSub"></span>
+  </nav>
+
+  <div class="books-layout" style="padding-bottom:60px;">
+    <!-- 상세검색 사이드바 -->
+    <aside class="filter-sidebar">
+      <div class="filter-header">🔍 상세검색</div>
+      <div class="filter-group">
+        <div class="filter-group-title">도서 유형</div>
+        <div class="filter-options" id="typeFilter">
+          <label class="filter-option"><input type="checkbox" value="참고서" onchange="renderAreaFilter();applyFilter()"><span>참고서</span></label>
+          <label class="filter-option"><input type="checkbox" value="교과서" onchange="renderAreaFilter();applyFilter()"><span>교과서</span></label>
+          <label class="filter-option"><input type="checkbox" value="ELT" onchange="applyFilter()"><span>ELT</span></label>
+          <label class="filter-option"><input type="checkbox" value="일반" onchange="applyFilter()"><span>일반/수험서</span></label>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-title">과목</div>
+        <div class="filter-options" id="subjectFilter">
+          <label class="filter-option"><input type="checkbox" value="영어" onchange="applyFilter()"><span>영어</span></label>
+          <label class="filter-option"><input type="checkbox" value="수학" onchange="applyFilter()"><span>수학</span></label>
+        </div>
+      </div>
+      <div class="filter-group" id="areaFilterGroup" style="display:none;">
+        <div class="filter-group-title">학습 영역</div>
+        <div class="filter-options" id="areaFilter"></div>
+      </div>
+      <button class="filter-reset" onclick="resetFilter()">✕ 초기화</button>
+    </aside>
+
+    <!-- 도서 목록 -->
+    <div class="book-list-area">
+      <div class="list-toolbar">
+        <div class="sort-tabs" id="sortTabs">
+          <button class="sort-tab active" data-sort="relevant" onclick="setSort(this,'relevant')">정확도순</button>
+          <button class="sort-tab" data-sort="sales" onclick="setSort(this,'sales')">판매량순</button>
+          <button class="sort-tab" data-sort="new" onclick="setSort(this,'new')">최신순</button>
+          <button class="sort-tab" data-sort="alpha" onclick="setSort(this,'alpha')">가나다순</button>
+        </div>
+        <div class="list-toolbar-right">
+          <div class="list-count">총 <strong id="bookCount">0</strong>종의 교재</div>
+          <div class="view-toggle">
+            <button class="view-btn" title="격자형" onclick="setView(this,'grid')">▦</button>
+            <button class="view-btn active" title="목록형" onclick="setView(this,'list')">☰</button>
+          </div>
+        </div>
+      </div>
+      <div id="bookGrid" class="book-grid-list"></div>
+      <div class="pagination" id="pagination"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <div>© 2026 북샘 교육출판. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">이용약관</a>
+        <a href="#" style="color:white;font-weight:700;">개인정보처리방침</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+const AREAS = {
+  elementary: ['어휘','듣기','문법/구문','독해','회화','파닉스'],
+  middle:     ['어휘','듣기','문법/구문','독해','쓰기'],
+  high:       ['어휘','듣기','문법/구문','독해','수능대비','모의고사','단기특강'],
+};
+const CAT_HERO = {
+  elementary: { label:'초등 교재', desc:'초등 영어·수학 참고서, 교과서, ELT 전체 목록', cls:'elementary' },
+  middle:     { label:'중학 교재', desc:'중학 영어·수학 참고서, 교과서, ELT 전체 목록', cls:'middle' },
+  high:       { label:'고등 교재', desc:'수능 대비, 모의고사, 고등 교과서 전체 목록',    cls:'high' },
+  '':         { label:'전체 도서',  desc:'북샘의 모든 교재를 한눈에',                   cls:'default' },
+};
+
+const params    = new URLSearchParams(location.search);
+const currentCat = params.get('cat') || '';
+const initType   = params.get('type') || '';
+const initArea   = params.get('area') || '';
+const initQ      = params.get('q') || '';
+let currentPage  = 1;
+const PAGE_SIZE  = 12;
+let currentSort  = 'relevant';
+let currentView  = 'list';
+
+// 히어로
+const heroInfo = CAT_HERO[currentCat] || CAT_HERO[''];
+document.getElementById('pageHero').className = `page-hero ${heroInfo.cls}`;
+document.getElementById('heroTitle').textContent = heroInfo.label;
+document.getElementById('heroDesc').textContent  = heroInfo.desc;
+document.getElementById('breadCat').textContent  = heroInfo.label;
+
+// GNB 활성화
+document.querySelectorAll('.gnb-item').forEach(item => {
+  if (item.dataset.cat === currentCat) item.querySelector('.gnb-link').classList.add('active');
+});
+
+if (initType || initArea) {
+  document.getElementById('breadSep2').style.display = '';
+  document.getElementById('breadSub').textContent = [initType, initArea].filter(Boolean).join(' > ');
+}
+if (initQ) document.getElementById('searchInput').value = initQ;
+
+// 학습 영역 필터 — 도서 유형(참고서/교과서) 선택 여부에 따라 동적 표시
+const TEXTBOOK_AREAS = ['교과서','평가문제집','자습서','지도서','자료집','교구재'];
+const REF_AREAS = {
+  elementary: ['어휘','듣기','문법/구문','독해','회화','파닉스'],
+  middle:     ['어휘','듣기','문법/구문','독해','쓰기'],
+  high:       ['어휘','듣기','문법/구문','독해','수능대비','모의고사','단기특강'],
+};
+
+function renderAreaFilter() {
+  const typeChecked = getChecked('#typeFilter input');
+  const hasRef = typeChecked.includes('참고서');
+  const hasTxt = typeChecked.includes('교과서');
+  const group  = document.getElementById('areaFilterGroup');
+
+  if (!hasRef && !hasTxt) {
+    group.style.display = 'none';
+    document.getElementById('areaFilter').innerHTML = '';
+    return;
+  }
+
+  group.style.display = '';
+  let areas = [];
+  if (hasRef) {
+    const ref = currentCat ? (REF_AREAS[currentCat] || []) : [...new Set(Object.values(REF_AREAS).flat())];
+    areas.push(...ref);
+  }
+  if (hasTxt) areas.push(...TEXTBOOK_AREAS);
+  areas = [...new Set(areas)];
+
+  document.getElementById('areaFilter').innerHTML = areas.map(a => `
+    <label class="filter-option">
+      <input type="checkbox" value="${a}" onchange="applyFilter()" ${initArea===a?'checked':''}>
+      <span>${a}</span>
+    </label>`).join('');
+}
+
+// 초기 체크 후 학습 영역 렌더 (순서 중요)
+if (initType) document.querySelectorAll('#typeFilter input').forEach(cb => { if(cb.value===initType) cb.checked=true; });
+renderAreaFilter();
+
+function getChecked(sel) { return [...document.querySelectorAll(sel)].filter(c=>c.checked).map(c=>c.value); }
+
+function setSort(btn, sort) {
+  currentSort = sort;
+  document.querySelectorAll('.sort-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilter();
+}
+
+function setView(btn, view) {
+  currentView = view;
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilter();
+}
+
+function applyFilter(page=1) {
+  currentPage = page;
+  const types    = getChecked('#typeFilter input');
+  const subjects = getChecked('#subjectFilter input');
+  const areas    = getChecked('#areaFilter input');
+  const q        = document.getElementById('searchInput').value.toLowerCase();
+
+  let filtered = BOOKS.filter(b => {
+    if (currentCat && b.cat !== currentCat) return false;
+    if (types.length && !types.includes(b.type)) return false;
+    if (subjects.length && !subjects.some(s=>b.subject.includes(s))) return false;
+    if (areas.length && !areas.includes(b.area)) return false;
+    if (q && !b.title.toLowerCase().includes(q) && !b.author.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  if (currentSort==='sales')   filtered = filtered.filter(b=>b.badge==='best').concat(filtered.filter(b=>b.badge!=='best'));
+  if (currentSort==='new')     filtered = filtered.filter(b=>b.badge==='new').concat(filtered.filter(b=>b.badge!=='new'));
+  if (currentSort==='alpha')   filtered.sort((a,b)=>a.title.localeCompare(b.title,'ko'));
+
+  document.getElementById('bookCount').textContent = filtered.length;
+  const pageItems = filtered.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE);
+  const grid = document.getElementById('bookGrid');
+
+  // 뷰 모드에 따라 클래스 전환
+  if (currentView === 'list') {
+    grid.className = 'book-grid-list';
+  } else {
+    grid.className = 'book-grid-4';
+  }
+
+  if (pageItems.length === 0) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">📭</div><div class="empty-title">해당 조건의 교재가 없습니다</div><div class="empty-desc">필터를 변경하거나 초기화해보세요.</div></div>`;
+  } else if (currentView === 'list') {
+    grid.innerHTML = pageItems.map(renderListCard).join('');
+  } else {
+    grid.innerHTML = pageItems.map(renderBookCard).join('');
+  }
+
+  renderPagination(filtered.length, page);
+}
+
+function renderPagination(total, page) {
+  const pages = Math.ceil(total/PAGE_SIZE);
+  const pg = document.getElementById('pagination');
+  if (pages<=1) { pg.innerHTML=''; return; }
+  let html = `<button class="page-btn" onclick="applyFilter(${Math.max(1,page-1)})">‹</button>`;
+  for(let i=1;i<=pages;i++) html+=`<button class="page-btn ${i===page?'active':''}" onclick="applyFilter(${i})">${i}</button>`;
+  html += `<button class="page-btn" onclick="applyFilter(${Math.min(pages,page+1)})">›</button>`;
+  pg.innerHTML = html;
+}
+
+function resetFilter() {
+  document.querySelectorAll('.filter-sidebar input[type=checkbox]').forEach(cb=>cb.checked=false);
+  applyFilter();
+}
+
+document.getElementById('searchInput').addEventListener('keydown', e=>{ if(e.key==='Enter') applyFilter(); });
+applyFilter();
+</script>
+</body>
+</html>

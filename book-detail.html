@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>도서 상세 - 북샘</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- TOP UTILITY BAR -->
+<div class="util-topbar">
+  <div class="util-topbar-inner">
+    <div class="util-links">
+      <a href="login.html" class="util-link">로그인</a>
+      <a href="login.html" class="util-link">회원가입</a>
+      <a href="customer.html" class="util-link">고객센터</a>
+      <a href="cart.html" class="util-link">장바구니 <span class="cart-badge" style="display:none">0</span></a>
+      <a href="mypage.html" class="util-link">마이페이지</a>
+    </div>
+  </div>
+</div>
+<div class="util-bar">
+  <div class="util-bar-inner">
+    <a href="index.html" class="util-logo">
+      <span class="logo-mark">YBM북스</span>
+
+      <span class="logo-badge">초중고</span>
+    </a>
+    <div class="header-search">
+      <div class="search-wrap">
+        <select class="search-select"><option>카테고리 전체</option></select>
+        <select class="search-select2"><option>전체</option></select>
+        <input type="text" class="search-input" placeholder="초등, 중등, 고등 교재명을 입력하세요">
+        <button class="search-btn">🔍</button>
+      </div>
+    </div>
+    <div class="gnb-special">
+      <a href="https://www.ybmbooksam.com/html/main/index" target="_blank" class="btn-orange">강사용 Y튜터 ↗</a>
+      <a href="books.html" class="btn-blue">YBM북스-성인 ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- GNB -->
+<nav class="gnb-bar">
+  <div class="gnb-inner">
+    <button class="gnb-all"><span class="hamburger">☰</span> 전체 카테고리</button>
+    <div class="gnb-nav">
+      <div class="gnb-item" data-cat="elementary">
+        <a href="books.html?cat=elementary" class="gnb-link">초등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--elem);">
+            <span class="dropdown-cat-icon">🎒</span>
+            <span class="dropdown-cat-label">초등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=elementary&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=elementary&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=elementary&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=elementary&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=elementary&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=elementary&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=elementary&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="middle">
+        <a href="books.html?cat=middle" class="gnb-link">중학</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--mid);">
+            <span class="dropdown-cat-icon">📚</span>
+            <span class="dropdown-cat-label">중학</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=middle&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=middle&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=middle&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=middle&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=middle&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=middle&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=middle&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=middle&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=middle&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="high">
+        <a href="books.html?cat=high" class="gnb-link">고등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--high);">
+            <span class="dropdown-cat-icon">🎓</span>
+            <span class="dropdown-cat-label">고등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=high&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=high&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=high&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=high&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=high&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=high&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=high&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=high&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=high&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="resources">
+        <a href="resources.html" class="gnb-link">자료실</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--res);">
+            <span class="dropdown-cat-icon">📂</span>
+            <span class="dropdown-cat-label">자료실</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="resources.html?tab=materials" class="mega-group-title">교재 자료실</a>
+            <a href="resources.html?tab=daily" class="mega-group-title">데일리 외국어</a>
+            <a href="resources.html?tab=howto" class="mega-group-title">교재 활용법</a>
+            <a href="resources.html?tab=curation" class="mega-group-title">큐레이션</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="events">
+        <a href="events.html" class="gnb-link">이벤트</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--red);">
+            <span class="dropdown-cat-icon">🎁</span>
+            <span class="dropdown-cat-label">이벤트</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="events.html" class="mega-group-title">이벤트</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container" style="padding-top:24px;padding-bottom:80px;">
+  <nav class="breadcrumb" id="breadcrumb">
+    <a href="index.html">홈</a>
+    <span class="breadcrumb-sep">›</span>
+    <a href="#" id="breadCat"></a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current" id="breadTitle"></span>
+  </nav>
+
+  <div id="detailGrid" style="margin-bottom:48px"></div>
+
+  <!-- 연관 도서 -->
+  <section style="margin-top:60px;">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">RELATED</div>
+        <h2 class="section-title">연관 도서</h2>
+      </div>
+      <a href="books.html" class="view-all">전체보기 →</a>
+    </div>
+    <div class="book-grid" id="relatedBooks"></div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <div>© 2026 북샘 교육출판. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">이용약관</a>
+        <a href="#" style="color:white;font-weight:700;">개인정보처리방침</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// ── 로그인 상태 ──
+const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+// ── 자료 데이터 ──
+const materials = [
+  { id:'errata',      title:'정오표',        type:'download',   loginRequired:false },
+  { id:'answer',      title:'정답 및 해석',   type:'download',   loginRequired:false },
+  { id:'mp3-stream',  title:'MP3 바로 듣기',  type:'streaming',  loginRequired:false },
+  { id:'body-pdf',    title:'본문 (PDF)',     type:'download',   loginRequired:true  },
+  { id:'mp3-file',    title:'MP3 파일',      type:'download',   loginRequired:true  },
+];
+
+// ── SVG 아이콘 ──
+const MAT_ICONS = {
+  'errata':     `<svg class="mat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>`,
+  'answer':     `<svg class="mat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="8 13 10.5 15.5 16 10"/></svg>`,
+  'mp3-stream': `<svg class="mat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>`,
+  'body-pdf':   `<svg class="mat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="13" y2="13"/><path d="M15 13h1a1.5 1.5 0 0 1 0 3h-1v-3z"/><line x1="8" y1="17" x2="10" y2="17"/></svg>`,
+  'mp3-file':   `<svg class="mat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/><line x1="12" y1="1" x2="12" y2="8"/><polyline points="9 5 12 8 15 5"/></svg>`,
+};
+
+// ── 토스트 ──
+function showToast(msg) {
+  let t = document.getElementById('_toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = '_toast'; t.className = 'toast';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._tm);
+  t._tm = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── 로그인 안내 팝업 ──
+function openLoginAlert(mat) {
+  const ov = document.createElement('div');
+  ov.className = 'modal-overlay';
+  ov.innerHTML = `
+    <div class="modal-box">
+      <div class="modal-title">안내</div>
+      <div class="modal-body">로그인이 필요한 서비스입니다.<br>로그인 하시겠습니까?</div>
+      <div class="modal-btns">
+        <button class="modal-btn-secondary" onclick="this.closest('.modal-overlay').remove()">닫기</button>
+        <button class="modal-btn-primary" id="_loginConfirm">확인</button>
+      </div>
+    </div>`;
+  document.body.appendChild(ov);
+  document.getElementById('_loginConfirm').onclick = () => {
+    localStorage.setItem('redirectAfterLogin', location.pathname + location.search);
+    localStorage.setItem('pendingMaterialId',    mat.id);
+    localStorage.setItem('pendingMaterialTitle', mat.title);
+    location.href = 'login.html';
+  };
+  ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+}
+
+// ── MP3 플레이어 모달 ──
+function openMp3Modal(bookTitle) {
+  const ov = document.createElement('div');
+  ov.className = 'modal-overlay';
+  ov.innerHTML = `
+    <div class="mp3-modal-wrap">
+      <div class="mp3-modal-title">🎧 MP3 바로 듣기</div>
+      <div class="mp3-track-name">${bookTitle} — Unit 01</div>
+      <div class="mp3-player">
+        <button class="mp3-play-btn" id="_mp3Play">▶</button>
+        <div class="mp3-row">
+          <span class="mp3-time" id="_mp3Cur">0:00</span>
+          <div class="mp3-progress-bar"><div class="mp3-progress-fill" id="_mp3Fill"></div></div>
+          <span class="mp3-time">3:45</span>
+        </div>
+      </div>
+      <button class="mp3-close-btn" onclick="this.closest('.modal-overlay').remove()">닫기</button>
+    </div>`;
+  document.body.appendChild(ov);
+  let playing = false, sec = 0;
+  const btn = document.getElementById('_mp3Play');
+  btn.onclick = () => {
+    playing = !playing;
+    btn.textContent = playing ? '⏸' : '▶';
+  };
+  ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+}
+
+// ── 자료 클릭 처리 ──
+function handleMaterialClick(matId) {
+  const mat = materials.find(m => m.id === matId);
+  if (!mat) return;
+  if (mat.loginRequired && !isLoggedIn) { openLoginAlert(mat); return; }
+  useMaterial(mat);
+}
+function useMaterial(mat) {
+  if (mat.type === 'streaming') {
+    const bk = BOOKS.find(b => b.id === parseInt(getParam('id')));
+    openMp3Modal(bk ? bk.title : 'MP3');
+    return;
+  }
+  showToast(`${mat.title} 다운로드가 시작됩니다.`);
+}
+
+// ── 로그인 후 복귀 시 pending 데이터 정리 ──
+// (자동 다운로드 없음 - 버튼을 다시 클릭하면 isLoggedIn=true이므로 바로 이용 가능)
+function checkPendingMaterial() {
+  ['redirectAfterLogin','pendingMaterialId','pendingMaterialTitle']
+    .forEach(k => localStorage.removeItem(k));
+}
+
+// ── 메인 렌더링 ──
+const id   = parseInt(getParam('id'));
+const book = BOOKS.find(b => b.id === id);
+
+if (!book) {
+  document.getElementById('detailGrid').innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon">📭</div>
+      <div class="empty-title">도서를 찾을 수 없습니다</div>
+      <div class="empty-desc"><a href="books.html" style="color:var(--red)">목록으로 돌아가기</a></div>
+    </div>`;
+} else {
+  const info     = CAT_INFO[book.cat];
+  const discount = Math.round((1 - book.price / book.originalPrice) * 100);
+  const isWished = Wish.has(book.id);
+
+  document.title = `${book.title} - 북샘`;
+  document.getElementById('breadCat').textContent = '교재찾기';
+  document.getElementById('breadCat').href = 'books.html';
+  document.getElementById('breadTitle').textContent = book.title;
+
+  document.querySelectorAll('.gnb-item').forEach(item => {
+    if (item.dataset.cat === book.cat) item.querySelector('.gnb-link').classList.add('active');
+  });
+
+  // 태그
+  const tagsHtml = [book.type, info.label, book.subject, book.area]
+    .filter(Boolean).map(t => `<span class="detail-tag">${t}</span>`).join('');
+
+  // 부가자료 카드
+  const matsHtml = materials.map(m => `
+    <button class="material-card" onclick="handleMaterialClick('${m.id}')">
+      ${MAT_ICONS[m.id]}
+      <span class="mat-label">${m.title}</span>
+    </button>`).join('');
+
+  // 커버
+  const coverContent = book.img
+    ? `<img src="${book.img}" alt="${book.title}" class="detail-cover-img">`
+    : `<div style="font-size:72px;line-height:1">${info.emoji}</div>`;
+
+  document.getElementById('detailGrid').innerHTML = `
+    <div class="detail-layout">
+
+      <!-- 좌: 표지 -->
+      <div class="detail-cover-col">
+        <div class="detail-cover-wrap">${coverContent}</div>
+        <div class="detail-cover-btns">
+          <button class="cover-btn" onclick="showToast('미리보기 서비스 준비 중입니다.')">미리보기</button>
+          <button class="cover-btn" onclick="showToast('크게보기 서비스 준비 중입니다.')">크게보기</button>
+        </div>
+      </div>
+
+      <!-- 우: 정보 -->
+      <div class="detail-info-col">
+        <div class="detail-tags">${tagsHtml}</div>
+        <h1 class="detail-title-new">${book.title}</h1>
+
+        <div class="detail-meta-new">
+          <div class="detail-meta-row-new">
+            <span class="meta-key-new">저자</span>
+            <span class="meta-sep-new">|</span>
+            <span class="meta-val-new">${book.author}</span>
+          </div>
+          <div class="detail-meta-row-new">
+            <span class="meta-key-new">출판사</span>
+            <span class="meta-sep-new">|</span>
+            <span class="meta-val-new">${book.publisher || '북샘 교육출판'}</span>
+          </div>
+          ${book.date ? `<div class="detail-meta-row-new">
+            <span class="meta-key-new">출간일</span>
+            <span class="meta-sep-new">|</span>
+            <span class="meta-val-new">${book.date}</span>
+          </div>` : ''}
+        </div>
+
+        <div class="detail-price-new">
+          <span class="detail-sale-price">${fmtPrice(book.price)}원</span>
+          <span class="detail-orig-price">${fmtPrice(book.originalPrice)}원</span>
+          <span class="detail-discount-badge">(${discount}% OFF)</span>
+        </div>
+
+        <hr class="detail-divider">
+
+        <div class="materials-section">
+          <p class="materials-section-title">제공 서비스 및 부가자료</p>
+          <div class="materials-grid">${matsHtml}</div>
+        </div>
+
+        <div class="detail-action-row">
+          <button class="btn-detail-wish ${isWished?'active':''}" id="wishBtn"
+            onclick="toggleWish(this,${book.id})">♡</button>
+          <button class="btn-detail-buy"
+            onclick="addToCart(${book.id}); showToast('구매 페이지로 이동합니다.')">
+            종이책 구매 (교보문고) &nbsp;🛒
+          </button>
+          <button class="btn-detail-cart"
+            onclick="addToCart(${book.id}); showToast('장바구니에 담겼습니다.')">🛒</button>
+        </div>
+      </div>
+
+    </div>`;
+
+  // ── 탭 영역 ──
+  const tabArea = document.createElement('div');
+  tabArea.style.marginTop = '48px';
+  tabArea.innerHTML = `
+    <div class="detail-tabs">
+      <button class="detail-tab active" data-tab="tab-intro">도서 소개</button>
+      <button class="detail-tab" data-tab="tab-contents">목차</button>
+      <button class="detail-tab" data-tab="tab-review">리뷰 (3)</button>
+      <button class="detail-tab" data-tab="tab-delivery">배송/교환</button>
+    </div>
+    <div id="tab-intro" class="tab-panel active tab-content">
+      <h3 style="font-size:16px;font-weight:800;margin-bottom:14px;">도서 소개</h3>
+      <p>『${book.title}』은 ${info.label} 학생들을 위한 <strong>${book.area}</strong> 집중 학습 교재입니다.</p><br>
+      <p>체계적인 단계별 학습 구성으로 기초부터 심화까지 자연스럽게 실력을 높일 수 있습니다.</p><br>
+      <h4 style="font-weight:700;margin-bottom:10px;">📌 이 책의 특징</h4>
+      <ul style="padding-left:20px;line-height:2.2;">
+        <li>단계별 학습으로 자연스러운 실력 향상</li>
+        <li>핵심 개념과 예문을 한눈에 정리</li>
+        <li>다양한 유형의 연습 문제 수록</li>
+        <li>QR코드를 통한 음원 및 해설 영상 제공</li>
+      </ul>
+    </div>
+    <div id="tab-contents" class="tab-panel tab-content">
+      <h3 style="font-size:16px;font-weight:800;margin-bottom:14px;">목차</h3>
+      ${[1,2,3,4,5,6,7,8].map(i=>`
+        <div style="display:flex;justify-content:space-between;padding:11px 14px;background:${i%2?'var(--bg)':'white'};border-radius:4px;font-size:13px;">
+          <span><strong>Chapter ${i}.</strong> ${book.area} 학습 ${i}단계</span>
+          <span style="color:var(--muted);">${i*14}p</span>
+        </div>`).join('')}
+    </div>
+    <div id="tab-review" class="tab-panel tab-content">
+      <h3 style="font-size:16px;font-weight:800;margin-bottom:14px;">구매 리뷰</h3>
+      ${[
+        {star:5,name:'학*맘',text:'아이가 너무 좋아해요! 설명이 친절하고 문제도 적절해서 혼자 공부하기 좋아요.'},
+        {star:5,name:'교*사',text:'수업 자료로 활용하기 좋습니다. 체계적인 구성이 마음에 들어요.'},
+        {star:4,name:'중*생',text:'내용은 좋은데 양이 조금 적은 것 같아요. 그래도 핵심만 있어서 효율적!'},
+      ].map(r=>`
+        <div style="padding:18px;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <div style="background:var(--navy);color:white;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;">${r.name[0]}</div>
+            <div>
+              <div style="font-weight:700;font-size:13px;">${r.name}</div>
+              <div style="color:#f59e0b;font-size:13px;">${'★'.repeat(r.star)}${'☆'.repeat(5-r.star)}</div>
+            </div>
+          </div>
+          <p style="font-size:13px;line-height:1.7;color:var(--text2);">${r.text}</p>
+        </div>`).join('')}
+    </div>
+    <div id="tab-delivery" class="tab-panel tab-content">
+      <h3 style="font-size:16px;font-weight:800;margin-bottom:14px;">배송/교환 안내</h3>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="padding:16px 18px;background:var(--bg);border-radius:var(--radius);border-left:3px solid var(--navy);">
+          <div style="font-weight:700;margin-bottom:8px;font-size:14px;">🚚 배송 안내</div>
+          <ul style="font-size:13px;line-height:2;color:var(--text2);padding-left:16px;">
+            <li>주문 확인 후 1~2 영업일 이내 출고</li>
+            <li>15,000원 이상 구매 시 무료 배송</li>
+          </ul>
+        </div>
+        <div style="padding:16px 18px;background:var(--bg);border-radius:var(--radius);border-left:3px solid var(--red);">
+          <div style="font-weight:700;margin-bottom:8px;font-size:14px;">🔄 교환/반품 안내</div>
+          <ul style="font-size:13px;line-height:2;color:var(--text2);padding-left:16px;">
+            <li>수령 후 7일 이내 교환/반품 가능</li>
+            <li>고객 변심 반품 시 배송비 고객 부담</li>
+          </ul>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('detailGrid').after(tabArea);
+
+
+  // 연관 도서
+  const related = BOOKS.filter(b => b.cat === book.cat && b.id !== book.id).slice(0, 5);
+  document.getElementById('relatedBooks').innerHTML = related.map(renderBookCard).join('');
+
+  // 로그인 후 pending 자료 처리
+  checkPendingMaterial();
+}
+</script>
+</body>
+</html>

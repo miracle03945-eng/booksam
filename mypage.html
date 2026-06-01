@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마이페이지 - 북샘</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="util-topbar">
+  <div class="util-topbar-inner">
+    <div class="util-links">
+      <a href="login.html" class="util-link">로그인</a>
+      <a href="login.html" class="util-link">회원가입</a>
+      <a href="customer.html" class="util-link">고객센터</a>
+      <a href="cart.html" class="util-link">장바구니 <span class="cart-badge" style="display:none">0</span></a>
+      <a href="mypage.html" class="util-link">마이페이지</a>
+    </div>
+  </div>
+</div>
+<div class="util-bar">
+  <div class="util-bar-inner">
+    <a href="index.html" class="util-logo">
+      <span class="logo-mark">YBM북스</span><span class="logo-badge">초중고</span>
+    </a>
+    <div class="header-search">
+      <div class="search-wrap">
+        <select class="search-select"><option>카테고리 전체</option></select>
+        <select class="search-select2"><option>전체</option></select>
+        <input type="text" class="search-input" placeholder="초등, 중등, 고등 교재명을 입력하세요">
+        <button class="search-btn">🔍</button>
+      </div>
+    </div>
+    <div class="gnb-special">
+      <a href="https://www.ybmbooksam.com/html/main/index" target="_blank" class="btn-orange">강사용 Y튜터 ↗</a>
+      <a href="books.html" class="btn-blue">YBM북스-성인 ↗</a>
+    </div>
+  </div>
+</div>
+
+<nav class="gnb-bar">
+  <div class="gnb-inner">
+    <button class="gnb-all"><span class="hamburger">☰</span> 전체 카테고리</button>
+    <div class="gnb-nav">
+      <div class="gnb-item" data-cat="elementary">
+        <a href="books.html?cat=elementary" class="gnb-link">초등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--elem);">
+            <span class="dropdown-cat-icon">🎒</span>
+            <span class="dropdown-cat-label">초등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=elementary&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=elementary&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=elementary&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=elementary&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=elementary&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=elementary&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=elementary&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="middle">
+        <a href="books.html?cat=middle" class="gnb-link">중학</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--mid);">
+            <span class="dropdown-cat-icon">📚</span>
+            <span class="dropdown-cat-label">중학</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=middle&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=middle&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=middle&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=middle&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=middle&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=middle&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=middle&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=middle&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=middle&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="high">
+        <a href="books.html?cat=high" class="gnb-link">고등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--high);">
+            <span class="dropdown-cat-icon">🎓</span>
+            <span class="dropdown-cat-label">고등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=high&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=high&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=high&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=high&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=high&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=high&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=high&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=high&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=high&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="resources">
+        <a href="resources.html" class="gnb-link">자료실</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--res);">
+            <span class="dropdown-cat-icon">📂</span>
+            <span class="dropdown-cat-label">자료실</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="resources.html?tab=materials" class="mega-group-title">교재 자료실</a>
+            <a href="resources.html?tab=daily" class="mega-group-title">데일리 외국어</a>
+            <a href="resources.html?tab=howto" class="mega-group-title">교재 활용법</a>
+            <a href="resources.html?tab=curation" class="mega-group-title">큐레이션</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="events">
+        <a href="events.html" class="gnb-link">이벤트</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--red);">
+            <span class="dropdown-cat-icon">🎁</span>
+            <span class="dropdown-cat-label">이벤트</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="events.html" class="mega-group-title">이벤트</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero default" style="padding:24px 40px;">
+  <div class="page-hero-inner">
+    <h1 class="page-hero-title">👤 마이페이지</h1>
+    <p class="page-hero-desc">주문 내역, 관심 교재, 개인정보를 관리하세요</p>
+  </div>
+</div>
+
+<div class="container" style="padding-top:28px;padding-bottom:80px;">
+  <div class="cs-layout">
+
+    <nav class="cs-nav">
+      <!-- 유저 요약 -->
+      <div style="padding:18px 16px;border-bottom:1px solid var(--bg2);text-align:center;">
+        <div style="width:52px;height:52px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:white;margin:0 auto 10px;">👤</div>
+        <div style="font-weight:700;font-size:14px;" id="userName">홍길동</div>
+        <div style="font-size:12px;color:var(--muted);" id="userEmail">user@email.com</div>
+        <div style="display:flex;gap:6px;justify-content:center;margin-top:12px;">
+          <div style="text-align:center;flex:1;background:var(--bg);border-radius:var(--radius);padding:8px 4px;border:1px solid var(--border);">
+            <div style="font-size:15px;font-weight:800;color:var(--red);">3</div>
+            <div style="font-size:10px;color:var(--muted);">주문</div>
+          </div>
+          <div style="text-align:center;flex:1;background:var(--bg);border-radius:var(--radius);padding:8px 4px;border:1px solid var(--border);">
+            <div style="font-size:15px;font-weight:800;color:var(--red);" id="wishCount">0</div>
+            <div style="font-size:10px;color:var(--muted);">관심</div>
+          </div>
+          <div style="text-align:center;flex:1;background:var(--bg);border-radius:var(--radius);padding:8px 4px;border:1px solid var(--border);">
+            <div style="font-size:15px;font-weight:800;color:var(--orange);">500</div>
+            <div style="font-size:10px;color:var(--muted);">P</div>
+          </div>
+        </div>
+      </div>
+      <div class="cs-nav-group">
+        <div class="cs-nav-title">쇼핑</div>
+        <a href="#" class="cs-nav-link" data-tab="orders"  onclick="switchTab('orders',this);return false;">📦 주문 내역</a>
+        <a href="#" class="cs-nav-link" data-tab="wish"    onclick="switchTab('wish',this);return false;">❤️ 관심 교재</a>
+        <a href="#" class="cs-nav-link" data-tab="cart" onclick="switchTab('cart',this);return false;">🛒 장바구니</a>
+      </div>
+      <div class="cs-nav-group">
+        <div class="cs-nav-title">계정</div>
+        <a href="#" class="cs-nav-link" data-tab="profile" onclick="switchTab('profile',this);return false;">👤 개인정보 변경</a>
+        <a href="#" class="cs-nav-link" onclick="logout();return false;">🚪 로그아웃</a>
+      </div>
+      <div class="cs-nav-group">
+        <div class="cs-nav-title">고객지원</div>
+        <a href="customer.html?tab=notice" class="cs-nav-link">📢 공지사항</a>
+        <a href="customer.html?tab=faq"    class="cs-nav-link">❓ FAQ</a>
+      </div>
+    </nav>
+
+    <div class="cs-content">
+
+      <!-- 주문 내역 -->
+      <div id="panel-orders">
+        <h2 class="cs-content-title">📦 주문 내역</h2>
+        <div id="ordersContent"></div>
+      </div>
+
+      <!-- 관심 교재 -->
+      <div id="panel-wish" style="display:none;">
+        <h2 class="cs-content-title">❤️ 관심 교재</h2>
+        <div id="wishGrid" class="book-grid-4"></div>
+        <div id="wishEmpty" class="empty-state" style="display:none;border:1px solid var(--border);border-radius:var(--radius);">
+          <div class="empty-icon">🤍</div>
+          <div class="empty-title">관심 교재가 없습니다</div>
+          <div class="empty-desc">마음에 드는 교재에 하트를 눌러보세요</div>
+          <a href="books.html" style="display:inline-block;margin-top:16px;padding:11px 24px;background:var(--red);color:white;border-radius:var(--radius);font-weight:700;font-size:13px;">교재 둘러보기</a>
+        </div>
+      </div>
+
+      <!-- 장바구니 -->
+      <div id="panel-cart" style="display:none;">
+        <h2 class="cs-content-title">🛒 장바구니</h2>
+        <div id="cartItems"></div>
+        <div id="cartEmpty" class="empty-state" style="display:none;border:1px solid var(--border);border-radius:var(--radius);">
+          <div class="empty-icon">🛒</div>
+          <div class="empty-title">장바구니가 비어있습니다</div>
+          <div class="empty-desc">마음에 드는 교재를 담아보세요</div>
+          <a href="books.html" style="display:inline-block;margin-top:16px;padding:11px 24px;background:var(--red);color:white;border-radius:var(--radius);font-weight:700;font-size:13px;">교재 둘러보기</a>
+        </div>
+        <div id="cartSummary" style="display:none;margin-top:20px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <span style="font-size:14px;color:var(--muted);">총 상품금액</span>
+            <span style="font-size:16px;font-weight:800;" id="cartTotal">0원</span>
+          </div>
+          <button onclick="location.href='checkout.html'" style="width:100%;background:var(--red);color:white;border:none;padding:14px;border-radius:var(--radius);font-size:15px;font-weight:700;cursor:pointer;">주문하기</button>
+        </div>
+      </div>
+
+      <!-- 개인정보 -->
+      <div id="panel-profile" style="display:none;">
+        <h2 class="cs-content-title">👤 개인정보 변경</h2>
+        <div style="max-width:460px;">
+          ${['이름','이메일','휴대폰'].map((f,i)=>`
+            <div style="margin-bottom:16px;">
+              <label style="display:block;font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;">${f}</label>
+              <input type="${i===1?'email':i===2?'tel':'text'}" value="${['홍길동','user@email.com','010-1234-5678'][i]}"
+                style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:14px;font-family:inherit;outline:none;box-sizing:border-box;transition:border-color .2s;"
+                onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'">
+            </div>`).join('')}
+          <div style="background:var(--bg);border-radius:var(--radius);padding:16px;margin-bottom:20px;border:1px solid var(--border);">
+            <div style="font-size:13px;font-weight:700;margin-bottom:12px;">비밀번호 변경</div>
+            ${['현재 비밀번호','새 비밀번호','새 비밀번호 확인'].map(p=>`
+              <input type="password" placeholder="${p}" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;margin-bottom:8px;box-sizing:border-box;outline:none;transition:border-color .2s;"
+                onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'">`).join('')}
+          </div>
+          <button onclick="Toast.show('개인정보가 저장되었습니다.','success')" style="background:var(--red);color:white;border:none;padding:13px 30px;border-radius:var(--radius);font-size:14px;font-weight:700;cursor:pointer;">저장하기</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <div>© 2026 북샘 교육출판. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">이용약관</a><a href="#" style="color:white;font-weight:700;">개인정보처리방침</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// 로그인 가드 — 비로그인 시 로그인 페이지로 이동
+if (localStorage.getItem('isLoggedIn') !== 'true') {
+  localStorage.setItem('redirectAfterLogin', location.href);
+  location.replace('login.html');
+}
+
+const user = JSON.parse(localStorage.getItem('booksam_user') || '{"name":"홍길동","email":"user@email.com"}');
+document.getElementById('userName').textContent  = user.name  || '홍길동';
+document.getElementById('userEmail').textContent = user.email || 'user@email.com';
+document.getElementById('wishCount').textContent = Wish.items.length;
+
+const MOCK_ORDERS = [
+  {no:'20260301-001', date:'2026.03.01', books:[1,6,11], status:'배송완료', statusColor:'var(--elem)', total:43000},
+  {no:'20260215-002', date:'2026.02.15', books:[7],      status:'배송완료', statusColor:'var(--elem)', total:16000},
+  {no:'20260110-003', date:'2026.01.10', books:[12,15],  status:'배송완료', statusColor:'var(--elem)', total:35000},
+];
+
+function renderOrders() {
+  const statuses = ['전체','배송준비','배송중','배송완료','취소/반품'];
+  const filterBtns = statuses.map((s,i) => `
+    <button onclick="filterOrders(this,'${s}')" style="padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;
+      background:${i===0?'var(--navy)':'var(--bg2)'};color:${i===0?'white':'var(--muted)'};
+      border:1px solid ${i===0?'var(--navy)':'var(--border)'};">${s}</button>`).join('');
+
+  const orderCards = MOCK_ORDERS.map(order => {
+    const orderBooks = order.books.map(id => BOOKS.find(b => b.id === id)).filter(Boolean);
+    const booksHtml = orderBooks.map(b => `
+      <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--bg2);">
+        <div style="width:48px;height:64px;background:var(--bg2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:1px solid var(--border);">${CAT_INFO[b.cat].emoji}</div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;margin-bottom:3px;">${b.title}</div>
+          <div style="font-size:12px;color:var(--muted);">${CAT_INFO[b.cat].label} · ${b.author}</div>
+        </div>
+        <div style="font-size:14px;font-weight:700;">${fmtPrice(b.price)}원</div>
+      </div>`).join('');
+    return `
+      <div style="border:1px solid var(--border);border-radius:var(--radius);margin-bottom:14px;overflow:hidden;">
+        <div style="background:var(--bg);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);">
+          <div>
+            <span style="font-size:13px;font-weight:700;">주문번호 ${order.no}</span>
+            <span style="font-size:12px;color:var(--muted);margin-left:10px;">${order.date}</span>
+          </div>
+          <span style="font-size:12px;font-weight:700;color:${order.statusColor};">${order.status}</span>
+        </div>
+        ${booksHtml}
+        <div style="padding:12px 18px;display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:12px;color:var(--muted);">총 결제금액</span>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:16px;font-weight:800;color:var(--navy);">${fmtPrice(order.total)}원</span>
+            <button onclick="Toast.show('리뷰 작성 페이지로 이동합니다.','success')" style="background:none;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-size:12px;cursor:pointer;font-weight:600;">리뷰 작성</button>
+            <button onclick="Toast.show('재구매 목록에 추가했습니다.','success')" style="background:var(--red);color:white;border:none;padding:6px 12px;border-radius:4px;font-size:12px;cursor:pointer;font-weight:700;">재구매</button>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('ordersContent').innerHTML =
+    `<div style="display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;">${filterBtns}</div>${orderCards}`;
+}
+
+function filterOrders(btn, status) {
+  document.querySelectorAll('#ordersContent button[onclick*="filterOrders"]').forEach(b => {
+    b.style.background = 'var(--bg2)'; b.style.color = 'var(--muted)'; b.style.borderColor = 'var(--border)';
+  });
+  btn.style.background = 'var(--navy)'; btn.style.color = 'white'; btn.style.borderColor = 'var(--navy)';
+}
+
+function renderWish() {
+  const wishBooks = BOOKS.filter(b=>Wish.has(b.id));
+  const grid  = document.getElementById('wishGrid');
+  const empty = document.getElementById('wishEmpty');
+  if(wishBooks.length===0){ grid.style.display='none'; empty.style.display=''; }
+  else { grid.style.display=''; empty.style.display='none'; grid.innerHTML=wishBooks.map(renderBookCard).join(''); }
+}
+
+function renderCart() {
+  const items = Cart.items;
+  const container = document.getElementById('cartItems');
+  const empty     = document.getElementById('cartEmpty');
+  const summary   = document.getElementById('cartSummary');
+  if (!items.length) {
+    container.innerHTML = '';
+    empty.style.display = '';
+    summary.style.display = 'none';
+    return;
+  }
+  empty.style.display = 'none';
+  summary.style.display = '';
+  let total = 0;
+  container.innerHTML = items.map(item => {
+    const b = BOOKS.find(bk => bk.id === item.id);
+    if (!b) return '';
+    total += b.price * item.qty;
+    return `
+      <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);">
+        <div style="width:48px;height:64px;background:var(--bg2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:1px solid var(--border);">${CAT_INFO[b.cat].emoji}</div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;margin-bottom:3px;">${b.title}</div>
+          <div style="font-size:12px;color:var(--muted);">${CAT_INFO[b.cat].label} · ${b.author}</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
+            <button onclick="Cart.updateQty(${b.id},${item.qty - 1});renderCart();" style="width:24px;height:24px;border:1px solid var(--border);border-radius:4px;background:white;cursor:pointer;font-size:14px;line-height:1;">−</button>
+            <span style="font-size:13px;font-weight:700;">${item.qty}</span>
+            <button onclick="Cart.updateQty(${b.id},${item.qty + 1});renderCart();" style="width:24px;height:24px;border:1px solid var(--border);border-radius:4px;background:white;cursor:pointer;font-size:14px;line-height:1;">+</button>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:14px;font-weight:800;">${fmtPrice(b.price * item.qty)}원</div>
+          <button onclick="Cart.remove(${b.id});renderCart();" style="margin-top:6px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;">삭제</button>
+        </div>
+      </div>`;
+  }).join('');
+  document.getElementById('cartTotal').textContent = fmtPrice(total) + '원';
+}
+
+const initTab = getParam('tab') || 'orders';
+switchTab(initTab, document.querySelector(`[data-tab="${initTab}"]`));
+
+function switchTab(tab, el) {
+  document.querySelectorAll('.cs-nav-link[data-tab]').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('[id^="panel-"]').forEach(p=>p.style.display='none');
+  if(el) el.classList.add('active');
+  const panel = document.getElementById(`panel-${tab}`);
+  if(panel) panel.style.display='';
+  if(tab==='orders') renderOrders();
+  if(tab==='wish')   renderWish();
+  if(tab==='cart')   renderCart();
+}
+
+function logout() {
+  localStorage.removeItem('booksam_user');
+  Toast.show('로그아웃되었습니다.');
+  setTimeout(()=>location.href='index.html',1000);
+}
+</script>
+</body>
+</html>

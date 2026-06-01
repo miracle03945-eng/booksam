@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>북샘 - 교육 전문 서점</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* 메인 전용 */
+
+    /* 인기 교재 섹션 */
+    .rank-list{
+      display:flex;
+      flex-direction:column;
+      gap:0;
+    }
+    .rank-item{
+      display:flex;align-items:center;gap:14px;
+      padding:12px 0;
+      border-bottom:1px solid var(--bg2);
+      cursor:pointer;
+      transition:background .15s;
+    }
+    .rank-item:last-child{border-bottom:none;}
+    .rank-item:hover{background:var(--bg);}
+    .rank-num{
+      font-size:18px;font-weight:900;
+      color:var(--border);
+      min-width:28px;text-align:center;
+    }
+    .rank-num.top{color:var(--red);}
+    .rank-thumb{
+      width:44px;height:58px;
+      background:var(--bg2);
+      border-radius:3px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:20px;flex-shrink:0;
+      border:1px solid var(--border);
+    }
+    .rank-info{flex:1;}
+    .rank-title{font-size:13px;font-weight:700;margin-bottom:2px;
+      display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
+    .rank-meta{font-size:11px;color:var(--muted);}
+    .rank-price{font-size:13px;font-weight:700;}
+
+    /* 이벤트 배너 */
+    .event-banner{
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:0;
+      height:200px;
+    }
+    .event-half{
+      display:flex;flex-direction:column;
+      justify-content:center;
+      padding:32px 36px;
+      color:white;
+      cursor:pointer;
+      transition:filter .2s;
+    }
+    .event-half:hover{filter:brightness(1.1);}
+    .event-tag{
+      font-size:11px;font-weight:700;letter-spacing:1.5px;
+      opacity:.7;margin-bottom:10px;
+    }
+    .event-title{font-size:20px;font-weight:900;line-height:1.3;margin-bottom:8px;}
+    .event-cta{
+      font-size:12px;font-weight:700;
+      display:flex;align-items:center;gap:4px;
+      opacity:.8;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== TOP UTILITY BAR ===== -->
+<div class="util-topbar">
+  <div class="util-topbar-inner">
+    <div class="util-links">
+      <a href="login.html" class="util-link">로그인</a>
+      <a href="login.html" class="util-link">회원가입</a>
+      <a href="customer.html" class="util-link">고객센터</a>
+      <a href="cart.html" class="util-link">
+        장바구니 <span class="cart-badge" style="display:none">0</span>
+      </a>
+      <a href="mypage.html" class="util-link">마이페이지</a>
+    </div>
+  </div>
+</div>
+<div class="util-bar">
+  <div class="util-bar-inner">
+    <a href="index.html" class="util-logo">
+      <span class="logo-mark">YBM북스</span>
+
+      <span class="logo-badge">초중고</span>
+    </a>
+
+    <div class="header-search">
+      <div class="search-wrap">
+        <select class="search-select" id="searchCat">
+          <option value="">카테고리 전체</option>
+          <option value="elementary">초등</option>
+          <option value="middle">중학</option>
+          <option value="high">고등</option>
+        </select>
+        <select class="search-select2" id="searchType">
+          <option value="">전체</option>
+          <option value="참고서">참고서</option>
+          <option value="교과서">교과서</option>
+          <option value="ELT">ELT</option>
+          <option value="일반">일반/수험서</option>
+        </select>
+        <input type="text" class="search-input" id="searchInput"
+          placeholder="초등, 중등, 고등 교재명을 입력하세요">
+        <button class="search-btn" onclick="doSearch()">🔍</button>
+      </div>
+    </div>
+
+    <div class="gnb-special">
+      <a href="https://www.ybmbooksam.com/html/main/index" target="_blank" class="btn-orange">강사용 Y튜터 ↗</a>
+      <a href="books.html" class="btn-blue">YBM북스-성인 ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GNB ===== -->
+<nav class="gnb-bar">
+  <div class="gnb-inner">
+    <button class="gnb-all"><span class="hamburger">☰</span> 전체 카테고리</button>
+    <div class="gnb-nav">
+
+      <!-- 초등 -->
+      <div class="gnb-item" data-cat="elementary">
+        <a href="books.html?cat=elementary" class="gnb-link">초등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--elem);">
+            <span class="dropdown-cat-icon">🎒</span>
+            <span class="dropdown-cat-label">초등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=elementary&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=elementary&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=elementary&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=elementary&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=elementary&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=elementary&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=elementary&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 중학 -->
+      <div class="gnb-item" data-cat="middle">
+        <a href="books.html?cat=middle" class="gnb-link">중학</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--mid);">
+            <span class="dropdown-cat-icon">📚</span>
+            <span class="dropdown-cat-label">중학</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=middle&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=middle&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=middle&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=middle&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=middle&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=middle&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=middle&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=middle&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=middle&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 고등 -->
+      <div class="gnb-item" data-cat="high">
+        <a href="books.html?cat=high" class="gnb-link">고등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--high);">
+            <span class="dropdown-cat-icon">🎓</span>
+            <span class="dropdown-cat-label">고등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=high&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=high&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=high&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=high&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=high&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=high&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=high&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=high&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=high&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 자료실 -->
+      <div class="gnb-item" data-cat="resources">
+        <a href="resources.html" class="gnb-link">자료실</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--res);">
+            <span class="dropdown-cat-icon">📂</span>
+            <span class="dropdown-cat-label">자료실</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="resources.html?tab=materials" class="mega-group-title">교재 자료실</a>
+            <a href="resources.html?tab=daily" class="mega-group-title">데일리 외국어</a>
+            <a href="resources.html?tab=howto" class="mega-group-title">교재 활용법</a>
+            <a href="resources.html?tab=curation" class="mega-group-title">큐레이션</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 이벤트 -->
+      <div class="gnb-item" data-cat="events">
+        <a href="events.html" class="gnb-link">이벤트</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--red);">
+            <span class="dropdown-cat-icon">🎁</span>
+            <span class="dropdown-cat-label">이벤트</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="events.html" class="mega-group-title">이벤트</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO BANNER ===== -->
+<section class="hero">
+  <div class="hero-inner">
+  <!-- slide 1 -->
+  <div class="hero-slides">
+    <div class="hero-slide active">
+      <div class="hero-content">
+        <div class="hero-exclusive">EXCLUSIVE</div>
+        <h1 class="hero-title">
+          최신 교육과정을 완벽 반영한<br>
+          <span>내신 대비 중학 독해 시리즈</span>
+        </h1>
+        <p class="hero-desc">
+          최신 교육과정 완벽 반영, 최신 개정판!<br>
+          중학 내신 대비 독해 시리즈
+        </p>
+        <div class="hero-btns">
+          <button class="hero-btn-primary" onclick="location.href='book-detail.html?id=16'">교재 자세히 보기</button>
+          <button class="hero-btn-outline" onclick="location.href='resources.html?tab=curation'">내 맞춤 플랜 찾기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 우측 책 이미지 -->
+  <div class="hero-visual">
+    <div class="hero-books" id="heroBooks">
+      <div class="hero-book hero-book-img" onclick="location.href='book-detail.html?id=16'">
+        <img src="images/ilove-reading-1.png" alt="I Love Reading Level 1">
+      </div>
+      <div class="hero-book hero-book-img" onclick="location.href='book-detail.html?id=17'">
+        <img src="images/ilove-reading-2.png" alt="I Love Reading Level 2">
+      </div>
+      <div class="hero-book hero-book-img" onclick="location.href='book-detail.html?id=18'">
+        <img src="images/ilove-reading-3.png" alt="I Love Reading Level 3">
+      </div>
+    </div>
+    <!-- 슬라이드 2: Booster Voca (이미지 파일 추가 시 활성화) -->
+    <div class="hero-books hero-books-alt" id="heroBooksVoca" style="display:none;">
+      <div class="hero-book hero-book-img">
+        <img src="images/booster-voca-basic.png" alt="Booster Voca 기본" onerror="this.parentElement.style.background='linear-gradient(160deg,#6d1c1c,#4a0f0f)';this.style.display='none'">
+      </div>
+      <div class="hero-book hero-book-img">
+        <img src="images/booster-voca-power.png" alt="Booster Voca 실력" onerror="this.parentElement.style.background='linear-gradient(160deg,#4a1460,#300d42)';this.style.display='none'">
+      </div>
+      <div class="hero-book hero-book-img">
+        <img src="images/booster-voca-complete.png" alt="Booster Voca 완성" onerror="this.parentElement.style.background='linear-gradient(160deg,#0d3b6e,#081f3a)';this.style.display='none'">
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /.hero-inner -->
+
+  <!-- 슬라이드 컨트롤 -->
+  <div class="hero-controls">
+    <button class="slide-btn" onclick="prevSlide()">‹</button>
+    <span class="slide-counter" id="slideCounter">1 / 3</span>
+    <button class="slide-btn" onclick="nextSlide()">›</button>
+    <button class="slide-pause" id="pauseBtn" onclick="togglePause()">⏸</button>
+  </div>
+</section>
+
+<!-- ===== CONTENTS (데일리 외국어) ===== -->
+<section class="section section-compact">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">CONTENTS</div>
+        <h2 class="section-title">데일리 외국어 학습</h2>
+      </div>
+      <a href="resources.html?tab=daily" class="view-all">전체보기 →</a>
+    </div>
+
+    <div class="daily-grid">
+      <div class="daily-cards">
+
+        <!-- 영어 — 뉴욕 야경 스카이라인 -->
+        <div class="daily-card" onclick="openDailyModal('en')">
+          <div class="daily-card-thumb">
+            <svg width="100%" height="88" viewBox="0 0 300 88" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="sky-en" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#040d24"/>
+                  <stop offset="100%" stop-color="#0d2b6b"/>
+                </linearGradient>
+              </defs>
+              <rect width="300" height="88" fill="url(#sky-en)"/>
+              <!-- 별 -->
+              <circle cx="18" cy="10" r="1" fill="white" opacity=".6"/>
+              <circle cx="50" cy="6"  r="1" fill="white" opacity=".5"/>
+              <circle cx="88" cy="13" r="1" fill="white" opacity=".7"/>
+              <circle cx="170" cy="8" r="1" fill="white" opacity=".6"/>
+              <circle cx="220" cy="16" r="1.5" fill="white" opacity=".8"/>
+              <circle cx="258" cy="5"  r="1" fill="white" opacity=".5"/>
+              <!-- 달 -->
+              <circle cx="260" cy="16" r="8" fill="#fff9db" opacity=".9"/>
+              <!-- 빌딩 실루엣 왼쪽 -->
+              <rect x="0"   y="52" width="18" height="36" fill="#081535"/>
+              <rect x="16"  y="40" width="14" height="48" fill="#0a1c42"/>
+              <rect x="28"  y="56" width="16" height="32" fill="#081535"/>
+              <rect x="42"  y="44" width="12" height="44" fill="#0a1c42"/>
+              <rect x="52"  y="60" width="18" height="28" fill="#081535"/>
+              <!-- 엠파이어 스테이트 빌딩 -->
+              <rect x="118" y="26" width="14" height="62" fill="#0a1c42"/>
+              <rect x="121" y="18" width="8"  height="10" fill="#0a1c42"/>
+              <rect x="123.5" y="8" width="3"  height="12" fill="#0a1c42"/>
+              <rect x="124.5" y="3" width="1"  height="7"  fill="#0a1c42"/>
+              <!-- 빌딩 오른쪽 -->
+              <rect x="178" y="46" width="16" height="42" fill="#0a1c42"/>
+              <rect x="192" y="33" width="18" height="55" fill="#081535"/>
+              <rect x="208" y="50" width="20" height="38" fill="#0a1c42"/>
+              <rect x="226" y="38" width="14" height="50" fill="#081535"/>
+              <rect x="238" y="56" width="22" height="32" fill="#0a1c42"/>
+              <rect x="258" y="44" width="14" height="44" fill="#081535"/>
+              <rect x="270" y="58" width="30" height="30" fill="#0a1c42"/>
+              <!-- 창문 불빛 -->
+              <rect x="120" y="30" width="2" height="2" fill="#ffe57f" opacity=".9"/>
+              <rect x="124" y="38" width="2" height="2" fill="#ffe57f" opacity=".9"/>
+              <rect x="120" y="46" width="2" height="2" fill="#ffe57f" opacity=".9"/>
+              <rect x="124" y="54" width="2" height="2" fill="#ffe57f" opacity=".9"/>
+              <rect x="18"  y="44" width="2" height="2" fill="#ffe57f" opacity=".5"/>
+              <rect x="193" y="37" width="2" height="2" fill="#ffe57f" opacity=".5"/>
+              <rect x="197" y="45" width="2" height="2" fill="#ffe57f" opacity=".5"/>
+              <!-- 수면 반사 -->
+              <rect x="0" y="78" width="300" height="10" fill="#0a1c42" opacity=".5"/>
+              <!-- 국기 배지 -->
+              <circle cx="268" cy="70" r="11" fill="white"/>
+              <text x="268" y="74" text-anchor="middle" font-size="13">🇺🇸</text>
+            </svg>
+          </div>
+          <div class="daily-card-info">
+            <div class="daily-card-subject">영어</div>
+            <div class="daily-card-text">[DAY 1235] 전화를 잘못 걸다</div>
+          </div>
+        </div>
+
+        <!-- 중국어 — 만리장성 + 붉은 하늘 -->
+        <div class="daily-card" onclick="openDailyModal('cn')">
+          <div class="daily-card-thumb">
+            <svg width="100%" height="88" viewBox="0 0 300 88" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="sky-cn" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#7f0000"/>
+                  <stop offset="50%" stop-color="#c62828"/>
+                  <stop offset="100%" stop-color="#ef5350"/>
+                </linearGradient>
+                <linearGradient id="mtn-cn" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3e0000"/>
+                  <stop offset="100%" stop-color="#5d1a1a"/>
+                </linearGradient>
+              </defs>
+              <rect width="300" height="88" fill="url(#sky-cn)"/>
+              <!-- 태양 -->
+              <circle cx="150" cy="22" r="13" fill="#ffee58" opacity=".95"/>
+              <circle cx="150" cy="22" r="9"  fill="#fffde7"/>
+              <!-- 오성홍기 별 (작은) -->
+              <text x="186" y="16" font-size="8" fill="#ffee58" opacity=".85">★</text>
+              <text x="196" y="22" font-size="6" fill="#ffee58" opacity=".75">★</text>
+              <text x="192" y="30" font-size="6" fill="#ffee58" opacity=".75">★</text>
+              <text x="181" y="30" font-size="6" fill="#ffee58" opacity=".75">★</text>
+              <text x="176" y="20" font-size="6" fill="#ffee58" opacity=".75">★</text>
+              <!-- 산 실루엣 -->
+              <polygon points="0,88 55,38 110,88"  fill="url(#mtn-cn)"/>
+              <polygon points="55,88 125,28 195,88" fill="#3a0a0a"/>
+              <polygon points="140,88 208,34 276,88" fill="url(#mtn-cn)"/>
+              <polygon points="220,88 275,44 300,88" fill="#3a0a0a"/>
+              <!-- 만리장성 -->
+              <path d="M10,72 L55,48 L100,64 L130,40 L170,56 L210,45 L255,61 L290,50"
+                    stroke="#6a0000" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+              <!-- 성벽 흉벽 -->
+              <rect x="48" y="45" width="5" height="7" fill="#6a0000"/>
+              <rect x="56" y="45" width="5" height="7" fill="#6a0000"/>
+              <rect x="123" y="36" width="5" height="7" fill="#6a0000"/>
+              <rect x="131" y="36" width="5" height="7" fill="#6a0000"/>
+              <rect x="203" y="41" width="5" height="7" fill="#6a0000"/>
+              <rect x="211" y="41" width="5" height="7" fill="#6a0000"/>
+              <!-- 성문 탑 -->
+              <rect x="143" y="26" width="14" height="22" fill="#5d0000"/>
+              <polygon points="138,26 150,16 162,26" fill="#7f0000"/>
+              <!-- 국기 배지 -->
+              <circle cx="268" cy="70" r="11" fill="white"/>
+              <text x="268" y="74" text-anchor="middle" font-size="13">🇨🇳</text>
+            </svg>
+          </div>
+          <div class="daily-card-info">
+            <div class="daily-card-subject">중국어</div>
+            <div class="daily-card-text">[DAY 1235] 지나치게, 몹시</div>
+          </div>
+        </div>
+
+        <!-- 일본어 — 후지산 + 도리이 -->
+        <div class="daily-card" onclick="openDailyModal('jp')">
+          <div class="daily-card-thumb">
+            <svg width="100%" height="88" viewBox="0 0 300 88" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="sky-jp" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ff6d00"/>
+                  <stop offset="55%" stop-color="#ff8f00"/>
+                  <stop offset="100%" stop-color="#ffb300"/>
+                </linearGradient>
+                <linearGradient id="fuji-g" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#e0e8f0"/>
+                  <stop offset="28%" stop-color="#e0e8f0"/>
+                  <stop offset="29%" stop-color="#37474f"/>
+                  <stop offset="100%" stop-color="#263238"/>
+                </linearGradient>
+              </defs>
+              <rect width="300" height="88" fill="url(#sky-jp)"/>
+              <!-- 구름/안개 -->
+              <ellipse cx="60"  cy="58" rx="55" ry="12" fill="white" opacity=".18"/>
+              <ellipse cx="240" cy="62" rx="50" ry="10" fill="white" opacity=".15"/>
+              <!-- 태양 (일장기 원) -->
+              <circle cx="150" cy="24" r="15" fill="#e53935" opacity=".9"/>
+              <!-- 후지산 -->
+              <polygon points="45,88 150,14 255,88" fill="url(#fuji-g)"/>
+              <!-- 설모 -->
+              <polygon points="118,44 150,14 182,44 174,47 150,20 126,47" fill="white"/>
+              <!-- 호수 (수면) -->
+              <rect x="0" y="76" width="300" height="12" fill="#bf360c" opacity=".35"/>
+              <ellipse cx="150" cy="80" rx="90" ry="5" fill="#e64a19" opacity=".2"/>
+              <!-- 도리이 게이트 -->
+              <rect x="222" y="52" width="5" height="30" fill="#b71c1c"/>
+              <rect x="253" y="52" width="5" height="30" fill="#b71c1c"/>
+              <rect x="217" y="44" width="48" height="6"  fill="#c62828" rx="2"/>
+              <rect x="222" y="54" width="41" height="4"  fill="#b71c1c" rx="1"/>
+              <!-- 벚꽃 -->
+              <circle cx="22"  cy="72" r="4" fill="#f8bbd0" opacity=".8"/>
+              <circle cx="32"  cy="66" r="3" fill="#f48fb1" opacity=".7"/>
+              <circle cx="14"  cy="65" r="3" fill="#f8bbd0" opacity=".6"/>
+              <circle cx="272" cy="70" r="4" fill="#f8bbd0" opacity=".8"/>
+              <circle cx="282" cy="64" r="3" fill="#f48fb1" opacity=".7"/>
+              <!-- 국기 배지 -->
+              <circle cx="268" cy="70" r="11" fill="white"/>
+              <text x="268" y="74" text-anchor="middle" font-size="13">🇯🇵</text>
+            </svg>
+          </div>
+          <div class="daily-card-info">
+            <div class="daily-card-subject">일본어</div>
+            <div class="daily-card-text">[DAY 1231] 가리다</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 교재 소개 영상 -->
+      <div class="video-panel">
+        <div class="video-panel-header">
+          <div class="video-panel-title">북샘 교재 소개 영상</div>
+          <div class="video-panel-sub">최신 교재 특징을 영상으로 확인하세요</div>
+        </div>
+        <div class="video-thumb" onclick="Toast.show('영상 재생을 시작합니다.','success')">
+          <div style="display:flex;width:100%;height:100%;">
+            <img src="images/ilove-reading-1.png" alt="I Love Reading 1" style="flex:1;width:0;object-fit:cover;opacity:.88;">
+            <img src="images/ilove-reading-2.png" alt="I Love Reading 2" style="flex:1;width:0;object-fit:cover;opacity:.88;">
+            <img src="images/ilove-reading-3.png" alt="I Love Reading 3" style="flex:1;width:0;object-fit:cover;opacity:.88;">
+          </div>
+          <div class="video-play">▶</div>
+        </div>
+        <div style="padding:10px 14px;">
+          <div style="font-size:13px;color:rgba(255,255,255,.8);font-weight:600;margin-bottom:4px;">I Love Reading 시리즈 소개</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);">조회 12,847회</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 영어 커리큘럼 ===== -->
+<section class="section section-bg">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">CURATION</div>
+        <h2 class="section-title">영어 교재 큐레이션</h2>
+        <p class="section-sub">나에게 맞는 단계별 학습 로드맵을 확인하세요</p>
+      </div>
+    </div>
+
+    <!-- 캐릭터 레벨 탭 (클릭 시 자료실 > 큐레이션으로 이동) -->
+    <div class="curric-char-tabs">
+      <div class="curric-char-tab" data-level="all"
+           onclick="location.href='resources.html?tab=curation&amp;level=all'">
+        <div class="char-tab-desc">인기 커리큘럼을<br>한눈에</div>
+        <div class="char-tab-avatar">👨‍🏫</div>
+        <div class="char-tab-label">전체</div>
+      </div>
+      <div class="curric-char-tab" data-level="elementary"
+           onclick="location.href='resources.html?tab=curation&amp;level=elementary'">
+        <div class="char-tab-desc">기초부터 쉽고<br>재미있게 학습하는</div>
+        <div class="char-tab-avatar">👧</div>
+        <div class="char-tab-label">초등</div>
+      </div>
+      <div class="curric-char-tab" data-level="middle"
+           onclick="location.href='resources.html?tab=curation&amp;level=middle'">
+        <div class="char-tab-desc">체계적으로 탄탄하게<br>실력을 쌓는</div>
+        <div class="char-tab-avatar">🧑‍🎒</div>
+        <div class="char-tab-label">중학</div>
+      </div>
+      <div class="curric-char-tab" data-level="high"
+           onclick="location.href='resources.html?tab=curation&amp;level=high'">
+        <div class="char-tab-desc">수능 기본기부터<br>실전 대비까지</div>
+        <div class="char-tab-avatar">👩‍🎓</div>
+        <div class="char-tab-label">고등</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 베스트 교재 ===== -->
+<section class="section section-bg">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">BEST SELLER</div>
+        <h2 class="section-title">인기 교재</h2>
+      </div>
+      <a href="books.html?sort=best" class="view-all">전체보기 →</a>
+    </div>
+
+    <div class="cat-tab-bar">
+      <button class="cat-tab active" data-target="best-all">전체</button>
+      <button class="cat-tab" data-target="best-elem">초등</button>
+      <button class="cat-tab" data-target="best-mid">중학</button>
+      <button class="cat-tab" data-target="best-high">고등</button>
+    </div>
+
+    <div id="best-all"  class="curation-panel book-grid"></div>
+    <div id="best-elem" class="curation-panel book-grid" style="display:none"></div>
+    <div id="best-mid"  class="curation-panel book-grid" style="display:none"></div>
+    <div id="best-high" class="curation-panel book-grid" style="display:none"></div>
+  </div>
+</section>
+
+<!-- ===== 베스트 + 신간 좌우 분할 ===== -->
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start;">
+
+      <!-- 신간 목록 -->
+      <div>
+        <div class="section-header">
+          <div>
+            <div class="section-eyebrow">NEW RELEASE</div>
+            <h2 class="section-title">신간 교재</h2>
+          </div>
+          <a href="books.html?sort=new" class="view-all">전체보기 →</a>
+        </div>
+        <div id="new-books" class="book-grid" style="grid-template-columns:repeat(4,1fr);"></div>
+      </div>
+
+      <!-- 인기 순위 -->
+      <div>
+        <div class="section-header" style="margin-bottom:0;">
+          <div>
+            <div class="section-eyebrow">RANKING</div>
+            <h2 class="section-title">주간 판매 순위</h2>
+          </div>
+        </div>
+        <div class="rank-list" id="rankList" style="margin-top:20px;"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 이벤트 배너 (제거됨) ===== -->
+<section class="section section-bg" style="display:none">
+  <div class="container">
+    <div class="event-banner">
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-links">
+        <div>
+          <div class="footer-col-title">교재</div>
+          <a href="books.html?cat=elementary" class="footer-link">초등 교재</a>
+          <a href="books.html?cat=middle" class="footer-link">중학 교재</a>
+          <a href="books.html?cat=high" class="footer-link">고등 교재</a>
+          <a href="books.html?sort=best" class="footer-link">베스트셀러</a>
+        </div>
+        <div>
+          <div class="footer-col-title">자료실</div>
+          <a href="resources.html?tab=materials" class="footer-link">교재 자료실</a>
+          <a href="resources.html?tab=daily" class="footer-link">데일리 외국어</a>
+          <a href="resources.html?tab=howto" class="footer-link">교재 활용법</a>
+          <a href="resources.html?tab=curation" class="footer-link">큐레이션</a>
+        </div>
+        <div>
+          <div class="footer-col-title">고객센터</div>
+          <a href="customer.html?tab=notice" class="footer-link">공지사항</a>
+          <a href="customer.html?tab=faq" class="footer-link">자주 묻는 질문</a>
+          <a href="customer.html?tab=remote" class="footer-link">원격 지원</a>
+        </div>
+        <div>
+          <div class="footer-col-title">서비스</div>
+          <a href="mypage.html" class="footer-link">마이페이지</a>
+          <a href="cart.html" class="footer-link">장바구니</a>
+          <a href="mypage.html?tab=wish" class="footer-link">관심 교재</a>
+          <a href="events.html" class="footer-link">이벤트</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 북샘 교육출판. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">이용약관</a>
+        <a href="#" style="color:white;font-weight:700;">개인정보처리방침</a>
+        <a href="#">사업자정보</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// 베스트/신간 렌더링
+const bestBooks = BOOKS.filter(b => b.badge === 'best');
+const newBooks  = BOOKS.filter(b => b.badge === 'new');
+
+document.getElementById('best-all').innerHTML  = bestBooks.map(renderBookCard).join('');
+document.getElementById('best-elem').innerHTML = bestBooks.filter(b=>b.cat==='elementary').map(renderBookCard).join('') || '<p style="color:var(--muted);padding:20px">해당 교재가 없습니다.</p>';
+document.getElementById('best-mid').innerHTML  = bestBooks.filter(b=>b.cat==='middle').map(renderBookCard).join('') || '<p style="color:var(--muted);padding:20px">해당 교재가 없습니다.</p>';
+document.getElementById('best-high').innerHTML = bestBooks.filter(b=>b.cat==='high').map(renderBookCard).join('') || '<p style="color:var(--muted);padding:20px">해당 교재가 없습니다.</p>';
+document.getElementById('new-books').innerHTML  = newBooks.map(renderBookCard).join('');
+
+// 주간 순위
+const rankBooks = [...BOOKS].slice(0,6);
+document.getElementById('rankList').innerHTML = rankBooks.map((b,i) => `
+  <div class="rank-item" onclick="location.href='book-detail.html?id=${b.id}'">
+    <div class="rank-num ${i<3?'top':''}">${String(i+1).padStart(2,'0')}</div>
+    <div class="rank-thumb">${CAT_INFO[b.cat].emoji}</div>
+    <div class="rank-info">
+      <div class="rank-title">${b.title}</div>
+      <div class="rank-meta">${CAT_INFO[b.cat].label} · ${b.author}</div>
+    </div>
+    <div class="rank-price">${fmtPrice(b.price)}원</div>
+  </div>
+`).join('');
+
+// 검색
+function doSearch(){
+  const q = document.getElementById('searchInput').value;
+  const cat = document.getElementById('searchCat').value;
+  const params = new URLSearchParams({q,...(cat&&{cat})});
+  location.href = `books.html?${params}`;
+}
+document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
+
+// 슬라이드
+const slides = [
+  { badge:'EXCLUSIVE', title:'최신 교육과정을 완벽 반영한\n<span>내신 대비 중학 독해 시리즈</span>', desc:'최신 교육과정 완벽 반영, 최신 개정판!\n중학 내신 대비 독해 시리즈', btn1:'교재 자세히 보기', btn2:'내 맞춤 플랜 찾기', colors:['#2e7d32','#6a1b9a','#1565c0'] },
+];
+let current = 0;
+let paused = false;
+let timer;
+
+function renderSlide(idx){
+  const s = slides[idx];
+  document.querySelector('.hero-exclusive').textContent = s.badge;
+  document.querySelector('.hero-title').innerHTML = s.title.replace(/\n/g,'<br>');
+  document.querySelector('.hero-desc').innerHTML = s.desc.replace(/\n/g,'<br>');
+  document.querySelector('.hero-btn-primary').textContent = s.btn1;
+  document.querySelector('.hero-btn-outline').textContent = s.btn2;
+  // 이미지 카드는 배경색 변경 불필요
+  document.getElementById('slideCounter').textContent = `${idx+1} / ${slides.length}`;
+}
+
+function nextSlide(){current=(current+1)%slides.length;renderSlide(current);}
+function prevSlide(){current=(current-1+slides.length)%slides.length;renderSlide(current);}
+function togglePause(){
+  paused=!paused;
+  document.getElementById('pauseBtn').textContent = paused?'▶':'⏸';
+  if(!paused) startTimer(); else clearInterval(timer);
+}
+function startTimer(){
+  clearInterval(timer);
+  if(!paused) timer=setInterval(nextSlide,4000);
+}
+startTimer();
+</script>
+
+<!-- ===== 데일리 외국어 모달 ===== -->
+<div id="dailyModal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);align-items:center;justify-content:center;" onclick="if(event.target===this)closeDailyModal()">
+  <div style="background:white;border-radius:16px;width:90%;max-width:480px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.35);" onclick="event.stopPropagation()">
+    <div id="dailyModalHeader" style="padding:28px 28px 20px;color:white;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div id="dailyModalBadge" style="font-size:11px;font-weight:800;letter-spacing:2px;opacity:.8;margin-bottom:8px;"></div>
+          <div id="dailyModalLang" style="font-size:22px;font-weight:900;"></div>
+        </div>
+        <button onclick="closeDailyModal()" style="background:rgba(255,255,255,.2);border:none;color:white;width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">✕</button>
+      </div>
+    </div>
+    <div style="padding:24px 28px 28px;">
+      <div id="dailyModalWord" style="font-size:30px;font-weight:900;color:#1a2e44;margin-bottom:6px;"></div>
+      <div id="dailyModalPron" style="font-size:14px;color:#888;margin-bottom:16px;"></div>
+      <div style="background:#f8f9fb;border-radius:10px;padding:14px 16px;margin-bottom:16px;">
+        <div style="font-size:11px;font-weight:800;color:#999;letter-spacing:1px;margin-bottom:6px;">뜻</div>
+        <div id="dailyModalMeaning" style="font-size:15px;font-weight:700;color:#1a2e44;"></div>
+      </div>
+      <div style="background:#f8f9fb;border-radius:10px;padding:14px 16px;margin-bottom:20px;">
+        <div style="font-size:11px;font-weight:800;color:#999;letter-spacing:1px;margin-bottom:8px;">예문</div>
+        <div id="dailyModalEx1" style="font-size:14px;color:#333;line-height:1.7;margin-bottom:4px;"></div>
+        <div id="dailyModalEx2" style="font-size:13px;color:#888;line-height:1.6;"></div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button onclick="Toast.show('음원을 재생합니다.','success')" style="flex:1;padding:12px;background:#1a2e44;color:white;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">🔊 발음 듣기</button>
+        <a id="dailyModalMore" href="resources.html?tab=daily" style="flex:1;padding:12px;background:#f0f2f5;color:#1a2e44;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;">더 보기 →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DAILY_DATA = {
+  en: {
+    badge: 'ENGLISH · DAY 1235',
+    lang: '영어',
+    headerBg: 'linear-gradient(135deg,#1565c0,#0d47a1)',
+    word: 'hang up',
+    pron: '[hæŋ ʌp]',
+    meaning: '(전화를) 끊다, 전화를 잘못 걸다',
+    ex1: 'She accidentally hung up on the wrong person.',
+    ex2: '그녀는 실수로 엉뚱한 사람에게 전화를 끊었다.',
+  },
+  cn: {
+    badge: '중국어 · DAY 1235',
+    lang: '중국어',
+    headerBg: 'linear-gradient(135deg,#c0392b,#922b21)',
+    word: '过分 (guòfèn)',
+    pron: 'guò fèn',
+    meaning: '지나치게, 너무, 심하게 (excessive / too much)',
+    ex1: '你做得太过分了！',
+    ex2: '너무 심한 거 아니에요?',
+  },
+  jp: {
+    badge: '일본어 · DAY 1231',
+    lang: '일본어',
+    headerBg: 'linear-gradient(135deg,#e65c00,#bf4200)',
+    word: '選ぶ（えらぶ）',
+    pron: 'e·ra·bu',
+    meaning: '고르다, 선택하다 (to choose / to select)',
+    ex1: '好きな色を選んでください。',
+    ex2: '좋아하는 색을 골라 주세요.',
+  },
+};
+
+function openDailyModal(lang) {
+  const d = DAILY_DATA[lang];
+  const modal = document.getElementById('dailyModal');
+  document.getElementById('dailyModalHeader').style.background = d.headerBg;
+  document.getElementById('dailyModalBadge').textContent   = d.badge;
+  document.getElementById('dailyModalLang').textContent    = d.lang;
+  document.getElementById('dailyModalWord').textContent    = d.word;
+  document.getElementById('dailyModalPron').textContent    = d.pron;
+  document.getElementById('dailyModalMeaning').textContent = d.meaning;
+  document.getElementById('dailyModalEx1').textContent     = d.ex1;
+  document.getElementById('dailyModalEx2').textContent     = d.ex2;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeDailyModal() {
+  document.getElementById('dailyModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeDailyModal(); });
+</script>
+
+</body>
+</html>
