@@ -269,11 +269,9 @@ function renderBookCard(book) {
   const discount = Math.round((1 - book.price / book.originalPrice) * 100);
   const isWished = Wish.has(book.id);
 
-  const placeholderHtml = `<div class="book-thumb-placeholder">${info.emoji}<small>${book.type}</small></div>`;
   const thumbContent = book.img
-    ? `<img src="${book.img}" alt="${book.title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
-         onerror="this.outerHTML='${placeholderHtml.replace(/'/g,'&apos;')}';">`
-    : placeholderHtml;
+    ? `<img src="${book.img}" alt="${book.title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">`
+    : `<div class="book-thumb-placeholder">${info.emoji}<small>${book.type}</small></div>`;
 
   return `
     <div class="book-card" data-id="${book.id}" onclick="location.href='book-detail.html?id=${book.id}'">
