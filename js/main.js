@@ -517,6 +517,11 @@ document.addEventListener('DOMContentLoaded', () => {
     .find(a => a.textContent.trim() === '회원가입');
   if (joinLink) joinLink.style.display = loggedIn ? 'none' : '';
 
+  // 장바구니 링크: 상단 헤더에서 항상 숨김 (고객센터 > 마이페이지에서 접근)
+  const cartLink = [...document.querySelectorAll('.util-links .util-link')]
+    .find(a => a.textContent.includes('장바구니'));
+  if (cartLink) cartLink.style.display = 'none';
+
   if (loginLink) {
     if (loggedIn) {
       // 로그인 상태 → 로그아웃으로 변경
