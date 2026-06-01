@@ -5,6 +5,173 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>도서 상세 - 북샘</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Unit별 MP3 플레이어 ── */
+    .mp3-unit-modal {
+      background: #fff;
+      border-radius: 12px;
+      width: 92%;
+      max-width: 620px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+    .mp3-unit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      border-bottom: 1px solid #eee;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+    .mp3-unit-header button {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: var(--muted);
+      line-height: 1;
+      padding: 4px 8px;
+    }
+    .mp3-unit-book {
+      padding: 10px 22px 12px;
+      font-size: 12px;
+      color: var(--muted);
+      border-bottom: 1px solid #f0f0f0;
+      flex-shrink: 0;
+    }
+    .mp3-unit-list {
+      overflow-y: auto;
+      flex: 1;
+    }
+    .mp3-lesson-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 22px;
+      background: #f5f5f5;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .mp3-lesson-header.open { background: #eeeeee; }
+    .mp3-lesson-arrow { font-size: 11px; color: #888; }
+    .mp3-tracks-body { background: #fff; }
+    .mp3-track-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 22px 11px 32px;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background .15s;
+    }
+    .mp3-track-row:last-child { border-bottom: none; }
+    .mp3-track-row.playing { background: #fff8e1; }
+    .mp3-track-btns { display: flex; gap: 6px; flex-shrink: 0; }
+    .mp3-btn-play,
+    .mp3-btn-stop {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1.5px solid #bbb;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      cursor: pointer;
+      color: #444;
+      transition: border-color .15s, background .15s;
+      flex-shrink: 0;
+    }
+    .mp3-btn-play:hover { border-color: var(--navy); color: var(--navy); }
+    .mp3-btn-stop:hover { border-color: #e53935; color: #e53935; }
+    .mp3-track-row.playing .mp3-btn-play { border-color: var(--navy); color: var(--navy); background: #e8edf4; }
+    .mp3-track-label { font-size: 14px; color: #333; flex: 1; }
+    .mp3-track-row.playing .mp3-track-label { font-weight: 700; color: var(--navy); }
+
+    /* ── 오디오 플레이어 바 ── */
+    .mp3-unit-player {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 20px 16px;
+      border-top: 2px solid #e8e8e8;
+      background: #1a2e44;
+      flex-shrink: 0;
+      border-radius: 0 0 12px 12px;
+    }
+    /* 트랙 정보 */
+    .mp3-player-row1 { display: flex; align-items: center; }
+    .mp3-player-meta { display: flex; align-items: center; gap: 10px; }
+    .mp3-np-dot { color: #4fc3f7; font-size: 9px; animation: mp3blink 1.2s infinite; }
+    @keyframes mp3blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+    .mp3-np-title { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.3; }
+    .mp3-np-sub   { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 2px; }
+
+    /* 프로그레스 바 */
+    .mp3-player-row2 { display: flex; align-items: center; gap: 10px; }
+    .mp3-np-cur, .mp3-np-tot { font-size: 11px; color: rgba(255,255,255,.6); white-space: nowrap; min-width: 32px; }
+    .mp3-np-tot { text-align: right; }
+    .mp3-np-bar {
+      flex: 1; height: 6px; background: rgba(255,255,255,.18);
+      border-radius: 3px; cursor: pointer; position: relative;
+      transition: height .15s;
+    }
+    .mp3-np-bar:hover { height: 8px; }
+    .mp3-np-fill {
+      height: 100%; background: #4fc3f7; border-radius: 3px;
+      width: 0%; transition: width .1s linear;
+    }
+    .mp3-np-thumb {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 14px; height: 14px; background: #fff; border-radius: 50%;
+      left: -6px; box-shadow: 0 1px 4px rgba(0,0,0,.3);
+      transition: left .1s linear;
+      pointer-events: none;
+    }
+
+    /* 컨트롤 + 배속 */
+    .mp3-player-row3 { display: flex; align-items: center; justify-content: space-between; }
+    .mp3-ctrl-btns { display: flex; align-items: center; gap: 12px; }
+    .mp3-ctrl-btn {
+      background: rgba(255,255,255,.12); border: none; color: #fff;
+      width: 32px; height: 32px; border-radius: 50%; font-size: 13px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .mp3-ctrl-btn:hover { background: rgba(255,255,255,.25); }
+    .mp3-ctrl-pp {
+      background: #fff; border: none; color: #1a2e44;
+      width: 40px; height: 40px; border-radius: 50%; font-size: 16px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+      transition: transform .1s;
+    }
+    .mp3-ctrl-pp:hover { transform: scale(1.08); }
+
+    /* 배속 */
+    .mp3-speed-wrap { display: flex; align-items: center; gap: 5px; }
+    .mp3-speed-label { font-size: 11px; color: rgba(255,255,255,.45); margin-right: 2px; }
+    .mp3-speed-btn {
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.65); font-size: 11px; font-weight: 600;
+      padding: 3px 8px; border-radius: 12px; cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .mp3-speed-btn:hover { background: rgba(255,255,255,.2); color: #fff; }
+    .mp3-speed-btn.active {
+      background: #4fc3f7; border-color: #4fc3f7; color: #1a2e44;
+    }
+  </style>
 </head>
 <body>
 
@@ -241,32 +408,310 @@ function openLoginAlert(mat) {
   ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
 }
 
-// ── MP3 플레이어 모달 ──
-function openMp3Modal(bookTitle) {
+// ── Unit별 MP3 트랙 데이터 ──
+const MP3_TRACKS = {
+  // I Love Reading 시리즈
+  16: [
+    { lesson:'Lesson 1 - All about Me',                    tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_1'] },
+    { lesson:'Lesson 2 - Think Wise, Stay Safe',           tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_2'] },
+    { lesson:'Lesson 3 - Wonderful Stories from School',   tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_3'] },
+    { lesson:'Lesson 4 - Make a Difference in Our Community', tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_4'] },
+  ],
+  17: [
+    { lesson:'Lesson 1 - Technology in Our Lives',  tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_1'] },
+    { lesson:'Lesson 2 - Nature and Environment',   tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_2'] },
+    { lesson:'Lesson 3 - Culture and Tradition',    tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_3'] },
+    { lesson:'Lesson 4 - Dreams and Future',        tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_4'] },
+  ],
+  18: [
+    { lesson:'Lesson 1 - Global Issues',    tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_1'] },
+    { lesson:'Lesson 2 - Science & Art',    tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_2'] },
+    { lesson:'Lesson 3 - Media & Society',  tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_3'] },
+    { lesson:'Lesson 4 - Future Careers',   tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up_4'] },
+  ],
+  // Phonics NOW 시리즈
+  1: [
+    { lesson:'Chapter 1 - Short Vowels',   tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+    { lesson:'Chapter 2 - Long Vowels',    tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+    { lesson:'Chapter 3 - Consonants',     tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+    { lesson:'Chapter 4 - Blends',         tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+  ],
+  2: [
+    { lesson:'Chapter 1 - Digraphs',       tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+    { lesson:'Chapter 2 - Diphthongs',     tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+    { lesson:'Chapter 3 - R-Controlled',   tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+    { lesson:'Chapter 4 - Silent Letters', tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+  ],
+  19: [
+    { lesson:'Chapter 1 - Vowel Teams',    tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+    { lesson:'Chapter 2 - Sight Words',    tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+    { lesson:'Chapter 3 - Word Families',  tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+    { lesson:'Chapter 4 - Review',         tracks:['Vocabulary List','Listen & Chant','Story Time','Let\'s Practice','Wrap Up'] },
+  ],
+  // Benchmark Reading 시리즈
+  20: [
+    { lesson:'Unit 1 - Animals',      tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+    { lesson:'Unit 2 - Nature',       tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+    { lesson:'Unit 3 - People',       tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+    { lesson:'Unit 4 - Science',      tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+  ],
+  21: [
+    { lesson:'Unit 1 - Culture',      tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+    { lesson:'Unit 2 - History',      tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+    { lesson:'Unit 3 - Technology',   tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+    { lesson:'Unit 4 - Society',      tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+  ],
+  22: [
+    { lesson:'Unit 1 - Environment',  tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+    { lesson:'Unit 2 - Art & Music',  tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+    { lesson:'Unit 3 - Sports',       tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+    { lesson:'Unit 4 - Future',       tracks:['Vocabulary Preview','Reading Passage A','Reading Passage B','Listening Check','Wrap Up'] },
+  ],
+  // Booster Voca 시리즈
+  6: [
+    { lesson:'Day 01–05',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 06–10',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 11–15',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 16–20',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 21–25',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+  ],
+  7: [
+    { lesson:'Day 01–05',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 06–10',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 11–15',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 16–20',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 21–25',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+  ],
+  8: [
+    { lesson:'Day 01–05',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 06–10',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 11–15',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 16–20',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+    { lesson:'Day 21–25',   tracks:['Word List','Example Sentences A','Example Sentences B','Review Test'] },
+  ],
+};
+const MP3_DEFAULT = [
+  { lesson:'Unit 1', tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up'] },
+  { lesson:'Unit 2', tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up'] },
+  { lesson:'Unit 3', tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up'] },
+  { lesson:'Unit 4', tracks:['Vocabulary List','Listen A','Listen B','Watch','Read','Wrap Up'] },
+];
+
+let _mp3State = { timer:null, elapsed:0, duration:0, speed:1, playing:false, li:-1, ti:-1, trackName:'', lessonName:'', lessons:[] };
+
+// ── Unit별 MP3 플레이어 모달 ──
+function openMp3Modal(bookTitle, bookId) {
+  const lessons = MP3_TRACKS[bookId] || MP3_DEFAULT;
   const ov = document.createElement('div');
   ov.className = 'modal-overlay';
+
+  const lessonsHtml = lessons.map((ls, li) => `
+    <div class="mp3-lesson-group" id="mp3ls${li}">
+      <div class="mp3-lesson-header ${li === 0 ? 'open' : ''}" onclick="toggleMp3Lesson(${li})">
+        <span>${ls.lesson}</span>
+        <span class="mp3-lesson-arrow">${li === 0 ? '▲' : '▼'}</span>
+      </div>
+      <div class="mp3-tracks-body" style="display:${li === 0 ? 'block' : 'none'}">
+        ${ls.tracks.map((tr, ti) => `
+          <div class="mp3-track-row" id="mp3row_${li}_${ti}">
+            <div class="mp3-track-btns">
+              <button class="mp3-btn-play" onclick="mp3Play(${li},${ti},this)" title="재생">▶</button>
+              <button class="mp3-btn-stop" onclick="mp3Stop()" title="정지">■</button>
+            </div>
+            <span class="mp3-track-label">${tr}</span>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+
   ov.innerHTML = `
-    <div class="mp3-modal-wrap">
-      <div class="mp3-modal-title">🎧 MP3 바로 듣기</div>
-      <div class="mp3-track-name">${bookTitle} — Unit 01</div>
-      <div class="mp3-player">
-        <button class="mp3-play-btn" id="_mp3Play">▶</button>
-        <div class="mp3-row">
-          <span class="mp3-time" id="_mp3Cur">0:00</span>
-          <div class="mp3-progress-bar"><div class="mp3-progress-fill" id="_mp3Fill"></div></div>
-          <span class="mp3-time">3:45</span>
+    <div class="mp3-unit-modal">
+      <div class="mp3-unit-header">
+        <span>🎧 MP3 바로 듣기</span>
+        <button onclick="mp3Stop();this.closest('.modal-overlay').remove()">✕</button>
+      </div>
+      <div class="mp3-unit-book">${bookTitle}</div>
+      <div class="mp3-unit-list">${lessonsHtml}</div>
+      <div class="mp3-unit-player" id="_mp3NowPlaying" style="display:none">
+        <div class="mp3-player-row1">
+          <div class="mp3-player-meta">
+            <span class="mp3-np-dot">●</span>
+            <div>
+              <div class="mp3-np-title" id="_mp3NpTitle"></div>
+              <div class="mp3-np-sub"   id="_mp3NpSub"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mp3-player-row2">
+          <span class="mp3-np-cur" id="_mp3NpCur">0:00</span>
+          <div class="mp3-np-bar" id="_mp3NpBar" onclick="mp3Seek(event,this)">
+            <div class="mp3-np-fill" id="_mp3NpFill"></div>
+            <div class="mp3-np-thumb" id="_mp3NpThumb"></div>
+          </div>
+          <span class="mp3-np-tot" id="_mp3NpTot">0:00</span>
+        </div>
+        <div class="mp3-player-row3">
+          <div class="mp3-ctrl-btns">
+            <button class="mp3-ctrl-btn" onclick="mp3Prev()" title="이전 트랙">⏮</button>
+            <button class="mp3-ctrl-pp"  id="_mp3PpBtn" onclick="mp3MainToggle()">⏸</button>
+            <button class="mp3-ctrl-btn" onclick="mp3Next()" title="다음 트랙">⏭</button>
+          </div>
+          <div class="mp3-speed-wrap">
+            <span class="mp3-speed-label">배속</span>
+            <button class="mp3-speed-btn" data-speed="0.75" onclick="mp3SetSpeed(0.75)">0.75x</button>
+            <button class="mp3-speed-btn active" data-speed="1" onclick="mp3SetSpeed(1)">1x</button>
+            <button class="mp3-speed-btn" data-speed="1.25" onclick="mp3SetSpeed(1.25)">1.25x</button>
+            <button class="mp3-speed-btn" data-speed="1.5" onclick="mp3SetSpeed(1.5)">1.5x</button>
+            <button class="mp3-speed-btn" data-speed="2" onclick="mp3SetSpeed(2)">2x</button>
+          </div>
         </div>
       </div>
-      <button class="mp3-close-btn" onclick="this.closest('.modal-overlay').remove()">닫기</button>
     </div>`;
   document.body.appendChild(ov);
-  let playing = false, sec = 0;
-  const btn = document.getElementById('_mp3Play');
-  btn.onclick = () => {
-    playing = !playing;
-    btn.textContent = playing ? '⏸' : '▶';
+  _mp3State.lessons = lessons;
+  ov.addEventListener('click', e => { if (e.target === ov) { mp3Stop(); ov.remove(); } });
+}
+
+function toggleMp3Lesson(li) {
+  const group = document.getElementById('mp3ls' + li);
+  const body  = group.querySelector('.mp3-tracks-body');
+  const arrow = group.querySelector('.mp3-lesson-arrow');
+  const header = group.querySelector('.mp3-lesson-header');
+  const open = body.style.display !== 'none';
+  body.style.display  = open ? 'none' : 'block';
+  arrow.textContent   = open ? '▼' : '▲';
+  header.classList.toggle('open', !open);
+}
+
+// ── 트랙별 가상 재생 시간(초) ──
+function _mp3Dur(label) {
+  const map = {
+    'Vocabulary List':165,'Vocabulary Preview':155,
+    'Listen A':210,'Listen B':195,'Watch':240,'Read':135,
+    'Word List':180,'Example Sentences A':150,'Example Sentences B':150,'Review Test':120,
+    'Reading Passage A':220,'Reading Passage B':200,'Listening Check':175,
+    'Listen & Chant':130,'Story Time':180,"Let's Practice":120,
   };
-  ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+  for (const k of Object.keys(map)) { if (label.startsWith(k)) return map[k]; }
+  return 180;
+}
+function _mp3Fmt(s) {
+  return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+}
+function _mp3UpdateUI() {
+  const { elapsed, duration, trackName, lessonName, playing } = _mp3State;
+  const pct = duration ? elapsed / duration * 100 : 0;
+  const $  = id => document.getElementById(id);
+  const fill = $('_mp3NpFill'), thumb = $('_mp3NpThumb');
+  if (fill)  fill.style.width = pct + '%';
+  if (thumb) thumb.style.left = `calc(${pct}% - 6px)`;
+  if ($('_mp3NpCur'))   $('_mp3NpCur').textContent   = _mp3Fmt(elapsed);
+  if ($('_mp3NpTot'))   $('_mp3NpTot').textContent   = _mp3Fmt(duration);
+  if ($('_mp3NpTitle')) $('_mp3NpTitle').textContent = trackName;
+  if ($('_mp3NpSub'))   $('_mp3NpSub').textContent   = lessonName;
+  if ($('_mp3PpBtn'))   $('_mp3PpBtn').textContent   = playing ? '⏸' : '▶';
+}
+function _mp3StartTimer() {
+  _mp3State.timer = setInterval(() => {
+    _mp3State.elapsed += 0.1 * _mp3State.speed;
+    if (_mp3State.elapsed >= _mp3State.duration) {
+      _mp3State.elapsed = _mp3State.duration;
+      clearInterval(_mp3State.timer); _mp3State.playing = false;
+      _mp3UpdateUI();
+      setTimeout(() => mp3Next(), 600);
+    } else { _mp3UpdateUI(); }
+  }, 100);
+}
+
+function mp3Play(li, ti, btn) {
+  _mp3StopInternal();
+  const row = document.getElementById(`mp3row_${li}_${ti}`);
+  if (!row) return;
+  const label      = row.querySelector('.mp3-track-label').textContent;
+  const lsSpan     = document.getElementById(`mp3ls${li}`)?.querySelector('.mp3-lesson-header span');
+  const lessonName = lsSpan ? lsSpan.textContent : '';
+  Object.assign(_mp3State, { elapsed:0, duration:_mp3Dur(label), playing:true, li, ti, trackName:label, lessonName });
+  row.classList.add('playing');
+  btn.textContent = '⏸';
+  btn.setAttribute('onclick', 'mp3ListToggle(this)');
+  document.getElementById('_mp3NowPlaying').style.display = 'flex';
+  _mp3UpdateUI();
+  _mp3StartTimer();
+}
+
+function mp3ListToggle(btn) {
+  mp3MainToggle();
+}
+
+function mp3MainToggle() {
+  if (_mp3State.playing) {
+    clearInterval(_mp3State.timer); _mp3State.playing = false;
+    _mp3UpdateUI();
+    const row = document.getElementById(`mp3row_${_mp3State.li}_${_mp3State.ti}`);
+    if (row) row.querySelector('.mp3-btn-play').textContent = '▶';
+  } else if (_mp3State.elapsed < _mp3State.duration) {
+    _mp3State.playing = true;
+    _mp3UpdateUI();
+    const row = document.getElementById(`mp3row_${_mp3State.li}_${_mp3State.ti}`);
+    if (row) row.querySelector('.mp3-btn-play').textContent = '⏸';
+    _mp3StartTimer();
+  }
+}
+
+function mp3Seek(e, bar) {
+  const rect = bar.getBoundingClientRect();
+  _mp3State.elapsed = Math.max(0, Math.min(_mp3State.duration,
+    (e.clientX - rect.left) / rect.width * _mp3State.duration));
+  _mp3UpdateUI();
+}
+
+function mp3SetSpeed(speed) {
+  _mp3State.speed = speed;
+  document.querySelectorAll('.mp3-speed-btn').forEach(b =>
+    b.classList.toggle('active', parseFloat(b.dataset.speed) === speed));
+}
+
+function mp3Prev() {
+  const { li, ti, lessons } = _mp3State;
+  if (ti > 0) {
+    const r = document.getElementById(`mp3row_${li}_${ti-1}`);
+    if (r) mp3Play(li, ti-1, r.querySelector('.mp3-btn-play'));
+  } else if (li > 0) {
+    const prevLen = lessons[li-1].tracks.length;
+    const r = document.getElementById(`mp3row_${li-1}_${prevLen-1}`);
+    if (r) mp3Play(li-1, prevLen-1, r.querySelector('.mp3-btn-play'));
+  }
+}
+
+function mp3Next() {
+  const { li, ti, lessons } = _mp3State;
+  if (!lessons.length) return;
+  if (ti < lessons[li].tracks.length - 1) {
+    const r = document.getElementById(`mp3row_${li}_${ti+1}`);
+    if (r) mp3Play(li, ti+1, r.querySelector('.mp3-btn-play'));
+  } else if (li < lessons.length - 1) {
+    const body = document.getElementById(`mp3ls${li+1}`)?.querySelector('.mp3-tracks-body');
+    if (body?.style.display === 'none') toggleMp3Lesson(li+1);
+    const r = document.getElementById(`mp3row_${li+1}_0`);
+    if (r) mp3Play(li+1, 0, r.querySelector('.mp3-btn-play'));
+  }
+}
+
+function _mp3StopInternal() {
+  if (_mp3State.timer) { clearInterval(_mp3State.timer); _mp3State.timer = null; }
+  document.querySelectorAll('.mp3-track-row.playing').forEach(r => {
+    r.classList.remove('playing');
+    const pb = r.querySelector('.mp3-btn-play');
+    pb.textContent = '▶';
+    const p = r.id.split('_');
+    pb.setAttribute('onclick', `mp3Play(${p[1]},${p[2]},this)`);
+  });
+}
+
+function mp3Stop() {
+  _mp3StopInternal();
+  Object.assign(_mp3State, { elapsed:0, duration:0, playing:false, li:-1, ti:-1, trackName:'', lessonName:'' });
+  const np = document.getElementById('_mp3NowPlaying');
+  if (np) np.style.display = 'none';
 }
 
 // ── 자료 클릭 처리 ──
@@ -279,7 +724,7 @@ function handleMaterialClick(matId) {
 function useMaterial(mat) {
   if (mat.type === 'streaming') {
     const bk = BOOKS.find(b => b.id === parseInt(getParam('id')));
-    openMp3Modal(bk ? bk.title : 'MP3');
+    openMp3Modal(bk ? bk.title : 'MP3', bk ? bk.id : null);
     return;
   }
   showToast(`${mat.title} 다운로드가 시작됩니다.`);
