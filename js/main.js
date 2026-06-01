@@ -73,6 +73,55 @@ const Wish = {
   }
 };
 
+// ── 하트(관심 교재) 로그인 게이트 ──
+function toggleWish(btn, id) {
+  const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  if (!loggedIn) {
+    // 복귀 후 처리를 위해 저장
+    localStorage.setItem('redirectAfterLogin', location.href);
+    localStorage.setItem('pendingWishId', String(id));
+
+    // 로그인 필요 모달
+    const ov = document.createElement('div');
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center;';
+    ov.innerHTML = `
+      <div style="background:#fff;border-radius:14px;padding:36px 32px;max-width:320px;width:90%;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.18);">
+        <div style="font-size:36px;margin-bottom:12px;">🔒</div>
+        <div style="font-size:16px;font-weight:800;color:#1a2e44;margin-bottom:8px;">로그인이 필요합니다</div>
+        <div style="font-size:13px;color:#888;margin-bottom:24px;line-height:1.7;">관심 교재에 추가하려면<br>로그인이 필요합니다.</div>
+        <div style="display:flex;gap:10px;">
+          <button onclick="this.closest('[style]').remove()" style="flex:1;padding:12px;border:1.5px solid #ddd;border-radius:8px;background:#fff;font-size:14px;font-weight:700;cursor:pointer;color:#555;">닫기</button>
+          <button onclick="location.href='login.html'" style="flex:1;padding:12px;border:none;border-radius:8px;background:#dc2626;color:#fff;font-size:14px;font-weight:700;cursor:pointer;">로그인 바로가기</button>
+        </div>
+      </div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+    return;
+  }
+
+  // 로그인 상태 - 기존 토글 로직
+  const active = Wish.toggle(id);
+  btn.classList.toggle('active', active);
+  btn.textContent = active ? '❤️' : '🤍';
+  Toast.show(active ? '관심 교재에 추가되었습니다.' : '관심 교재에서 제거되었습니다.', 'success');
+}
+
+// ── 로그인 후 복귀 시 pending 위시 처리 ──
+document.addEventListener('DOMContentLoaded', () => {
+  const pendingId = localStorage.getItem('pendingWishId');
+  if (pendingId && localStorage.getItem('isLoggedIn') === 'true') {
+    localStorage.removeItem('pendingWishId');
+    const id = parseInt(pendingId);
+    if (!Wish.has(id)) {
+      Wish.toggle(id);
+      // 카드의 하트 버튼 UI 갱신
+      const btn = document.querySelector(`[onclick*="toggleWish(this, ${id})"]`);
+      if (btn) { btn.classList.add('active'); btn.textContent = '❤️'; }
+      Toast.show('관심 교재에 추가되었습니다.', 'success');
+    }
+  }
+});
+
 // Toast
 const Toast = {
   show(msg, type = '') {
@@ -256,11 +305,7 @@ function addToCart(id) {
   if (book) Cart.add(book);
 }
 
-function toggleWish(btn, id) {
-  const active = Wish.toggle(id);
-  btn.classList.toggle('active', active);
-  btn.textContent = active ? '❤' : '♡';
-}
+// toggleWish는 Wishlist 블록 위에 정의됨
 
 // 페이지 로드 시 공통 초기화
 document.addEventListener('DOMContentLoaded', () => {
@@ -456,6 +501,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 마이페이지 링크: 비로그인 시 숨김
   if (mypageLink) mypageLink.style.display = loggedIn ? '' : 'none';
+
+  // 회원가입 링크: 로그인 시 숨김
+  const joinLink = [...document.querySelectorAll('.util-links .util-link')]
+    .find(a => a.textContent.trim() === '회원가입');
+  if (joinLink) joinLink.style.display = loggedIn ? 'none' : '';
 
   if (loginLink) {
     if (loggedIn) {
