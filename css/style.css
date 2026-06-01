@@ -470,12 +470,12 @@ img{max-width:100%;display:block;}
   margin-bottom:20px;
 }
 .hero-title{
-  font-size:36px;
+  font-size:26px;
   font-weight:900;
   color:var(--white);
-  line-height:1.25;
-  margin-bottom:16px;
-  letter-spacing:-1px;
+  line-height:1.35;
+  margin-bottom:14px;
+  letter-spacing:-.5px;
 }
 .hero-title span{color:#ffd54f;}
 .hero-desc{
