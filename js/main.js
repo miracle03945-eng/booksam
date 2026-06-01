@@ -523,6 +523,8 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('redirectAfterLogin');
         localStorage.removeItem('pendingMaterialId');
         localStorage.removeItem('pendingMaterialTitle');
+        localStorage.removeItem('pendingWishId');
+        localStorage.removeItem('booksam_wish');   // 로그아웃 시 관심 교재 초기화
         location.reload();
       };
     } else {
