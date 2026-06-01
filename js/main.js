@@ -347,6 +347,29 @@ function renderListCard(book) {
 }
 
 function addToCart(id) {
+  if (localStorage.getItem('isLoggedIn') !== 'true') {
+    document.getElementById('_cartLoginOv')?.remove();
+    const ov = document.createElement('div');
+    ov.id = '_cartLoginOv';
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center;';
+    ov.innerHTML = `
+      <div style="background:#fff;border-radius:14px;padding:36px 32px;max-width:320px;width:90%;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.18);">
+        <div style="font-size:36px;margin-bottom:12px;">🛒</div>
+        <div style="font-size:16px;font-weight:800;color:#1a2e44;margin-bottom:8px;">로그인이 필요합니다</div>
+        <div style="font-size:13px;color:#888;margin-bottom:24px;line-height:1.7;">장바구니는 로그인 후<br>이용하실 수 있습니다.</div>
+        <div style="display:flex;gap:10px;">
+          <button onclick="document.getElementById('_cartLoginOv').remove()"
+            style="flex:1;padding:12px;border:1.5px solid #ddd;border-radius:8px;background:#fff;font-size:14px;font-weight:700;cursor:pointer;color:#555;">닫기</button>
+          <button onclick="
+              localStorage.setItem('redirectAfterLogin', location.href);
+              location.href='login.html';"
+            style="flex:1;padding:12px;border:none;border-radius:8px;background:#dc2626;color:#fff;font-size:14px;font-weight:700;cursor:pointer;">로그인 바로가기</button>
+        </div>
+      </div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+    return;
+  }
   const book = BOOKS.find(b => b.id === id);
   if (book) Cart.add(book);
 }
