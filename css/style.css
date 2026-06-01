@@ -682,10 +682,20 @@ img{max-width:100%;display:block;}
 }
 .daily-card-info{
   background:white;
-  padding:14px;
+  padding:16px 18px 14px;
 }
-.daily-card-subject{font-size:14px;font-weight:700;margin-bottom:4px;}
-.daily-card-text{font-size:12px;color:var(--muted);line-height:1.4;}
+.daily-card-header{display:flex;align-items:center;gap:7px;margin-bottom:8px;}
+.daily-today-badge{
+  background:var(--red);color:white;
+  font-size:9px;font-weight:800;letter-spacing:1px;
+  padding:2px 6px;border-radius:3px;
+}
+.daily-card-subject{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.daily-card-word{font-size:18px;font-weight:900;color:var(--navy);margin-bottom:4px;line-height:1.2;}
+.daily-card-meaning{font-size:13px;color:var(--text2);margin-bottom:10px;line-height:1.4;}
+.daily-card-cta{font-size:12px;font-weight:700;color:var(--red);display:flex;align-items:center;gap:3px;}
+.daily-card-cta::after{content:'→';transition:transform .2s;}
+.daily-card:hover .daily-card-cta::after{transform:translateX(3px);}
 
 .video-panel{
   background:var(--navy);
