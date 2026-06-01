@@ -156,7 +156,7 @@
         <a href="#" class="cs-nav-link" data-tab="faq"    onclick="switchTab('faq',this);return false;">❓ 자주 묻는 질문</a>
         <a href="#" class="cs-nav-link" data-tab="remote" onclick="switchTab('remote',this);return false;">🖥 원격 지원</a>
       </div>
-      <div class="cs-nav-group">
+      <div class="cs-nav-group" id="cs-nav-mypage" style="display:none;">
         <div class="cs-nav-title">마이페이지</div>
         <a href="mypage.html?tab=orders"  class="cs-nav-link">📦 주문 내역</a>
         <a href="mypage.html?tab=wish"    class="cs-nav-link">❤️ 관심 교재</a>
@@ -187,25 +187,7 @@
               <th style="width:56px;">조회</th>
             </tr>
           </thead>
-          <tbody>
-            ${[
-              {id:'공지',title:'[필독] 2026 신학기 교재 출시 안내',   date:'2026.03.01',views:8420, pin:true},
-              {id:'공지',title:'개인정보처리방침 개정 안내',            date:'2026.02.15',views:3215, pin:true},
-              {id:8,     title:'2026년 1분기 신규 교재 출시 목록',    date:'2026.02.10',views:2187, pin:false},
-              {id:7,     title:'설 연휴 배송 일정 안내',               date:'2026.01.20',views:1934, pin:false},
-              {id:6,     title:'무료배송 기준 변경 안내 (15,000원 이상)',date:'2026.01.10',views:4521,pin:false},
-              {id:5,     title:'사이트 리뉴얼 오픈 안내',             date:'2025.12.01',views:9876, pin:false},
-              {id:4,     title:'포인트 적립/사용 제도 안내',           date:'2025.11.20',views:2341, pin:false},
-              {id:3,     title:'교재 정오표 업데이트 안내',            date:'2025.11.05',views:1122, pin:false},
-            ].map(n=>`<tr onclick="alert('공지사항 상세 페이지')">
-              <td style="text-align:center;font-size:12px;${n.pin?'':'color:var(--muted);'}">
-                ${n.pin?`<span class="notice-pin">공지</span>`:n.id}
-              </td>
-              <td style="font-size:13px;">${n.pin?`<strong>${n.title}</strong>`:n.title}</td>
-              <td style="color:var(--muted);font-size:12px;">${n.date}</td>
-              <td style="color:var(--muted);font-size:12px;text-align:right;">${n.views.toLocaleString()}</td>
-            </tr>`).join('')}
-          </tbody>
+          <tbody id="noticeBody"></tbody>
         </table>
         <div class="pagination" style="margin-top:20px;">
           <button class="page-btn active">1</button>
@@ -218,32 +200,8 @@
       <!-- FAQ -->
       <div id="panel-faq" style="display:none;">
         <h2 class="cs-content-title">❓ 자주 묻는 질문</h2>
-        <div style="display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;">
-          ${['전체','주문/결제','배송','교환/반품','회원','교재'].map((c,i)=>`
-            <button onclick="filterFaq(this,'${c}')" style="padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;
-              background:${i===0?'var(--red)':'var(--bg2)'};color:${i===0?'white':'var(--muted)'};
-              border:1px solid ${i===0?'var(--red)':'var(--border)'};">${c}</button>`).join('')}
-        </div>
-        <div id="faqList">
-          ${[
-            {cat:'주문/결제',q:'주문은 어떻게 하나요?',a:'원하는 교재를 장바구니에 담고, 결제 페이지에서 배송지와 결제 수단을 선택하신 후 결제하시면 됩니다.'},
-            {cat:'주문/결제',q:'결제 수단에는 무엇이 있나요?',a:'신용카드, 체크카드, 카카오페이, 네이버페이, 무통장 입금 등 다양한 결제 수단을 지원합니다.'},
-            {cat:'배송',q:'배송은 얼마나 걸리나요?',a:'주문 확인 후 1~2 영업일 이내에 출고되며, 출고 후 1~2일 내 수령 가능합니다. (주말·공휴일 제외)'},
-            {cat:'배송',q:'무료배송 기준이 있나요?',a:'15,000원 이상 구매 시 무료배송이 적용됩니다. 미만 시 배송비 2,500원이 부과됩니다.'},
-            {cat:'교환/반품',q:'교환·반품은 어떻게 신청하나요?',a:'수령 후 7일 이내에 마이페이지 > 주문 내역에서 신청하거나 고객센터로 연락 주시기 바랍니다.'},
-            {cat:'교환/반품',q:'반품 시 배송비는 누가 부담하나요?',a:'상품 불량·오배송의 경우 무료 반품이 가능합니다. 고객 변심의 경우 왕복 배송비 5,000원을 부담하셔야 합니다.'},
-            {cat:'회원',q:'회원가입 혜택이 있나요?',a:'신규 회원 가입 시 5,000원 할인 쿠폰이 지급됩니다. 또한 구매 금액의 1%가 포인트로 적립됩니다.'},
-            {cat:'교재',q:'교재 자료(MP3, 정답지 등)는 어디서 받나요?',a:'자료실 > 교재 자료실에서 구매한 교재의 자료를 무료로 다운로드하실 수 있습니다.'},
-          ].map(f=>`
-            <div class="faq-item" data-cat="${f.cat}">
-              <button class="faq-question">
-                <span class="faq-q-icon">Q</span>
-                ${f.q}
-                <span class="faq-arrow">▾</span>
-              </button>
-              <div class="faq-answer"><strong style="color:var(--red);">A.</strong> ${f.a}</div>
-            </div>`).join('')}
-        </div>
+        <div id="faqCats" style="display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;"></div>
+        <div id="faqList"></div>
       </div>
 
       <!-- 원격 지원 -->
@@ -253,21 +211,7 @@
           <div style="font-size:44px;margin-bottom:14px;">🖥</div>
           <h3 style="font-size:18px;font-weight:800;margin-bottom:8px;">원격 지원 서비스</h3>
           <p style="color:var(--muted);line-height:1.7;font-size:13px;margin-bottom:22px;">교재 학습 중 어려운 점이 있으신가요?<br>전문 상담사가 원격으로 직접 도와드립니다.</p>
-          <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-            ${[
-              {icon:'📞',label:'전화 상담',value:'1588-XXXX',sub:'평일 09:00~18:00'},
-              {icon:'💬',label:'채팅 상담',value:'채팅 시작',sub:'',btn:true},
-              {icon:'✉️',label:'이메일 문의',value:'help@booksam.kr',sub:'24시간 접수'},
-            ].map(c=>`
-              <div style="background:white;border:1px solid var(--border);border-radius:var(--radius);padding:18px 24px;min-width:140px;">
-                <div style="font-size:22px;margin-bottom:8px;">${c.icon}</div>
-                <div style="font-weight:700;font-size:13px;margin-bottom:4px;">${c.label}</div>
-                ${c.btn
-                  ?`<button onclick="Toast.show('채팅 상담을 시작합니다.','success')" style="background:var(--red);color:white;border:none;padding:7px 14px;border-radius:var(--radius);font-size:12px;font-weight:700;cursor:pointer;margin-top:4px;">${c.value}</button>`
-                  :`<div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">${c.value}</div>`}
-                ${c.sub?`<div style="font-size:11px;color:var(--muted);">${c.sub}</div>`:''}
-              </div>`).join('')}
-          </div>
+          <div id="remoteCards" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;"></div>
         </div>
       </div>
 
@@ -286,24 +230,112 @@
 
 <script src="js/main.js"></script>
 <script>
+// ── 마이페이지 nav: 로그인 시에만 표시 ──
+if (localStorage.getItem('isLoggedIn') === 'true') {
+  document.getElementById('cs-nav-mypage').style.display = '';
+}
+
+// ── 공지사항 렌더링 ──
+const NOTICES = [
+  {id:'공지', title:'[필독] 2026 신학기 교재 출시 안내',        date:'2026.03.01', views:8420,  pin:true},
+  {id:'공지', title:'개인정보처리방침 개정 안내',                 date:'2026.02.15', views:3215,  pin:true},
+  {id:8,      title:'2026년 1분기 신규 교재 출시 목록',          date:'2026.02.10', views:2187,  pin:false},
+  {id:7,      title:'설 연휴 배송 일정 안내',                    date:'2026.01.20', views:1934,  pin:false},
+  {id:6,      title:'무료배송 기준 변경 안내 (15,000원 이상)',    date:'2026.01.10', views:4521,  pin:false},
+  {id:5,      title:'사이트 리뉴얼 오픈 안내',                   date:'2025.12.01', views:9876,  pin:false},
+  {id:4,      title:'포인트 적립/사용 제도 안내',                 date:'2025.11.20', views:2341,  pin:false},
+  {id:3,      title:'교재 정오표 업데이트 안내',                  date:'2025.11.05', views:1122,  pin:false},
+];
+document.getElementById('noticeBody').innerHTML = NOTICES.map(n => `
+  <tr style="cursor:pointer;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''"
+      onclick="Toast.show('${n.title}','success')">
+    <td style="text-align:center;font-size:12px;${n.pin?'':'color:var(--muted);'}">
+      ${n.pin ? '<span class="notice-pin">공지</span>' : n.id}
+    </td>
+    <td style="font-size:13px;">${n.pin ? `<strong>${n.title}</strong>` : n.title}</td>
+    <td style="color:var(--muted);font-size:12px;">${n.date}</td>
+    <td style="color:var(--muted);font-size:12px;text-align:right;">${n.views.toLocaleString()}</td>
+  </tr>`).join('');
+
+// ── FAQ 렌더링 ──
+const FAQ_CATS = ['전체','주문/결제','배송','교환/반품','회원','교재'];
+const FAQS = [
+  {cat:'주문/결제', q:'주문은 어떻게 하나요?',
+   a:'원하는 교재를 장바구니에 담고, 결제 페이지에서 배송지와 결제 수단을 선택하신 후 결제하시면 됩니다.'},
+  {cat:'주문/결제', q:'결제 수단에는 무엇이 있나요?',
+   a:'신용카드, 체크카드, 카카오페이, 네이버페이, 무통장 입금 등 다양한 결제 수단을 지원합니다.'},
+  {cat:'주문/결제', q:'주문 취소는 어떻게 하나요?',
+   a:'출고 전이라면 마이페이지 > 주문 내역에서 취소 가능합니다. 이미 출고된 경우 반품 절차를 이용해 주세요.'},
+  {cat:'배송',      q:'배송은 얼마나 걸리나요?',
+   a:'주문 확인 후 1~2 영업일 이내에 출고되며, 출고 후 1~2일 내 수령 가능합니다. (주말·공휴일 제외)'},
+  {cat:'배송',      q:'무료배송 기준이 있나요?',
+   a:'15,000원 이상 구매 시 무료배송이 적용됩니다. 미만 시 배송비 2,500원이 부과됩니다.'},
+  {cat:'배송',      q:'배송 조회는 어떻게 하나요?',
+   a:'마이페이지 > 주문 내역에서 운송장 번호를 확인하신 후 택배사 사이트에서 조회하실 수 있습니다.'},
+  {cat:'교환/반품', q:'교환·반품은 어떻게 신청하나요?',
+   a:'수령 후 7일 이내에 마이페이지 > 주문 내역에서 신청하거나 고객센터로 연락 주시기 바랍니다.'},
+  {cat:'교환/반품', q:'반품 시 배송비는 누가 부담하나요?',
+   a:'상품 불량·오배송의 경우 무료 반품이 가능합니다. 고객 변심의 경우 왕복 배송비 5,000원을 부담하셔야 합니다.'},
+  {cat:'회원',      q:'회원가입 혜택이 있나요?',
+   a:'신규 회원 가입 시 5,000원 할인 쿠폰이 지급됩니다. 또한 구매 금액의 1%가 포인트로 적립됩니다.'},
+  {cat:'회원',      q:'비밀번호를 잊어버렸어요.',
+   a:'로그인 페이지의 "비밀번호 찾기"를 클릭하여 가입 시 등록한 이메일로 재설정 링크를 받으실 수 있습니다.'},
+  {cat:'교재',      q:'교재 자료(MP3, 정답지 등)는 어디서 받나요?',
+   a:'자료실 > 교재 자료실에서 교재별 자료를 무료로 다운로드하실 수 있습니다.'},
+  {cat:'교재',      q:'절판된 교재는 어떻게 구매하나요?',
+   a:'절판 교재는 현재 판매가 불가합니다. 고객센터로 문의 주시면 유사 교재를 안내해 드리겠습니다.'},
+];
+
+document.getElementById('faqCats').innerHTML = FAQ_CATS.map((c, i) => `
+  <button onclick="filterFaq(this,'${c}')"
+    style="padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;
+      background:${i===0?'var(--red)':'var(--bg2)'};color:${i===0?'white':'var(--muted)'};
+      border:1px solid ${i===0?'var(--red)':'var(--border)'};">${c}</button>`).join('');
+
+document.getElementById('faqList').innerHTML = FAQS.map(f => `
+  <div class="faq-item" data-cat="${f.cat}">
+    <button class="faq-question">
+      <span class="faq-q-icon">Q</span>${f.q}<span class="faq-arrow">▾</span>
+    </button>
+    <div class="faq-answer"><strong style="color:var(--red);">A.</strong> ${f.a}</div>
+  </div>`).join('');
+
+// ── 원격 지원 카드 렌더링 ──
+const REMOTE_CARDS = [
+  {icon:'📞', label:'전화 상담',   value:'1588-1234', sub:'평일 09:00~18:00', btn:false},
+  {icon:'💬', label:'채팅 상담',   value:'채팅 시작',  sub:'평일 09:00~18:00', btn:true},
+  {icon:'✉️', label:'이메일 문의', value:'help@booksam.kr', sub:'24시간 접수', btn:false},
+];
+document.getElementById('remoteCards').innerHTML = REMOTE_CARDS.map(c => `
+  <div style="background:white;border:1px solid var(--border);border-radius:var(--radius);padding:22px 28px;min-width:150px;text-align:center;">
+    <div style="font-size:28px;margin-bottom:10px;">${c.icon}</div>
+    <div style="font-weight:700;font-size:14px;margin-bottom:6px;">${c.label}</div>
+    ${c.btn
+      ? `<button onclick="Toast.show('채팅 상담을 시작합니다.','success')"
+           style="background:var(--red);color:white;border:none;padding:8px 18px;border-radius:var(--radius);font-size:13px;font-weight:700;cursor:pointer;">${c.value}</button>`
+      : `<div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:3px;">${c.value}</div>`}
+    ${c.sub ? `<div style="font-size:11px;color:var(--muted);margin-top:4px;">${c.sub}</div>` : ''}
+  </div>`).join('');
+
+// ── 탭 전환 ──
 const initTab = getParam('tab') || 'notice';
 switchTab(initTab, document.querySelector(`[data-tab="${initTab}"]`));
 
 function switchTab(tab, el) {
-  document.querySelectorAll('.cs-nav-link[data-tab]').forEach(l=>l.classList.remove('active'));
-  document.querySelectorAll('[id^="panel-"]').forEach(p=>p.style.display='none');
-  if(el) el.classList.add('active');
+  document.querySelectorAll('.cs-nav-link[data-tab]').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('[id^="panel-"]').forEach(p => p.style.display = 'none');
+  if (el) el.classList.add('active');
   const panel = document.getElementById(`panel-${tab}`);
-  if(panel) panel.style.display='';
+  if (panel) panel.style.display = '';
 }
 
 function filterFaq(btn, cat) {
-  document.querySelectorAll('#panel-faq button:not(.faq-question)').forEach(b=>{
-    b.style.background='var(--bg2)';b.style.color='var(--muted)';b.style.borderColor='var(--border)';
+  document.querySelectorAll('#faqCats button').forEach(b => {
+    b.style.background = 'var(--bg2)'; b.style.color = 'var(--muted)'; b.style.borderColor = 'var(--border)';
   });
-  btn.style.background='var(--red)';btn.style.color='white';btn.style.borderColor='var(--red)';
-  document.querySelectorAll('.faq-item').forEach(item=>{
-    item.style.display = (cat==='전체'||item.dataset.cat===cat)?'':'none';
+  btn.style.background = 'var(--red)'; btn.style.color = 'white'; btn.style.borderColor = 'var(--red)';
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.style.display = (cat === '전체' || item.dataset.cat === cat) ? '' : 'none';
   });
 }
 </script>
