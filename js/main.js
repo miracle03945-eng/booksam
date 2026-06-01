@@ -225,6 +225,42 @@ const BOOKS = [
     author: '북샘 편집부', price: 13500, originalPrice: 15000, badge: '',
     img: 'images/ilove-reading-3.png', publisher: '북샘 교육출판', date: '2025.02.01',
     desc: '실전 수준의 지문과 독해 전략으로 내신 최고 등급을 목표로 합니다.', tags: ['중학독해', 'MP3'] },
+
+  // ── 고등 참고서 (수능 영어) ──
+  { id: 23, cat: 'high', type: '참고서', subject: '영어', area: '모의고사',
+    title: 'Reading Booster 영어독해 모의고사 15회 (3rd Edition)',
+    author: 'YBM 편집부', price: 14000, originalPrice: 16000, badge: 'best',
+    img: '', publisher: 'YBM', date: '2025.01.10',
+    desc: '수능 영어 1등급 완성 프로젝트. 고난도 유형 집중 공략 수록, 실전 모의고사 15회 완성.',
+    tags: ['베스트셀러', '수능', 'MP3'] },
+
+  { id: 24, cat: 'high', type: '참고서', subject: '영어', area: '어법/어휘',
+    title: 'Reading Booster 어법어휘',
+    author: 'YBM 편집부', price: 14000, originalPrice: 16000, badge: '',
+    img: '', publisher: 'YBM', date: '2025.01.10',
+    desc: '수능영어 1등급 프로젝트. 핵심개념·기출예제·실전문제 한 권으로 완성. MID-TEST 및 모의고사 10회 수록.',
+    tags: ['수능', 'MP3'] },
+
+  { id: 25, cat: 'high', type: '참고서', subject: '영어', area: '문법/구문',
+    title: 'Reading Booster 구문독해',
+    author: 'YBM 편집부', price: 14000, originalPrice: 16000, badge: '',
+    img: '', publisher: 'YBM', date: '2025.01.10',
+    desc: '수능영어 1등급 프로젝트. 44개 핵심구문으로 독해력 완성. 고난도 유형 TEST 3회 수록.',
+    tags: ['수능', 'MP3'] },
+
+  { id: 26, cat: 'high', type: '참고서', subject: '영어', area: '독해',
+    title: 'Reading Booster 유형독해',
+    author: 'YBM 편집부', price: 14000, originalPrice: 16000, badge: '',
+    img: '', publisher: 'YBM', date: '2025.01.10',
+    desc: '수능영어 1등급 프로젝트. 17개 수능유형 분석 및 32개 유형전략 제시. 실전대비 모의고사 총 9회 수록.',
+    tags: ['수능', 'MP3'] },
+
+  { id: 27, cat: 'high', type: '참고서', subject: '영어', area: '모의고사',
+    title: 'Reading Booster 영어독해 모의고사 10+2회 기본 (2nd Edition)',
+    author: 'YBM 편집부', price: 13000, originalPrice: 15000, badge: 'new',
+    img: '', publisher: 'YBM', date: '2025.08.01',
+    desc: '수능 독해유형별 전략 수록. 기본 모의고사 10회 + 심화 2회로 실전 감각 완성.',
+    tags: ['신규', '수능', 'MP3'] },
 ];
 
 // 도서 카드 HTML 생성
@@ -233,9 +269,11 @@ function renderBookCard(book) {
   const discount = Math.round((1 - book.price / book.originalPrice) * 100);
   const isWished = Wish.has(book.id);
 
+  const placeholderHtml = `<div class="book-thumb-placeholder">${info.emoji}<small>${book.type}</small></div>`;
   const thumbContent = book.img
-    ? `<img src="${book.img}" alt="${book.title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">`
-    : `<div class="book-thumb-placeholder">${info.emoji}<small>${book.type}</small></div>`;
+    ? `<img src="${book.img}" alt="${book.title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
+         onerror="this.outerHTML='${placeholderHtml.replace(/'/g,'&apos;')}';">`
+    : placeholderHtml;
 
   return `
     <div class="book-card" data-id="${book.id}" onclick="location.href='book-detail.html?id=${book.id}'">
