@@ -227,7 +227,7 @@ const BOOKS = [
     desc: '실전 수준의 지문과 독해 전략으로 내신 최고 등급을 목표로 합니다.', tags: ['중학독해', 'MP3'] },
 
   // ── 초등 교과서 / 평가문제집 ──
-  { id: 28, cat: 'elementary', type: '평가문제집', subject: '영어', area: '평가문제집/자습서',
+  { id: 28, cat: 'elementary', type: '교과서', subject: '영어', area: '평가문제집',
     title: '초등 영어 자습서 & 평가문제집 3-1 (22개정)',
     author: '김혜리 외', price: 15000, originalPrice: 17000, badge: 'new',
     img: 'images/elementary-workbook-3-1.png', publisher: 'YBM', date: '2026.01.01',
