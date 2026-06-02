@@ -609,13 +609,6 @@
   </div>
 </section>
 
-<!-- ===== 이벤트 배너 (제거됨) ===== -->
-<section class="section section-bg" style="display:none">
-  <div class="container">
-    <div class="event-banner">
-  </div>
-</section>
-
 <!-- ===== FOOTER ===== -->
 <footer class="site-footer">
   <div class="footer-inner">
@@ -665,7 +658,7 @@
 <script>
 // 베스트/신간 렌더링
 const bestBooks = BOOKS.filter(b => b.badge === 'best');
-const newBooks  = BOOKS.filter(b => b.badge === 'new');
+const newBooks  = BOOKS.filter(b => b.badge === 'new' && b.id !== 27);
 
 document.getElementById('best-all').innerHTML  = bestBooks.map(renderBookCard).join('');
 document.getElementById('best-elem').innerHTML = bestBooks.filter(b=>b.cat==='elementary').map(renderBookCard).join('') || '<p style="color:var(--muted);padding:20px">해당 교재가 없습니다.</p>';
