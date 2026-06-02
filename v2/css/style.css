@@ -1063,7 +1063,7 @@ img{max-width:100%;display:block;}
     flex-direction:row;
     align-items:stretch;
 
-    /* 스타일 */
+    /* 스타일 — 일반 페이지 기본 */
     background:white;
     border:none;
     border-top:2px solid var(--red);
@@ -1075,6 +1075,21 @@ img{max-width:100%;display:block;}
     overflow:visible;
   }
 
+  /* ── hero-page: 배너 그라디언트와 투명으로 연결 ── */
+  body.hero-page .gnb-dropdown{
+    background:transparent;   /* body 그라디언트가 비침 */
+    border-top:none;
+    border-bottom:none;
+    box-shadow:none;
+  }
+  body.hero-page .gnb-dropdown .mega-group-title{
+    color:rgba(255,255,255,.88);
+  }
+  body.hero-page .gnb-dropdown .mega-group-title:hover{
+    color:white;
+    border-bottom-color:white;
+  }
+
   /* 카테고리 헤더(초등/중학 등) 숨김 */
   .dropdown-cat{display:none !important;}
 
@@ -1083,11 +1098,10 @@ img{max-width:100%;display:block;}
     display:flex;
     flex-direction:row;
     align-items:stretch;
-    padding:0;
     max-width:1280px;
     margin:0 auto;
     width:100%;
-    padding-left:40px;
+    padding:0 40px;    /* 양쪽 대칭 — GNB 항목과 정렬 */
   }
 
   /* 대분류 항목: 가로 탭 스타일 */
