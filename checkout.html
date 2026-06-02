@@ -5,6 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>결제 - 북샘</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .co-wrap{max-width:860px;margin:0 auto;padding:32px 20px 80px;}
+    .co-title{font-size:22px;font-weight:900;color:var(--navy);margin-bottom:20px;}
+    /* 스텝 */
+    .co-steps{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:34px;}
+    .co-step{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:30px;padding:8px 18px;font-size:13px;color:var(--muted);background:#fff;}
+    .co-step.active{border-color:var(--red);color:var(--red);font-weight:800;background:#fff5f5;}
+    .co-step .co-step-num{width:20px;height:20px;border-radius:50%;background:var(--border);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;}
+    .co-step.active .co-step-num{background:var(--red);}
+    .co-step-line{width:34px;height:1px;background:var(--border);}
+    /* 섹션 */
+    .co-sec{margin-bottom:34px;}
+    .co-sec-title{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:12px;}
+    /* 주문상품 테이블 */
+    .co-table{width:100%;border-collapse:collapse;border-top:2px solid var(--navy);font-size:13px;}
+    .co-table thead th{background:#2b3a4d;color:#fff;font-weight:700;padding:11px 10px;font-size:12px;}
+    .co-table tbody td{padding:14px 10px;border-bottom:1px solid var(--border);text-align:center;color:var(--text2);vertical-align:middle;}
+    .co-prod{display:flex;align-items:center;gap:12px;text-align:left;}
+    .co-prod-thumb{width:46px;height:60px;border-radius:4px;overflow:hidden;flex-shrink:0;border:1px solid var(--border);background:var(--bg2);}
+    .co-prod-thumb img{width:100%;height:100%;object-fit:cover;}
+    .co-prod-title{font-size:13px;font-weight:700;color:var(--navy);line-height:1.4;}
+    .co-strike{color:var(--muted);text-decoration:line-through;font-size:12px;}
+    .co-sale{color:var(--red);font-weight:800;}
+    /* 합계 박스 */
+    .co-sum{display:flex;align-items:stretch;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:14px;}
+    .co-sum-cell{flex:1;text-align:center;padding:18px 10px;}
+    .co-sum-cell .co-sum-label{font-size:12px;color:var(--muted);margin-bottom:8px;}
+    .co-sum-cell .co-sum-val{font-size:18px;font-weight:900;color:var(--navy);}
+    .co-sum-cell.total .co-sum-val{color:var(--red);}
+    .co-sum-op{display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--muted);width:24px;flex-shrink:0;}
+    /* 정보 박스 */
+    .co-info{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 22px;}
+    .co-info-row{display:flex;align-items:center;padding:13px 0;border-bottom:1px solid var(--border);font-size:13px;}
+    .co-info-row:last-child{border-bottom:none;}
+    .co-info-row .co-info-label{width:90px;color:var(--muted);font-weight:700;}
+    .co-info-row .co-info-val{color:var(--text);}
+    .co-info-note{font-size:12px;color:var(--muted);line-height:1.7;margin-top:12px;}
+    .co-info-note a{color:var(--red);font-weight:700;}
+    /* 폼 */
+    .co-form-row{display:flex;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border);}
+    .co-form-row:last-child{border-bottom:none;}
+    .co-form-label{width:120px;font-size:13px;font-weight:700;color:var(--text2);padding-top:9px;flex-shrink:0;}
+    .co-form-label .req{color:var(--red);}
+    .co-form-field{flex:1;}
+    .co-input{padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font-size:13px;outline:none;box-sizing:border-box;font-family:inherit;transition:border-color .15s;}
+    .co-input:focus{border-color:var(--red);}
+    .co-btn-sub{background:var(--navy);color:#fff;border:none;padding:9px 16px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
+    .co-hint{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6;}
+    /* 결제수단 */
+    .co-pay-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+    .co-pay-card{border:1.5px solid var(--border);border-radius:8px;padding:16px 12px;text-align:center;cursor:pointer;transition:all .15s;background:#fff;}
+    .co-pay-card.active{border-color:var(--red);background:#fff5f5;}
+    .co-pay-card .co-pay-cat{font-size:11px;color:var(--muted);margin-bottom:8px;}
+    .co-pay-card.active .co-pay-cat{color:var(--red);}
+    .co-pay-card .co-pay-name{font-size:13px;font-weight:800;color:var(--navy);border:1px solid var(--border);border-radius:5px;padding:6px;background:var(--bg);}
+    .co-pay-card.active .co-pay-name{border-color:var(--red);color:var(--red);background:#fff;}
+    /* 유의사항 */
+    .co-notice{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px 20px;font-size:12px;color:var(--muted);line-height:1.9;}
+    .co-notice-title{font-size:13px;font-weight:800;color:var(--text2);margin-bottom:8px;}
+    /* 동의 + 결제 */
+    .co-agree{text-align:center;margin:24px 0 16px;font-size:13px;color:var(--text);}
+    .co-agree b{color:var(--red);}
+    .co-pay-btn{display:block;width:260px;margin:0 auto;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;transition:background .15s;}
+    .co-pay-btn:hover{background:#0d1b2e;}
+    @media(max-width:640px){
+      .co-sum{flex-wrap:wrap;}
+      .co-pay-grid{grid-template-columns:repeat(2,1fr);}
+      .co-form-row{flex-direction:column;}
+      .co-form-label{width:auto;padding-top:0;margin-bottom:6px;}
+    }
+  </style>
 </head>
 <body>
 
@@ -129,113 +200,148 @@
   </div>
 </nav>
 
-<div class="container" style="padding-top:28px;padding-bottom:80px;max-width:960px;">
-  <h1 style="font-size:22px;font-weight:900;margin-bottom:22px;">💳 결제</h1>
+<div class="co-wrap">
+  <h1 class="co-title">주문 및 결제</h1>
 
   <!-- 단계 -->
-  <div style="display:flex;align-items:center;padding:16px 22px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:28px;">
-    <div style="display:flex;align-items:center;gap:7px;color:var(--muted);">
-      <span style="width:24px;height:24px;background:var(--elem);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;">✓</span>
-      <span style="font-size:13px;text-decoration:line-through;">장바구니</span>
-    </div>
-    <div style="flex:1;height:1px;background:var(--red);margin:0 14px;max-width:50px;"></div>
-    <div style="display:flex;align-items:center;gap:7px;font-weight:700;color:var(--red);">
-      <span style="width:24px;height:24px;background:var(--red);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;">2</span>
-      <span style="font-size:13px;">결제정보</span>
-    </div>
-    <div style="flex:1;height:1px;background:var(--border);margin:0 14px;max-width:50px;"></div>
-    <div style="display:flex;align-items:center;gap:7px;color:var(--muted);">
-      <span style="width:24px;height:24px;background:var(--border);color:var(--muted);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;">3</span>
-      <span style="font-size:13px;">주문완료</span>
+  <div class="co-steps">
+    <div class="co-step"><span class="co-step-num">1</span> 장바구니 구매</div>
+    <div class="co-step-line"></div>
+    <div class="co-step active"><span class="co-step-num">2</span> 주문 및 결제</div>
+    <div class="co-step-line"></div>
+    <div class="co-step"><span class="co-step-num">3</span> 주문 완료</div>
+  </div>
+
+  <!-- 주문상품 -->
+  <div class="co-sec">
+    <div class="co-sec-title">주문상품</div>
+    <table class="co-table">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding-left:14px;">상품정보</th>
+          <th style="width:70px;">수량</th>
+          <th style="width:100px;">정가</th>
+          <th style="width:100px;">판매가</th>
+          <th style="width:90px;">주문관리</th>
+        </tr>
+      </thead>
+      <tbody id="checkoutItems"></tbody>
+    </table>
+
+    <!-- 합계 -->
+    <div class="co-sum">
+      <div class="co-sum-cell"><div class="co-sum-label">총 수량</div><div class="co-sum-val" id="coQty">-</div></div>
+      <div class="co-sum-op">|</div>
+      <div class="co-sum-cell"><div class="co-sum-label">총 상품금액</div><div class="co-sum-val" id="coOriginal">-</div></div>
+      <div class="co-sum-op">−</div>
+      <div class="co-sum-cell"><div class="co-sum-label">총 할인금액</div><div class="co-sum-val" id="coDiscount">-</div></div>
+      <div class="co-sum-op">+</div>
+      <div class="co-sum-cell"><div class="co-sum-label">배송비</div><div class="co-sum-val" id="coShipping">-</div></div>
+      <div class="co-sum-op">=</div>
+      <div class="co-sum-cell total"><div class="co-sum-label">총 결제금액</div><div class="co-sum-val" id="coTotal">-</div></div>
     </div>
   </div>
 
-  <div style="display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start;">
-    <div style="display:flex;flex-direction:column;gap:16px;">
-
-      <!-- 배송지 -->
-      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
-        <div style="background:var(--navy);color:white;padding:13px 20px;font-size:14px;font-weight:700;">🚚 배송지 정보</div>
-        <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div>
-            <label style="font-size:12px;font-weight:700;color:var(--text2);display:block;margin-bottom:6px;">받는 분</label>
-            <input type="text" value="홍길동" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;transition:border-color .2s;"
-              onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'">
-          </div>
-          <div>
-            <label style="font-size:12px;font-weight:700;color:var(--text2);display:block;margin-bottom:6px;">휴대폰</label>
-            <input type="tel" value="010-1234-5678" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;transition:border-color .2s;"
-              onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'">
-          </div>
-          <div style="grid-column:1/-1;">
-            <label style="font-size:12px;font-weight:700;color:var(--text2);display:block;margin-bottom:6px;">주소</label>
-            <div style="display:flex;gap:8px;margin-bottom:7px;">
-              <input type="text" placeholder="우편번호" style="width:130px;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;">
-              <button onclick="Toast.show('주소 검색','success')" style="background:var(--navy);color:white;border:none;padding:10px 16px;border-radius:var(--radius);font-size:12px;font-weight:700;cursor:pointer;">주소 검색</button>
-            </div>
-            <input type="text" placeholder="기본 주소" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;margin-bottom:7px;">
-            <input type="text" placeholder="상세 주소" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;">
-          </div>
-          <div style="grid-column:1/-1;">
-            <label style="font-size:12px;font-weight:700;color:var(--text2);display:block;margin-bottom:6px;">배송 메모</label>
-            <select style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;cursor:pointer;">
-              <option>배송 메모를 선택하세요</option>
-              <option>문 앞에 놔주세요</option>
-              <option>경비실에 맡겨주세요</option>
-              <option>직접 받겠습니다</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- 주문 상품 -->
-      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
-        <div style="background:var(--navy);color:white;padding:13px 20px;font-size:14px;font-weight:700;">📚 주문 상품</div>
-        <div id="checkoutItems" style="padding:0 20px;"></div>
-      </div>
-
-      <!-- 결제 수단 -->
-      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
-        <div style="background:var(--navy);color:white;padding:13px 20px;font-size:14px;font-weight:700;">💳 결제 수단</div>
-        <div style="padding:20px;">
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
-            ${[
-              {id:'card',  icon:'💳', label:'신용/체크카드'},
-              {id:'kakao', icon:'💬', label:'카카오페이'},
-              {id:'naver', icon:'N',  label:'네이버페이'},
-              {id:'bank',  icon:'🏦', label:'무통장 입금'},
-              {id:'phone', icon:'📱', label:'휴대폰 결제'},
-              {id:'point', icon:'⭐', label:'포인트'},
-            ].map((p,i)=>`
-              <label style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:13px;border:1.5px solid ${i===0?'var(--red)':'var(--border)'};border-radius:var(--radius);cursor:pointer;background:${i===0?'#fff5f5':''};transition:all .15s;" onclick="selectPay(this)">
-                <input type="radio" name="payMethod" value="${p.id}" ${i===0?'checked':''} style="display:none;">
-                <span style="font-size:20px;">${p.icon}</span>
-                <span style="font-size:11px;font-weight:600;">${p.label}</span>
-              </label>`).join('')}
-          </div>
-          <div style="background:var(--bg);border-radius:var(--radius);padding:14px;border:1px solid var(--border);">
-            <label style="font-size:12px;font-weight:700;color:var(--text2);display:block;margin-bottom:7px;">할부 개월</label>
-            <select style="width:100%;padding:10px 13px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;cursor:pointer;">
-              <option>일시불</option><option>2개월</option><option>3개월</option><option>6개월</option><option>12개월</option>
-            </select>
-          </div>
-        </div>
-      </div>
+  <!-- 주문 고객 정보 -->
+  <div class="co-sec">
+    <div class="co-sec-title">주문 고객 정보</div>
+    <div class="co-info">
+      <div class="co-info-row"><span class="co-info-label">이름</span><span class="co-info-val" id="custName">-</span></div>
+      <div class="co-info-row"><span class="co-info-label">휴대폰</span><span class="co-info-val">010-3035-4378</span></div>
+      <div class="co-info-row"><span class="co-info-label">이메일</span><span class="co-info-val" id="custEmail">-</span></div>
     </div>
+    <div class="co-info-note">
+      적립 내역 또는 회원에게 제 정보메일은 메일로 발송됩니다.<br>
+      다만, 휴대폰 기준 및 가입 메일이 변경된 경우 <a href="#">개인정보 변경하기 →</a>
+    </div>
+  </div>
 
-    <!-- 결제 요약 -->
-    <div style="position:sticky;top:80px;">
-      <div class="cart-summary">
-        <h3 class="summary-title">최종 결제 금액</h3>
-        <div class="summary-row"><span class="summary-label">상품 금액</span><span class="summary-value" id="coOriginal">-</span></div>
-        <div class="summary-row"><span class="summary-label">할인 금액</span><span class="summary-value highlight" id="coDiscount">-</span></div>
-        <div class="summary-row"><span class="summary-label">배송비</span><span class="summary-value" id="coShipping">-</span></div>
-        <div class="summary-row total"><span>결제 금액</span><span id="coTotal">-</span></div>
-        <button onclick="completePayment()" class="btn-checkout">🔒 결제하기</button>
-        <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:11px;line-height:1.6;">주문 내용을 확인하였으며<br>결제에 동의합니다.</p>
+  <!-- 받는 고객 정보 -->
+  <div class="co-sec">
+    <div class="co-sec-title">받는 고객 정보 <span style="font-size:11px;color:var(--muted);font-weight:400;">(주문 고객 정보와 같으면 클릭하세요)</span></div>
+    <div class="co-info" style="background:#fff;">
+      <div class="co-form-row">
+        <div class="co-form-label">이름 <span class="req">*</span></div>
+        <div class="co-form-field"><input type="text" class="co-input" style="width:240px;" placeholder="받는 분 이름"></div>
+      </div>
+      <div class="co-form-row">
+        <div class="co-form-label">휴대폰 <span class="req">*</span></div>
+        <div class="co-form-field">
+          <div style="display:flex;gap:6px;align-items:center;">
+            <select class="co-input" style="width:80px;"><option>010</option><option>011</option><option>016</option><option>017</option><option>019</option></select>
+            <input type="tel" class="co-input" style="width:220px;" placeholder="'-' 제외하고 입력해주세요.">
+          </div>
+          <div class="co-hint">* 수신자가 변경 (예. 010-0000-0000) 등 본 기입해야 정확 별도의 안내문이 우선 하실 수 있으니 반드시 정확 기입을 권장하여 기재해주시기 바랍니다.</div>
+        </div>
+      </div>
+      <div class="co-form-row">
+        <div class="co-form-label">연락처</div>
+        <div class="co-form-field"><input type="tel" class="co-input" style="width:240px;" placeholder="'-' 제외하고 입력해주세요."></div>
+      </div>
+      <div class="co-form-row">
+        <div class="co-form-label">배송지 주소</div>
+        <div class="co-form-field">
+          <div style="display:flex;gap:8px;margin-bottom:7px;">
+            <input type="text" class="co-input" style="width:130px;" placeholder="우편번호" id="coZip">
+            <button class="co-btn-sub" onclick="Toast.show('우편번호 검색','success')">우편번호찾기</button>
+          </div>
+          <input type="text" class="co-input" style="width:100%;margin-bottom:7px;" placeholder="기본 주소">
+          <input type="text" class="co-input" style="width:100%;" placeholder="상세주소 입력">
+        </div>
+      </div>
+      <div class="co-form-row">
+        <div class="co-form-label">배송요청사항</div>
+        <div class="co-form-field">
+          <select class="co-input" style="width:100%;">
+            <option>배송 시 책배함시 적절배경 전달적성 내용을 입력해주세요.</option>
+            <option>문 앞에 놔주세요</option>
+            <option>경비실에 맡겨주세요</option>
+            <option>배송 전 연락 바랍니다</option>
+            <option>파손 위험 상품입니다. 주의해주세요</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- 결제 수단 -->
+  <div class="co-sec">
+    <div class="co-sec-title">결제 수단</div>
+    <div class="co-pay-grid">
+      <div class="co-pay-card active" onclick="selectPay(this)">
+        <div class="co-pay-cat">일반결제</div><div class="co-pay-name">신용카드</div>
+      </div>
+      <div class="co-pay-card" onclick="selectPay(this)">
+        <div class="co-pay-cat">간편결제</div><div class="co-pay-name">간편결제</div>
+      </div>
+      <div class="co-pay-card" onclick="selectPay(this)">
+        <div class="co-pay-cat">현금결제</div><div class="co-pay-name">무통장계좌이체</div>
+      </div>
+      <div class="co-pay-card" onclick="selectPay(this)">
+        <div class="co-pay-cat">기타결제</div><div class="co-pay-name">무통장입금</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 유의사항 -->
+  <div class="co-sec">
+    <div class="co-notice">
+      <div class="co-notice-title">결제시 유의사항</div>
+      · 온라인 소득공제 대상 도서를 구매하는 경우에는 소득공제 처리되며, 현금 영수증 발급은 결제 완료 후 추가 정보를 입력하여야 발급됩니다.<br>
+      · 온라인 소득공제 대상 도서 외에 일반 상품을 구매하는 경우에는 온라인 소득공제 대상이 아니며, 현금 영수증 발급이 가능합니다.<br>
+      · 일부 도서는 정오표, 부록 등 콘텐츠 제공 시 별도 안내될 수 있습니다.<br>
+      · 무통장 입금 주문 시 입금기한(주문 후 3일) 이내 미입금 시 자동 주문취소 처리됩니다.
+    </div>
+  </div>
+
+  <!-- 동의 + 결제 -->
+  <div class="co-agree">
+    <label style="cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+      <input type="checkbox" id="agreeChk" checked style="width:16px;height:16px;accent-color:var(--red);">
+      <span>주문내용 보증, 가격, 배송정보, 환불정책 등을 확인하였으며, 구매에 동의하시겠습니까? <b>(필수)</b></span>
+    </label>
+  </div>
+  <button class="co-pay-btn" onclick="completePayment()">결제하기</button>
 </div>
 
 <footer class="site-footer">
@@ -252,35 +358,56 @@
 const items = Cart.items;
 if(items.length===0) location.href='cart.html';
 
-document.getElementById('checkoutItems').innerHTML = items.map(item=>`
-  <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--bg2);">
-    <div style="width:44px;height:58px;background:var(--bg2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid var(--border);">
-      ${CAT_INFO[item.cat].emoji}
-    </div>
-    <div style="flex:1;">
-      <div style="font-size:13px;font-weight:700;margin-bottom:3px;">${item.title}</div>
-      <div style="font-size:12px;color:var(--muted);">${item.qty}권</div>
-    </div>
-    <div style="font-weight:700;font-size:14px;">${fmtPrice(item.price*item.qty)}원</div>
-  </div>`).join('');
+// 주문 고객 정보 (로그인 회원)
+const user = JSON.parse(localStorage.getItem('booksam_user') || '{}');
+document.getElementById('custName').textContent  = user.name  || '회원';
+document.getElementById('custEmail').textContent = user.email || 'miracle03945@naver.com';
 
+// 주문상품 테이블
+document.getElementById('checkoutItems').innerHTML = items.map(item=>{
+  const thumb = item.img
+    ? `<img src="${item.img}" alt="${item.title}">`
+    : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:20px;">${CAT_INFO[item.cat].emoji}</div>`;
+  return `
+    <tr>
+      <td>
+        <div class="co-prod">
+          <div class="co-prod-thumb">${thumb}</div>
+          <div class="co-prod-title">${item.title}</div>
+        </div>
+      </td>
+      <td>${item.qty}</td>
+      <td class="co-strike">${fmtPrice(item.originalPrice)}원</td>
+      <td class="co-sale">${fmtPrice(item.price*item.qty)}원</td>
+      <td><button class="co-btn-sub" style="background:var(--bg2);color:var(--text2);" onclick="removeItem(${item.id})">주문삭제</button></td>
+    </tr>`;
+}).join('');
+
+const totalQty = items.reduce((s,i)=>s+i.qty,0);
 const original = items.reduce((s,i)=>s+i.originalPrice*i.qty,0);
 const sale     = items.reduce((s,i)=>s+i.price*i.qty,0);
 const shipping = sale>=15000?0:2500;
+document.getElementById('coQty').textContent      = totalQty+'개';
 document.getElementById('coOriginal').textContent = fmtPrice(original)+'원';
-document.getElementById('coDiscount').textContent = '-'+fmtPrice(original-sale)+'원';
+document.getElementById('coDiscount').textContent = fmtPrice(original-sale)+'원';
 document.getElementById('coShipping').textContent = shipping===0?'무료':fmtPrice(shipping)+'원';
 document.getElementById('coTotal').textContent    = fmtPrice(sale+shipping)+'원';
 
-function selectPay(label) {
-  document.querySelectorAll('[onclick="selectPay(this)"]').forEach(l=>{
-    l.style.borderColor='var(--border)';l.style.background='';
-  });
-  label.style.borderColor='var(--red)';label.style.background='#fff5f5';
-  label.querySelector('input').checked=true;
+function removeItem(id) {
+  Cart.remove(id);
+  location.reload();
+}
+
+function selectPay(card) {
+  document.querySelectorAll('.co-pay-card').forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
 }
 
 function completePayment() {
+  if (!document.getElementById('agreeChk').checked) {
+    Toast.show('구매 동의에 체크해주세요.','error');
+    return;
+  }
   Toast.show('결제가 완료되었습니다! 🎉','success');
   Cart.items=[]; Cart.save(); Cart.updateBadge();
   setTimeout(()=>location.href='mypage.html?tab=orders',1500);
