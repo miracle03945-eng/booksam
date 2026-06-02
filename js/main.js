@@ -228,6 +228,7 @@ const BOOKS = [
   { id: 17, cat: 'middle', type: '참고서', subject: '영어', area: '독해', title: 'I Love Reading Level 2 (2025)',
     author: '북샘 편집부', price: 13500, originalPrice: 15000, badge: 'new',
     img: 'images/ilove-reading-2.png', publisher: '북샘 교육출판', date: '2025.02.01',
+    kyoboUrl: 'https://product.kyobobook.co.kr/detail/S000218082160',
     desc: '다양한 유형의 지문과 심화 독해 전략으로 수준 높은 독해 능력을 키웁니다.', tags: ['신규', '중학독해', 'MP3'] },
   { id: 18, cat: 'middle', type: '참고서', subject: '영어', area: '독해', title: 'I Love Reading Level 3 (2025)',
     author: '북샘 편집부', price: 13500, originalPrice: 15000, badge: '',
