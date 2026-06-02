@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gnbBar.style.position = 'relative';
     gnbBar.appendChild(mega);
 
-    const closeMega = () => mega.classList.remove('open');
+    const closeMega = () => { mega.classList.remove('open'); document.body.style.overflow = ''; };
     let megaTimer;
 
     // 마우스오버 시 열기
@@ -491,6 +491,22 @@ document.addEventListener('DOMContentLoaded', () => {
       megaTimer = setTimeout(closeMega, 180);
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMega(); });
+
+    // 모바일: ☰ 클릭으로 메가메뉴 토글
+    gnbAll.addEventListener('click', () => {
+      if (window.innerWidth > 768) return;
+      const isOpen = mega.classList.contains('open');
+      mega.classList.toggle('open');
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    });
+    // 모바일: 메가메뉴 외부 탭 시 닫기
+    document.addEventListener('touchstart', (e) => {
+      if (window.innerWidth > 768) return;
+      if (mega.classList.contains('open') && !mega.contains(e.target) && !gnbAll.contains(e.target)) {
+        mega.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }, {passive: true});
   }
 
   // (구버전 메가메뉴 코드 — 삭제 예정 자리표시자)
