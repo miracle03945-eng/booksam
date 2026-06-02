@@ -84,82 +84,75 @@
       .rank-thumb{width:36px;height:48px;}
     }
 
-    /* ─── 3D 커버플로우 히어로 ─── */
-    .cf-hero{max-width:1180px;margin:0 auto;padding:48px 40px 46px;}
-    /* 3D 무대 */
-    .cf-stage{
-      position:relative;height:300px;
-      perspective:1500px;
-      display:flex;align-items:center;justify-content:center;
-      margin-bottom:26px;
+    /* ─── Hero Slider ─── */
+    .hs-wrapper{position:relative;overflow:hidden;min-height:360px;}
+    .hs-track{display:flex;transition:transform .65s cubic-bezier(.25,.46,.45,.94);will-change:transform;}
+    .hs-slide{flex:0 0 100%;min-width:100%;}
+    .hs-inner{
+      max-width:1280px;margin:0 auto;
+      padding:72px 100px 88px;    /* top 줄여 위로↑, bottom 늘려 크기 유지 */
+      display:flex;align-items:center;gap:48px;min-height:380px;
     }
-    .cf-book{
-      position:absolute;top:50%;left:50%;
-      width:204px;height:272px;
-      margin:-136px 0 0 -102px;       /* 중앙 정렬 */
-      border-radius:7px;overflow:hidden;
-      box-shadow:0 22px 50px rgba(0,40,90,.32);
-      cursor:pointer;
-      transition:transform .6s cubic-bezier(.25,.8,.3,1),opacity .6s ease,filter .6s ease;
-      will-change:transform;
-    }
-    .cf-book img{width:100%;height:100%;object-fit:cover;display:block;}
-    /* 가운데 책 살짝 떠오르는 글로우 */
-    .cf-book.is-center{box-shadow:0 30px 70px rgba(0,40,90,.42);}
+    /* 텍스트 LEFT */
+    .hs-text{flex:1;min-width:0;}
+    /* 책 RIGHT */
+    .hs-books{flex:0 0 380px;display:flex;align-items:flex-end;justify-content:center;gap:0;padding:20px 0;}
+    .hs-books-2{gap:18px;justify-content:flex-end;}
+    /* 책 이미지 */
+    .hs-bk{height:220px;width:auto;border-radius:6px;box-shadow:0 16px 44px rgba(0,0,0,.22);cursor:pointer;transition:filter .2s,transform .3s;position:relative;flex-shrink:0;}
+    .hs-bk1{transform:rotate(-6deg) translateY(10px);margin-right:-28px;z-index:1;filter:brightness(.9);}
+    .hs-bkm{height:248px;z-index:3;transform:none;margin-right:-20px;filter:none;}
+    .hs-bk3{transform:rotate(5deg) translateY(10px);z-index:2;filter:brightness(.9);}
+    .hs-books-2 .hs-bkm{margin-right:0;height:240px;}
+    .hs-books-2 .hs-bk3{transform:rotate(4deg) translateY(8px);}
+    .hs-bk:hover{filter:brightness(1.06)!important;transform:translateY(-8px)!important;}
+    /* 태그 */
+    .hs-tags{display:flex;gap:8px;margin-bottom:20px;}
+    .hs-tag{background:rgba(255,255,255,.2);color:white;font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.35);}
+    .hs-tag-acc{font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.9);border:none;color:#1565c0;}
+    .hs-tag-acc.purple{color:#6b3d9e;}
+    .hs-tag-acc.navy{color:#0d1b2a;}
+    .hs-tag-acc.orange{color:#c85e2a;}
+    /* 제목 */
+    .hs-title{font-size:36px;font-weight:900;color:white;line-height:1.3;margin-bottom:14px;letter-spacing:-.5px;text-shadow:0 2px 16px rgba(0,0,0,.22),0 1px 4px rgba(0,0,0,.12);}
+    .hs-title em{font-style:normal;color:rgba(255,255,255,.88);}
+    /* 설명 */
+    .hs-desc{font-size:15px;color:rgba(255,255,255,.9);line-height:1.75;margin-bottom:32px;text-shadow:0 1px 8px rgba(0,0,0,.18);}
+    /* 버튼 */
+    .hs-btns{display:flex;gap:12px;flex-wrap:wrap;}
+    .hs-btn-p{background:rgba(255,255,255,.95);color:#1a2e44;border:none;padding:12px 26px;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;}
+    .hs-btn-p:hover{background:white;transform:translateY(-1px);}
+    .hs-btn-o{background:transparent;color:white;border:2px solid rgba(255,255,255,.6);padding:10px 26px;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;}
+    .hs-btn-o:hover{border-color:white;background:rgba(255,255,255,.12);}
+    .hs-slide[data-theme="light"] .hs-btn-p{background:#1a2e44;color:white;}
+    .hs-slide[data-theme="light"] .hs-btn-o{color:#1a2e44;border-color:rgba(26,46,68,.4);}
+    .hs-slide[data-theme="light"] .hs-tag{background:rgba(26,46,68,.12);color:#1a2e44;border-color:rgba(26,46,68,.2);}
     /* 화살표 */
-    .cf-arrow{
-      position:absolute;top:50%;transform:translateY(-50%);
-      width:48px;height:48px;border-radius:50%;
-      background:rgba(255,255,255,.85);
-      border:none;box-shadow:0 6px 18px rgba(0,40,90,.2);
-      color:var(--navy);font-size:24px;line-height:1;
-      cursor:pointer;z-index:30;
-      display:flex;align-items:center;justify-content:center;
-      transition:background .15s,transform .15s;
-    }
-    .cf-arrow:hover{background:#fff;transform:translateY(-50%) scale(1.08);}
-    .cf-prev{left:0;}
-    .cf-next{right:0;}
-    /* 텍스트 정보 */
-    .cf-info{text-align:center;position:relative;}
-    .cf-tag{
-      display:inline-block;font-size:12px;font-weight:700;letter-spacing:1px;
-      color:#1a2e44;background:rgba(255,255,255,.7);
-      padding:5px 15px;border-radius:20px;margin-bottom:14px;
-      backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-    }
-    .cf-title{
-      font-size:31px;font-weight:900;color:#fff;line-height:1.3;
-      letter-spacing:-.6px;margin-bottom:6px;
-      text-shadow:0 2px 16px rgba(0,0,0,.22),0 1px 4px rgba(0,0,0,.12);
-    }
-    .cf-sub{font-size:15px;font-weight:800;color:#fff;opacity:.92;margin-bottom:20px;text-shadow:0 1px 8px rgba(0,0,0,.2);}
-    .cf-cta{
-      background:#1a2e44;color:#fff;border:none;
-      padding:13px 30px;border-radius:7px;
-      font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;
-      box-shadow:0 8px 22px rgba(13,27,42,.28);
-      transition:transform .15s,background .15s;
-    }
-    .cf-cta:hover{background:#0d1b2a;transform:translateY(-2px);}
-    /* 전환 시 텍스트 페이드 */
-    .cf-info.cf-anim .cf-tag,.cf-info.cf-anim .cf-title,.cf-info.cf-anim .cf-sub{animation:cfFade .55s ease;}
-    @keyframes cfFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .hs-arrow{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;z-index:20;transition:background .15s;}
+    .hs-arrow:hover{background:rgba(255,255,255,.36);}
+    .hs-prev{left:20px;}
+    .hs-next{right:20px;}
     /* 닷 */
-    .cf-dots{display:flex;gap:8px;justify-content:center;margin-top:22px;}
-    .cf-dot{width:9px;height:9px;border-radius:5px;background:rgba(255,255,255,.5);border:none;cursor:pointer;padding:0;transition:all .3s ease;}
-    .cf-dot.active{width:28px;background:#fff;}
-
+    .hs-dots{position:absolute;bottom:20px;right:40px;display:flex;gap:8px;z-index:20;}
+    .hs-dot{width:8px;height:8px;border-radius:4px;background:rgba(255,255,255,.35);border:none;cursor:pointer;padding:0;transition:all .3s ease;}
+    .hs-dot.active{width:28px;background:white;}
     /* 모바일 */
     @media(max-width:768px){
-      .cf-hero{padding:24px 16px 32px;}
-      .cf-stage{height:210px;margin-bottom:18px;}
-      .cf-book{width:138px;height:184px;margin:-92px 0 0 -69px;border-radius:5px;}
-      .cf-arrow{width:38px;height:38px;font-size:20px;}
-      .cf-prev{left:-4px;} .cf-next{right:-4px;}
-      .cf-title{font-size:21px;}
-      .cf-sub{font-size:13px;margin-bottom:16px;}
-      .cf-cta{padding:11px 24px;}
+      .hs-inner{flex-direction:column-reverse;padding:24px 16px 52px;gap:16px;min-height:auto;}
+      .hs-books,.hs-books-2{flex:none;width:100%;justify-content:center;padding:0;gap:0;}
+      .hs-bk{height:130px;}
+      .hs-bkm{height:148px;}
+      .hs-bk1{margin-right:-20px;}
+      .hs-bkm{margin-right:-16px;}
+      .hs-books-2 .hs-bkm{margin-right:8px;height:148px;}
+      .hs-books-2 .hs-bk3{transform:rotate(4deg) translateY(8px);}
+      .hs-title{font-size:22px;}
+      .hs-desc{font-size:13px;margin-bottom:18px;}
+      .hs-btns{flex-direction:column;gap:8px;}
+      .hs-btn-p,.hs-btn-o{width:100%;text-align:center;}
+      .hs-prev{left:6px;} .hs-next{right:6px;}
+      .hs-arrow{width:36px;height:36px;}
+      .hs-dots{right:16px;bottom:14px;}
     }
   </style>
 </head>
@@ -337,31 +330,106 @@
   </div>
 </nav>
 
-<!-- ===== 3D 커버플로우 히어로 ===== -->
-<section class="cf-hero">
-  <div class="cf-stage" id="cfStage">
-    <button class="cf-arrow cf-prev" id="cfPrev" aria-label="이전">‹</button>
+<!-- ===== HERO SLIDER ===== -->
+<section class="hs-wrapper" id="heroSlider" data-theme="light">
 
-    <img class="cf-book" data-i="0" src="images/ilove-reading-1.png" alt="I Love Reading">
-    <img class="cf-book" data-i="1" src="images/booster-voca-basic.png" alt="부스터 보카">
-    <img class="cf-book" data-i="2" src="images/reading-booster-15.png" alt="Reading Booster">
-    <img class="cf-book" data-i="3" src="images/phonics-now-1.png" alt="Phonics NOW">
+  <button class="hs-arrow hs-prev" id="hsPrev" aria-label="이전">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="hs-arrow hs-next" id="hsNext" aria-label="다음">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
 
-    <button class="cf-arrow cf-next" id="cfNext" aria-label="다음">›</button>
-  </div>
+  <div class="hs-track" id="hsTrack">
 
-  <div class="cf-info cf-anim" id="cfInfo">
-    <div class="cf-tag" id="cfTag"></div>
-    <h2 class="cf-title" id="cfTitle"></h2>
-    <div class="cf-sub" id="cfSub"></div>
-    <button class="cf-cta" id="cfCta">교재 자세히 보기 →</button>
-    <div class="cf-dots" id="cfDots">
-      <button class="cf-dot active" data-i="0" aria-label="1"></button>
-      <button class="cf-dot" data-i="1" aria-label="2"></button>
-      <button class="cf-dot" data-i="2" aria-label="3"></button>
-      <button class="cf-dot" data-i="3" aria-label="4"></button>
+    <!-- Slide 1: I Love Reading -->
+    <div class="hs-slide" data-theme="dark">
+      <div class="hs-inner">
+        <div class="hs-text">
+          <div class="hs-tags"><span class="hs-tag">2025개정</span><span class="hs-tag-acc">중학</span></div>
+          <h1 class="hs-title">최신 교육과정을 완벽 반영한<br><em>내신 대비 중학 독해 시리즈</em></h1>
+          <p class="hs-desc">최신 교육과정 완벽 반영, 최신 개정판!<br>중학 내신 대비 독해 시리즈</p>
+          <div class="hs-btns">
+            <button class="hs-btn-p" onclick="location.href='book-detail.html?id=16'">교재 자세히 보기</button>
+            <button class="hs-btn-o" onclick="location.href='resources.html?tab=curation'">내 맞춤 플랜 찾기</button>
+          </div>
+        </div>
+        <div class="hs-books">
+          <img src="images/ilove-reading-1.png" class="hs-bk hs-bk1" onclick="location.href='book-detail.html?id=16'" alt="I Love Reading 1">
+          <img src="images/ilove-reading-2.png" class="hs-bk hs-bkm" onclick="location.href='book-detail.html?id=17'" alt="I Love Reading 2">
+          <img src="images/ilove-reading-3.png" class="hs-bk hs-bk3" onclick="location.href='book-detail.html?id=18'" alt="I Love Reading 3">
+        </div>
+      </div>
     </div>
+
+    <!-- Slide 2: Booster Voca -->
+    <div class="hs-slide" data-theme="dark">
+      <div class="hs-inner">
+        <div class="hs-text">
+          <div class="hs-tags"><span class="hs-tag">중학</span><span class="hs-tag-acc purple">어휘</span></div>
+          <h1 class="hs-title">50일로 끝내는 중학 영단어 마스터<br><em>부스터 보카 시리즈</em></h1>
+          <p class="hs-desc">최신 교육과정 반영, 내신·수능 대비<br>중학 필수 영단어를 단계별로 완성하세요</p>
+          <div class="hs-btns">
+            <button class="hs-btn-p" onclick="location.href='book-detail.html?id=6'">교재 자세히 보기</button>
+            <button class="hs-btn-o" onclick="location.href='books.html?cat=middle&amp;type=참고서&amp;subject=영어'">중학 교재 전체보기</button>
+          </div>
+        </div>
+        <div class="hs-books">
+          <img src="images/booster-voca-basic.png" class="hs-bk hs-bk1" alt="Booster Voca 기본">
+          <img src="images/booster-voca-power.png" class="hs-bk hs-bkm" alt="Booster Voca 실력">
+          <img src="images/booster-voca-complete.png" class="hs-bk hs-bk3" alt="Booster Voca 완성">
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Reading Booster -->
+    <div class="hs-slide" data-theme="dark">
+      <div class="hs-inner">
+        <div class="hs-text">
+          <div class="hs-tags"><span class="hs-tag">고등</span><span class="hs-tag-acc navy">수능</span></div>
+          <h1 class="hs-title">수능 영어 1등급 완성 프로젝트<br><em>Reading Booster 시리즈</em></h1>
+          <p class="hs-desc">수능 독해 유형별 전략 수록<br>모의고사 10+2회 &amp; 15회로 실전 감각 완성</p>
+          <div class="hs-btns">
+            <button class="hs-btn-p" onclick="location.href='book-detail.html?id=23'">교재 자세히 보기</button>
+            <button class="hs-btn-o" onclick="location.href='books.html?cat=high&amp;type=참고서&amp;subject=영어'">고등 교재 전체보기</button>
+          </div>
+        </div>
+        <div class="hs-books hs-books-2">
+          <img src="images/reading-booster-10plus2.png" class="hs-bk hs-bkm" onclick="location.href='book-detail.html?id=27'" alt="Reading Booster 10+2">
+          <img src="images/reading-booster-15.png" class="hs-bk hs-bk3" onclick="location.href='book-detail.html?id=23'" alt="Reading Booster 15회">
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Phonics NOW -->
+    <div class="hs-slide" data-theme="dark">
+      <div class="hs-inner">
+        <div class="hs-text">
+          <div class="hs-tags"><span class="hs-tag">초등</span><span class="hs-tag-acc orange">파닉스</span></div>
+          <h1 class="hs-title">파닉스의 기초부터 탄탄하게<br><em>Phonics NOW 시리즈</em></h1>
+          <p class="hs-desc">AR 기반 체험형 학습으로 파닉스를<br>재미있고 체계적으로 배우는 단계별 시리즈</p>
+          <div class="hs-btns">
+            <button class="hs-btn-p" onclick="location.href='book-detail.html?id=1'">교재 자세히 보기</button>
+            <button class="hs-btn-o" onclick="location.href='books.html?cat=elementary&amp;type=참고서&amp;subject=영어'">초등 교재 전체보기</button>
+          </div>
+        </div>
+        <div class="hs-books">
+          <img src="images/phonics-now-1.png" class="hs-bk hs-bk1" onclick="location.href='book-detail.html?id=1'" alt="Phonics NOW 1">
+          <img src="images/phonics-now-2.png" class="hs-bk hs-bkm" onclick="location.href='book-detail.html?id=2'" alt="Phonics NOW 2">
+          <img src="images/phonics-now-3.png" class="hs-bk hs-bk3" onclick="location.href='book-detail.html?id=19'" alt="Phonics NOW 3">
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hs-track -->
+
+  <div class="hs-dots" id="hsDots">
+    <button class="hs-dot active" data-idx="0"></button>
+    <button class="hs-dot" data-idx="1"></button>
+    <button class="hs-dot" data-idx="2"></button>
+    <button class="hs-dot" data-idx="3"></button>
   </div>
+
 </section>
 
 <!-- ===== 베스트 교재 ===== -->
@@ -762,88 +830,52 @@ function doSearch(){
 }
 document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
 
-// ─── 3D 커버플로우 히어로 ───
+// ─── Hero Slider ───
 (function(){
-  // 슬라이드별 배경(투명 GNB가 비치는 body 배경) — 파스텔 멀티컬러
   const BG = [
-    'linear-gradient(135deg, #f5be82 0%, #f09ab0 30%, #c898e8 65%, #98b8f8 100%)', // I Love Reading
-    'linear-gradient(135deg, #78c8f8 0%, #90e0d8 28%, #b0a8f0 58%, #d8a0e0 100%)', // Booster Voca
-    'linear-gradient(135deg, #f8e08a 0%, #f8b890 28%, #f098b8 58%, #c898e0 100%)', // Reading Booster
-    'linear-gradient(135deg, #90e8c8 0%, #78b8f0 30%, #b098e8 62%, #e898c8 100%)', // Phonics NOW
+    // I Love Reading — 오렌지→핑크→라벤더 파스텔
+    'linear-gradient(135deg, #f5be82 0%, #f09ab0 30%, #c898e8 65%, #98b8f8 100%)',
+    // Booster Voca — 블루→민트→라일락 파스텔
+    'linear-gradient(135deg, #78c8f8 0%, #90e0d8 28%, #b0a8f0 58%, #d8a0e0 100%)',
+    // Reading Booster — 노랑→피치→로즈→라벤더 파스텔
+    'linear-gradient(135deg, #f8e08a 0%, #f8b890 28%, #f098b8 58%, #c898e0 100%)',
+    // Phonics NOW — 민트→스카이→퍼플→핑크 파스텔
+    'linear-gradient(135deg, #90e8c8 0%, #78b8f0 30%, #b098e8 62%, #e898c8 100%)',
   ];
-  const CF = [
-    { tag:'2025개정 · 중학 독해', title:'내신 대비 중학 독해 시리즈', sub:'I Love Reading', href:'book-detail.html?id=16' },
-    { tag:'중학 · 어휘',          title:'50일 완성 중학 영단어',      sub:'부스터 보카',        href:'book-detail.html?id=6'  },
-    { tag:'고등 · 수능',          title:'수능 1등급 영어 독해',       sub:'Reading Booster',   href:'book-detail.html?id=23' },
-    { tag:'초등 · 파닉스',        title:'파닉스 기초부터 탄탄하게',    sub:'Phonics NOW',       href:'book-detail.html?id=1'  },
-  ];
-  const N = CF.length;
   let cur = 0, tmr;
+  const track = document.getElementById('hsTrack');
+  const wrap  = document.getElementById('heroSlider');
+  const dots  = document.querySelectorAll('.hs-dot');
+  const slides = document.querySelectorAll('.hs-slide');
+  const N = BG.length;
 
-  const stage = document.getElementById('cfStage');
-  const books = [...document.querySelectorAll('.cf-book')];
-  const info  = document.getElementById('cfInfo');
-  const elTag = document.getElementById('cfTag');
-  const elTit = document.getElementById('cfTitle');
-  const elSub = document.getElementById('cfSub');
-  const elCta = document.getElementById('cfCta');
-  const dots  = document.querySelectorAll('.cf-dot');
-  if (!stage) return;
-
-  // 상대 위치별 3D 변형 (가운데 / 오른쪽 / 왼쪽 / 뒤)
-  function place(book, rel){
-    let t, op, z, fil, center=false;
-    if (rel === 0){           // 가운데 — 크게, 정면
-      t='translateX(0) translateZ(0) rotateY(0) scale(1)'; op=1; z=5; fil='none'; center=true;
-    } else if (rel === 1){    // 오른쪽
-      t='translateX(180px) translateZ(-150px) rotateY(-42deg) scale(.82)'; op=.92; z=3; fil='brightness(.82)';
-    } else if (rel === N-1){  // 왼쪽
-      t='translateX(-180px) translateZ(-150px) rotateY(42deg) scale(.82)'; op=.92; z=3; fil='brightness(.82)';
-    } else {                  // 뒤(숨김)
-      t='translateX(0) translateZ(-320px) scale(.6)'; op=0; z=1; fil='brightness(.6)';
-    }
-    book.style.transform = t;
-    book.style.opacity   = op;
-    book.style.zIndex    = z;
-    book.style.filter    = fil;
-    book.classList.toggle('is-center', center);
-  }
-
-  function goTo(idx){
+  function goTo(idx) {
     cur = ((idx % N) + N) % N;
-    books.forEach((b,i) => place(b, ((i - cur) % N + N) % N));
-    const c = CF[cur];
-    elTag.textContent = c.tag;
-    elTit.textContent = c.title;
-    elSub.textContent = c.sub;
-    elCta.onclick = () => location.href = c.href;
+    if (track) track.style.transform = `translateX(-${cur * 100}%)`;
     dots.forEach((d,i) => d.classList.toggle('active', i === cur));
     document.body.style.background = BG[cur];
-    document.body.setAttribute('data-hero-theme', 'dark');
-    // 텍스트 페이드 재트리거
-    info.classList.remove('cf-anim'); void info.offsetWidth; info.classList.add('cf-anim');
+    if (wrap) {
+      const theme = slides[cur]?.dataset.theme || 'dark';
+      wrap.dataset.theme = theme;
+      document.body.setAttribute('data-hero-theme', theme);
+    }
     clearInterval(tmr);
     tmr = setInterval(() => goTo(cur + 1), 5000);
   }
 
-  // 책 클릭: 가운데면 상세로, 옆이면 그 위치로 회전
-  books.forEach((b,i) => b.addEventListener('click', () => {
-    if (i === cur) location.href = CF[cur].href;
-    else goTo(i);
-  }));
-  document.getElementById('cfPrev').addEventListener('click', () => goTo(cur - 1));
-  document.getElementById('cfNext').addEventListener('click', () => goTo(cur + 1));
-  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.i)));
+  document.getElementById('hsPrev')?.addEventListener('click', () => goTo(cur - 1));
+  document.getElementById('hsNext')?.addEventListener('click', () => goTo(cur + 1));
+  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
 
   // 터치 스와이프
   let tx = 0;
-  stage.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
-  stage.addEventListener('touchend',   e => {
+  wrap?.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  wrap?.addEventListener('touchend',   e => {
     const dx = e.changedTouches[0].clientX - tx;
-    if (Math.abs(dx) > 40) goTo(cur + (dx < 0 ? 1 : -1));
+    if (Math.abs(dx) > 50) goTo(cur + (dx < 0 ? 1 : -1));
   }, {passive:true});
 
-  goTo(0);
+  goTo(0); // 초기화
 })();
 </script>
 
