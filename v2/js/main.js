@@ -737,7 +737,78 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+
+  // ── GNB 검색 오버레이 ──
+  const srchOverlay = document.createElement('div');
+  srchOverlay.id = 'gnbSearchOverlay';
+  srchOverlay.className = 'gnb-search-overlay';
+  srchOverlay.innerHTML = `
+    <div class="gnb-search-overlay-inner">
+      <select class="gnb-srch-sel" id="gnbSrchCat">
+        <option value="">카테고리 전체</option>
+        <option value="elementary">초등</option>
+        <option value="middle">중학</option>
+        <option value="high">고등</option>
+      </select>
+      <input type="text" class="gnb-srch-inp" id="gnbSrchInput" placeholder="초등, 중등, 고등 교재명을 입력하세요">
+      <button class="gnb-srch-go" onclick="doGnbSearch()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="gnb-srch-close" onclick="closeGnbSearch()">✕</button>
+    </div>`;
+  gnbBar?.after(srchOverlay);
+
+  document.getElementById('gnbSearchToggle')?.addEventListener('click', () => {
+    const ov = document.getElementById('gnbSearchOverlay');
+    if (!ov) return;
+    const isOpen = ov.classList.toggle('open');
+    if (isOpen) setTimeout(() => document.getElementById('gnbSrchInput')?.focus(), 80);
+  });
+  document.getElementById('gnbSrchInput')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') doGnbSearch();
+  });
+
+  // ── GNB 로그인 상태 동기화 (gnb-util-right) ──
+  const gnbLoginLink = document.querySelector('.gnb-login-link');
+  const gnbJoinLink  = document.querySelector('.gnb-join-link');
+  if (gnbJoinLink)  gnbJoinLink.style.display  = loggedIn ? 'none' : '';
+  if (gnbLoginLink) {
+    if (loggedIn) {
+      gnbLoginLink.textContent = '로그아웃';
+      gnbLoginLink.removeAttribute('href');
+      gnbLoginLink.style.cursor = 'pointer';
+      gnbLoginLink.onclick = (e) => {
+        e.preventDefault();
+        ['isLoggedIn','booksam_user','redirectAfterLogin','pendingMaterialId',
+         'pendingMaterialTitle','pendingWishId','booksam_wish'].forEach(k => localStorage.removeItem(k));
+        location.reload();
+      };
+    } else {
+      gnbLoginLink.addEventListener('click', () => {
+        localStorage.setItem('redirectAfterLogin', location.href);
+      });
+    }
+  }
+
+  // ── 스크롤 시 hero-page gnb 배경 전환 ──
+  if (document.body.classList.contains('hero-page')) {
+    const gnbEl = document.querySelector('.gnb-bar');
+    const onScroll = () => gnbEl?.classList.toggle('gnb-scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  }
 });
+
+function closeGnbSearch() {
+  document.getElementById('gnbSearchOverlay')?.classList.remove('open');
+}
+function doGnbSearch() {
+  const q   = document.getElementById('gnbSrchInput')?.value;
+  const cat = document.getElementById('gnbSrchCat')?.value;
+  if (!q?.trim()) return;
+  const params = new URLSearchParams({q, ...(cat && {cat})});
+  location.href = `books.html?${params}`;
+}
 
 // ── 로컬 이미지 미리보기 모달 ──
 // 사용법: images/ 폴더에 ytutor-preview.png / ybmbooks-preview.png 저장하면 자동 표시

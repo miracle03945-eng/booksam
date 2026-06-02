@@ -61,13 +61,16 @@ img{max-width:100%;display:block;}
 .page-body{min-height:calc(100vh - 100px);}
 
 /* ─────────── TOP UTILITY BAR ─────────── */
-/* Mobile: 숨김 */
-.util-topbar{display:none;}
+/* 모바일/데스크톱 모두 숨김 — 기능이 gnb로 통합됨 */
+.util-topbar{display:none !important;}
+.util-bar{display:none !important;}
 
-/* topbar-left / toeic 버튼: 모바일 기본 숨김 */
-.util-topbar-left{display:none;}
-.topbar-brand-link{display:none;}
+/* 신규 GNB 요소: 모바일 기본 숨김 */
+.gnb-logo-link{display:none;}
+.gnb-util-right{display:none;}
 .gnb-toeic-btn{display:none;}
+.topbar-brand-link{display:none;}
+.util-topbar-left{display:none;}
 
 /* ─────────── MAIN HEADER ─────────── */
 /* Mobile: 로고 위, 검색창 아래 */
@@ -804,82 +807,150 @@ img{max-width:100%;display:block;}
   /* Container */
   .container{max-width:1280px;margin:0 auto;padding:0 var(--sp-10);}
 
-  /* ── Top utility bar (동아출판 스타일, YBM 차별화) ── */
-  .util-topbar{
-    display:block;
-    background:var(--white);
-    border-bottom:1px solid #e8e8e8;
-    padding:0 var(--sp-10);
-  }
-  .util-topbar-inner{
-    max-width:1280px;margin:0 auto;
-    display:flex;justify-content:space-between; /* 좌: 브랜드링크 / 우: 유틸링크 */
-    height:38px;align-items:center;
-  }
+  /* ─── GNB = 통합 단일 헤더 (로고 + 네비 + 유틸) ─── */
 
-  /* 좌측: YBM북스 참고서 */
-  .util-topbar-left{display:flex;align-items:center;}
-  .topbar-brand-link{
-    display:flex;align-items:center;gap:5px;
-    font-size:12px;font-weight:700;
-    color:var(--red);
-    padding:0 14px 0 0;
-    border-right:1.5px solid #e0e0e0;
-    white-space:nowrap;
+  /* GNB 로고 */
+  .gnb-logo-link{
+    display:flex;align-items:center;gap:8px;
+    margin-right:var(--sp-5);
+    flex-shrink:0;text-decoration:none;
+  }
+  .gnb-logo-link .logo-mark{font-size:22px;font-weight:900;color:var(--red);letter-spacing:-1px;}
+  .gnb-logo-link .logo-badge{background:var(--red);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;}
+
+  /* GNB 우측 유틸 */
+  .gnb-util-right{
+    display:flex;align-items:center;gap:0;
+    margin-left:auto;flex-shrink:0;
+  }
+  .gnb-brand-ext{
+    font-size:12px;font-weight:700;color:var(--red);
+    padding:0 14px 0 0;margin-right:14px;
+    border-right:1px solid #ddd;
+    white-space:nowrap;text-decoration:none;
     transition:opacity .15s;
-    text-decoration:none;
-    letter-spacing:-.2px;
   }
-  .topbar-brand-link:hover{opacity:.75;}
-  .topbar-arrow{font-size:11px;font-weight:400;}
-
-  /* 우측 유틸 링크 */
-  .util-topbar .util-links{display:flex;align-items:center;}
-  .util-topbar .util-link{
+  .gnb-brand-ext span{font-size:11px;font-weight:400;}
+  .gnb-brand-ext:hover{opacity:.75;}
+  .gnb-util-link{
     font-size:12px;color:#666;
-    padding:0 10px;
+    padding:0 8px;line-height:1;
     border-right:1px solid #e0e0e0;
-    line-height:1;white-space:nowrap;transition:color .15s;
+    white-space:nowrap;transition:color .15s;
+    text-decoration:none;
   }
-  .util-topbar .util-link:first-child{border-left:1px solid #e0e0e0;}
-  .util-topbar .util-link:hover{color:var(--red);}
+  .gnb-util-link:hover{color:var(--red);}
+  .gnb-search-btn{
+    background:none;border:none;cursor:pointer;
+    color:#666;padding:6px 8px 6px 14px;
+    display:flex;align-items:center;
+    transition:color .15s;
+  }
+  .gnb-search-btn:hover{color:var(--red);}
 
-  /* ── Main Header ── */
-  .util-bar{
-    padding:0 var(--sp-10);
-    border-bottom:1px solid #ebebeb;
-    box-shadow:0 1px 0 rgba(0,0,0,.04);
-  }
-  .util-bar-inner{
-    max-width:1280px;margin:0 auto;
-    flex-wrap:nowrap;
-    height:64px;padding:0;gap:20px;
-    justify-content:space-between;
-  }
-  .header-search{flex:1;}
-  .search-select{display:block;min-width:110px;height:42px;}
-  .search-select2{display:block;background:var(--bg);border:none;border-right:1.5px solid #ddd;padding:0 12px;height:42px;font-size:13px;font-family:inherit;color:var(--text2);cursor:pointer;outline:none;min-width:90px;}
-  .search-input{height:42px;}
-  .search-btn{width:36px;height:36px;}
-  .gnb-special{display:none;} /* 기존 버튼 영역 제거 */
-
-  /* GNB */
-  .gnb-inner{
-    max-width:1280px;          /* 콘텐츠 최대폭 */
-    margin:0 auto;             /* 가운데 정렬 */
-    height:64px;
-    padding:0 var(--sp-10);
-    overflow-x:visible;
-  }
-  .gnb-all{font-size:14px;font-weight:700;padding:0 14px 0 0;margin-right:12px;gap:8px;}
-  .hamburger{font-size:20px;}
-  .gnb-link{padding:0 22px;height:64px;font-size:16px;letter-spacing:-.2px;}
-
-  /* GNB 이벤트 옆 외부 링크 버튼 */
+  /* GNB 토익 버튼 */
   .gnb-toeic-btn{
     display:flex;align-items:center;gap:4px;
-    margin-left:16px;
-    padding:7px 16px;
+    margin-left:10px;
+    padding:6px 13px;height:auto;align-self:center;
+    font-size:12px;font-weight:700;
+    color:var(--red);border:1.5px solid var(--red);
+    border-radius:4px;white-space:nowrap;
+    text-decoration:none;transition:background .15s,color .15s;flex-shrink:0;
+  }
+  .gnb-toeic-btn span{font-size:11px;font-weight:400;}
+  .gnb-toeic-btn:hover{background:var(--red);color:white;}
+
+  /* 검색 드롭다운 오버레이 */
+  .gnb-search-overlay{
+    position:fixed;top:72px;left:0;right:0;
+    background:white;
+    border-bottom:2px solid var(--red);
+    padding:18px 40px;
+    z-index:500;
+    box-shadow:0 8px 24px rgba(0,0,0,.1);
+    display:none;
+  }
+  .gnb-search-overlay.open{display:block;animation:srchSlide .18s ease;}
+  @keyframes srchSlide{from{transform:translateY(-8px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .gnb-search-overlay-inner{
+    max-width:1280px;margin:0 auto;
+    display:flex;align-items:center;gap:10px;
+  }
+  .gnb-srch-sel{
+    border:1.5px solid #ddd;padding:10px 14px;
+    font-family:inherit;font-size:14px;border-radius:6px;outline:none;cursor:pointer;
+    flex-shrink:0;
+  }
+  .gnb-srch-inp{
+    flex:1;border:2px solid var(--red);padding:10px 16px;
+    font-size:14px;font-family:inherit;border-radius:6px;outline:none;
+  }
+  .gnb-srch-go{
+    background:var(--red);border:none;border-radius:6px;
+    padding:10px 16px;cursor:pointer;display:flex;align-items:center;flex-shrink:0;
+    transition:background .15s;
+  }
+  .gnb-srch-go:hover{background:var(--red-dark);}
+  .gnb-srch-close{
+    background:none;border:none;font-size:20px;cursor:pointer;
+    color:#888;padding:6px;transition:color .15s;
+  }
+  .gnb-srch-close:hover{color:#333;}
+
+  /* hero-page: GNB 투명 + 배경이 히어로까지 꽉 참 */
+  body.hero-page{
+    background:linear-gradient(135deg,#cce8fa 0%,#6ab8ee 45%,#3a9cd8 100%);
+  }
+  body.hero-page .gnb-bar{
+    background:transparent !important;
+    border-bottom:none !important;
+    box-shadow:none !important;
+  }
+  body.hero-page .hero-editorial{background:transparent !important;}
+
+  /* hero-page 텍스트 색상 조정 */
+  body.hero-page .gnb-all,
+  body.hero-page .gnb-link{color:rgba(26,46,68,.88);}
+  body.hero-page .gnb-link:hover,
+  body.hero-page .gnb-link.active{color:var(--navy);}
+  body.hero-page .gnb-logo-link .logo-mark{color:var(--red);}
+  body.hero-page .gnb-util-link{color:rgba(26,46,68,.72);}
+  body.hero-page .gnb-util-link:hover{color:var(--navy);}
+  body.hero-page .gnb-search-btn{color:rgba(26,46,68,.72);}
+  body.hero-page .gnb-brand-ext{color:var(--red);}
+  body.hero-page .gnb-toeic-btn{border-color:rgba(26,46,68,.4);color:var(--navy2);}
+
+  /* 스크롤 후 → 흰 배경으로 전환 */
+  body.hero-page .gnb-bar.gnb-scrolled{
+    background:rgba(255,255,255,.98) !important;
+    border-bottom:1px solid rgba(0,0,0,.08) !important;
+    box-shadow:0 1px 6px rgba(0,0,0,.07) !important;
+  }
+  body.hero-page .gnb-bar.gnb-scrolled .gnb-all,
+  body.hero-page .gnb-bar.gnb-scrolled .gnb-link{color:var(--text2);}
+  body.hero-page .gnb-bar.gnb-scrolled .gnb-util-link{color:#666;}
+  body.hero-page .gnb-bar.gnb-scrolled .gnb-search-btn{color:#666;}
+  body.hero-page .gnb-bar.gnb-scrolled .gnb-toeic-btn{border-color:var(--red);color:var(--red);}
+
+  /* GNB — 단일 통합 헤더 */
+  .gnb-bar{box-shadow:0 1px 4px rgba(0,0,0,.07);}
+  .gnb-inner{
+    max-width:1280px;margin:0 auto;
+    height:72px;
+    padding:0 var(--sp-10);
+    overflow-x:visible;
+    align-items:center;
+  }
+  .gnb-all{font-size:13px;font-weight:700;padding:0 10px 0 0;margin-right:8px;gap:6px;}
+  .hamburger{font-size:18px;}
+  .gnb-link{padding:0 18px;height:72px;font-size:15px;letter-spacing:-.2px;}
+
+  /* GNB 이벤트 옆 외부 링크 버튼 (override) */
+  .gnb-toeic-btn{
+    display:flex;align-items:center;gap:4px;
+    margin-left:8px;
+    padding:6px 13px;
     height:auto;align-self:center;
     font-size:13px;font-weight:700;
     color:var(--red);
