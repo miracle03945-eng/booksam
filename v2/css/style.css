@@ -898,28 +898,54 @@ img{max-width:100%;display:block;}
   }
   .gnb-srch-close:hover{color:#333;}
 
-  /* hero-page: GNB 투명 + 배경이 히어로까지 꽉 참 */
+  /* hero-page: GNB 투명 + 배경 슬라이드별로 변경 */
   body.hero-page{
-    background:linear-gradient(135deg,#cce8fa 0%,#6ab8ee 45%,#3a9cd8 100%);
+    background:linear-gradient(135deg,#8fcde6 0%,#b8dff7 55%,#ddf0ff 100%);
+    transition:background 0.7s ease;
   }
   body.hero-page .gnb-bar{
     background:transparent !important;
     border-bottom:none !important;
     box-shadow:none !important;
+    transition:background 0.5s ease !important;
   }
-  body.hero-page .hero-editorial{background:transparent !important;}
 
-  /* hero-page 텍스트 색상 조정 */
-  body.hero-page .gnb-all,
-  body.hero-page .gnb-link{color:rgba(26,46,68,.88);}
+  /* ── 슬라이드 테마별 GNB 색상 ── */
+  /* 라이트 배경 (I Love Reading, 슬라이드1 기본) */
+  body.hero-page[data-hero-theme="light"] .gnb-all,
+  body.hero-page[data-hero-theme="light"] .gnb-link{color:rgba(26,46,68,.88);}
+  body.hero-page[data-hero-theme="light"] .gnb-logo-link .logo-mark{color:var(--red);}
+  body.hero-page[data-hero-theme="light"] .gnb-logo-link .logo-badge{background:var(--red);color:white;}
+  body.hero-page[data-hero-theme="light"] .gnb-util-link{color:rgba(26,46,68,.7);}
+  body.hero-page[data-hero-theme="light"] .gnb-search-btn{color:rgba(26,46,68,.7);}
+  body.hero-page[data-hero-theme="light"] .gnb-brand-ext{color:var(--red);border-right-color:#ddd;}
+  body.hero-page[data-hero-theme="light"] .gnb-toeic-btn{border-color:var(--red);color:var(--red);}
+  body.hero-page[data-hero-theme="light"] .gnb-bar{
+    background:linear-gradient(to bottom,rgba(255,255,255,.22),transparent) !important;
+  }
+
+  /* 다크 배경 (Booster Voca, Reading Booster, Phonics NOW) */
+  body.hero-page[data-hero-theme="dark"] .gnb-all,
+  body.hero-page[data-hero-theme="dark"] .gnb-link{color:rgba(255,255,255,.92);}
+  body.hero-page[data-hero-theme="dark"] .gnb-logo-link .logo-mark{color:white;}
+  body.hero-page[data-hero-theme="dark"] .gnb-logo-link .logo-badge{background:rgba(255,255,255,.9);color:#1a2e44;}
+  body.hero-page[data-hero-theme="dark"] .gnb-util-link{color:rgba(255,255,255,.78);}
+  body.hero-page[data-hero-theme="dark"] .gnb-search-btn{color:rgba(255,255,255,.78);}
+  body.hero-page[data-hero-theme="dark"] .gnb-brand-ext{color:rgba(255,255,255,.88);border-right-color:rgba(255,255,255,.3);}
+  body.hero-page[data-hero-theme="dark"] .gnb-toeic-btn{border-color:rgba(255,255,255,.5);color:white;}
+  body.hero-page[data-hero-theme="dark"] .gnb-bar{
+    background:linear-gradient(to bottom,rgba(0,0,0,.15),transparent) !important;
+  }
+
+  /* 공통 hover */
   body.hero-page .gnb-link:hover,
-  body.hero-page .gnb-link.active{color:var(--navy);}
-  body.hero-page .gnb-logo-link .logo-mark{color:var(--red);}
-  body.hero-page .gnb-util-link{color:rgba(26,46,68,.72);}
-  body.hero-page .gnb-util-link:hover{color:var(--navy);}
-  body.hero-page .gnb-search-btn{color:rgba(26,46,68,.72);}
-  body.hero-page .gnb-brand-ext{color:var(--red);}
-  body.hero-page .gnb-toeic-btn{border-color:rgba(26,46,68,.4);color:var(--navy2);}
+  body.hero-page .gnb-link.active{opacity:.75;}
+
+  /* GNB 컬러 전환 애니메이션 */
+  body.hero-page .gnb-all,body.hero-page .gnb-link,
+  body.hero-page .gnb-util-link,body.hero-page .gnb-search-btn,
+  body.hero-page .gnb-brand-ext,body.hero-page .gnb-toeic-btn,
+  body.hero-page .gnb-logo-link .logo-mark{transition:color 0.5s ease,opacity .15s;}
 
   /* 스크롤 후 → 흰 배경으로 전환 */
   body.hero-page .gnb-bar.gnb-scrolled{

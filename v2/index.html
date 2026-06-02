@@ -84,112 +84,78 @@
       .rank-thumb{width:36px;height:48px;}
     }
 
-    /* ─── 에디토리얼 히어로 배너 ─── */
-    .hero-editorial{
-      background:linear-gradient(135deg,#cce8fa 0%,#6ab8ee 45%,#3a9cd8 100%);
-      overflow:hidden;position:relative;min-height:320px;
+    /* ─── Hero Slider ─── */
+    .hs-wrapper{position:relative;overflow:hidden;min-height:360px;}
+    .hs-track{display:flex;transition:transform .65s cubic-bezier(.25,.46,.45,.94);will-change:transform;}
+    .hs-slide{flex:0 0 100%;min-width:100%;}
+    .hs-inner{
+      max-width:1280px;margin:0 auto;
+      padding:80px 40px 60px;
+      display:flex;align-items:center;gap:52px;min-height:360px;
     }
-    /* 장식 요소 */
-    .he-star{position:absolute;pointer-events:none;color:white;font-style:normal;line-height:1;z-index:1;}
-    .he-s1{top:16%;right:8%;font-size:30px;opacity:.5;}
-    .he-s2{top:62%;right:17%;font-size:18px;opacity:.4;}
-    .he-s3{bottom:20%;left:50%;font-size:22px;opacity:.3;}
-    .he-wave{
-      position:absolute;left:20px;top:50%;transform:translateY(-50%);
-      width:24px;height:160px;
-      border:3.5px solid rgba(255,255,255,.38);border-radius:30px;
-      pointer-events:none;z-index:1;
-    }
-    .he-circle{
-      position:absolute;right:4%;bottom:-50px;
-      width:130px;height:130px;
-      background:rgba(255,255,255,.22);border-radius:50%;
-      pointer-events:none;z-index:1;
-    }
-    /* 내부 레이아웃 */
-    .hero-editorial .hero-inner{
-      flex-direction:row;align-items:center;
-      max-width:1200px;margin:0 auto;
-      padding:48px 40px;
-      gap:56px;
-      position:relative;z-index:2;
-    }
-    /* 책 영역 */
-    .he-visual{
-      flex:0 0 380px;
-      min-width:0;
-      display:flex;align-items:center;justify-content:center;
-      padding:20px 0;
-    }
-    /* 책 3권: 음수 마진으로 겹쳐 쌓기 → 전체 시각 폭 축소 */
-    .he-books{display:flex;align-items:flex-end;gap:0;}
-    .he-book{
-      height:188px;width:auto;flex-shrink:0;
-      border-radius:5px;
-      box-shadow:0 14px 36px rgba(0,60,120,.28);
-      cursor:pointer;transition:filter .2s,transform .3s;
-      position:relative;
-    }
-    /* 책 1: 왼쪽 기울기 + 뒤로 */
-    .he-b1{
-      transform:rotate(-6deg) translateY(8px);
-      margin-right:-28px;
-      z-index:1;filter:brightness(.92);
-    }
-    /* 책 2: 메인 — 앞으로 크게 */
-    .he-b-main{
-      height:212px;z-index:3;transform:none;
-      margin-right:-20px;
-      filter:none;
-    }
-    /* 책 3: 오른쪽 기울기 + 뒤로 */
-    .he-b3{
-      transform:rotate(5deg) translateY(8px);
-      z-index:2;filter:brightness(.92);
-    }
-    .he-book:hover{filter:brightness(1.06)!important;transform:translateY(-8px)!important;}
-    /* 텍스트 */
-    .he-content{flex:1;min-width:0;}
-    .he-tags{display:flex;gap:8px;margin-bottom:18px;}
-    .he-tag{
-      background:rgba(255,255,255,.9);color:#1565c0;
-      font-size:12px;font-weight:700;padding:5px 16px;
-      border-radius:20px;letter-spacing:.3px;
-    }
-    .he-tag-accent{background:#1a2e44;color:white;}
-    .he-title{
-      font-size:34px;font-weight:900;color:#1a2e44;
-      line-height:1.3;margin-bottom:14px;letter-spacing:-.5px;
-    }
-    .he-title em{font-style:normal;color:#1565c0;}
-    .he-desc{font-size:15px;color:rgba(26,46,68,.72);line-height:1.75;margin-bottom:28px;}
-    .he-btns{display:flex;gap:12px;flex-wrap:wrap;}
-    .he-btn-primary{
-      background:#1a2e44;color:white;border:none;
-      padding:13px 28px;border-radius:6px;
-      font-size:14px;font-weight:700;cursor:pointer;
-      transition:background .15s,transform .15s;font-family:inherit;
-    }
-    .he-btn-primary:hover{background:#0d1b2a;transform:translateY(-1px);}
-    .he-btn-outline{
-      background:transparent;color:#1a2e44;
-      border:2px solid rgba(26,46,68,.4);
-      padding:11px 28px;border-radius:6px;
-      font-size:14px;font-weight:700;cursor:pointer;
-      transition:all .15s;font-family:inherit;
-    }
-    .he-btn-outline:hover{border-color:#1a2e44;background:rgba(26,46,68,.06);}
+    /* 텍스트 LEFT */
+    .hs-text{flex:1;min-width:0;}
+    /* 책 RIGHT */
+    .hs-books{flex:0 0 380px;display:flex;align-items:flex-end;justify-content:center;gap:0;padding:20px 0;}
+    .hs-books-2{gap:18px;justify-content:flex-end;}
+    /* 책 이미지 */
+    .hs-bk{height:220px;width:auto;border-radius:6px;box-shadow:0 16px 44px rgba(0,0,0,.22);cursor:pointer;transition:filter .2s,transform .3s;position:relative;flex-shrink:0;}
+    .hs-bk1{transform:rotate(-6deg) translateY(10px);margin-right:-28px;z-index:1;filter:brightness(.9);}
+    .hs-bkm{height:248px;z-index:3;transform:none;margin-right:-20px;filter:none;}
+    .hs-bk3{transform:rotate(5deg) translateY(10px);z-index:2;filter:brightness(.9);}
+    .hs-books-2 .hs-bkm{margin-right:0;height:240px;}
+    .hs-books-2 .hs-bk3{transform:rotate(4deg) translateY(8px);}
+    .hs-bk:hover{filter:brightness(1.06)!important;transform:translateY(-8px)!important;}
+    /* 태그 */
+    .hs-tags{display:flex;gap:8px;margin-bottom:20px;}
+    .hs-tag{background:rgba(255,255,255,.2);color:white;font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.35);}
+    .hs-tag-acc{font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.9);border:none;color:#1565c0;}
+    .hs-tag-acc.purple{color:#6b3d9e;}
+    .hs-tag-acc.navy{color:#0d1b2a;}
+    .hs-tag-acc.orange{color:#c85e2a;}
+    /* 제목 */
+    .hs-title{font-size:36px;font-weight:900;color:white;line-height:1.3;margin-bottom:14px;letter-spacing:-.5px;text-shadow:0 2px 8px rgba(0,0,0,.12);}
+    .hs-title em{font-style:normal;color:rgba(255,255,255,.82);}
+    .hs-slide[data-theme="light"] .hs-title{color:#1a2e44;text-shadow:none;}
+    .hs-slide[data-theme="light"] .hs-title em{color:#1565c0;}
+    /* 설명 */
+    .hs-desc{font-size:15px;color:rgba(255,255,255,.82);line-height:1.75;margin-bottom:32px;text-shadow:0 1px 4px rgba(0,0,0,.08);}
+    .hs-slide[data-theme="light"] .hs-desc{color:rgba(26,46,68,.72);text-shadow:none;}
+    /* 버튼 */
+    .hs-btns{display:flex;gap:12px;flex-wrap:wrap;}
+    .hs-btn-p{background:rgba(255,255,255,.95);color:#1a2e44;border:none;padding:12px 26px;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;}
+    .hs-btn-p:hover{background:white;transform:translateY(-1px);}
+    .hs-btn-o{background:transparent;color:white;border:2px solid rgba(255,255,255,.6);padding:10px 26px;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;}
+    .hs-btn-o:hover{border-color:white;background:rgba(255,255,255,.12);}
+    .hs-slide[data-theme="light"] .hs-btn-p{background:#1a2e44;color:white;}
+    .hs-slide[data-theme="light"] .hs-btn-o{color:#1a2e44;border-color:rgba(26,46,68,.4);}
+    .hs-slide[data-theme="light"] .hs-tag{background:rgba(26,46,68,.12);color:#1a2e44;border-color:rgba(26,46,68,.2);}
+    /* 화살표 */
+    .hs-arrow{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;z-index:20;transition:background .15s;}
+    .hs-arrow:hover{background:rgba(255,255,255,.36);}
+    .hs-prev{left:20px;}
+    .hs-next{right:20px;}
+    /* 닷 */
+    .hs-dots{position:absolute;bottom:20px;right:40px;display:flex;gap:8px;z-index:20;}
+    .hs-dot{width:8px;height:8px;border-radius:4px;background:rgba(255,255,255,.35);border:none;cursor:pointer;padding:0;transition:all .3s ease;}
+    .hs-dot.active{width:28px;background:white;}
     /* 모바일 */
     @media(max-width:768px){
-      .hero-editorial .hero-inner{flex-direction:column;padding:32px 20px 36px;gap:20px;}
-      .he-visual{flex:none;width:100%;}
-      .he-book{height:130px;}
-      .he-b-main{height:145px;}
-      .he-title{font-size:21px;}
-      .he-desc{font-size:13px;margin-bottom:20px;}
-      .he-btns{flex-direction:column;gap:8px;}
-      .he-btn-primary,.he-btn-outline{width:100%;text-align:center;}
-      .he-wave,.he-circle{display:none;}
+      .hs-inner{flex-direction:column-reverse;padding:24px 16px 52px;gap:16px;min-height:auto;}
+      .hs-books,.hs-books-2{flex:none;width:100%;justify-content:center;padding:0;gap:0;}
+      .hs-bk{height:130px;}
+      .hs-bkm{height:148px;}
+      .hs-bk1{margin-right:-20px;}
+      .hs-bkm{margin-right:-16px;}
+      .hs-books-2 .hs-bkm{margin-right:8px;height:148px;}
+      .hs-books-2 .hs-bk3{transform:rotate(4deg) translateY(8px);}
+      .hs-title{font-size:22px;}
+      .hs-desc{font-size:13px;margin-bottom:18px;}
+      .hs-btns{flex-direction:column;gap:8px;}
+      .hs-btn-p,.hs-btn-o{width:100%;text-align:center;}
+      .hs-prev{left:6px;} .hs-next{right:6px;}
+      .hs-arrow{width:36px;height:36px;}
+      .hs-dots{right:16px;bottom:14px;}
     }
   </style>
 </head>
@@ -366,51 +332,106 @@
   </div>
 </nav>
 
-<!-- ===== HERO BANNER ===== -->
-<section class="hero hero-editorial">
-  <!-- 장식 요소 -->
-  <span class="he-star he-s1">✦</span>
-  <span class="he-star he-s2">✦</span>
-  <span class="he-star he-s3">✦</span>
-  <div class="he-wave"></div>
-  <div class="he-circle"></div>
+<!-- ===== HERO SLIDER ===== -->
+<section class="hs-wrapper" id="heroSlider" data-theme="light">
 
-  <div class="hero-inner">
-    <!-- 좌: 책 3권 -->
-    <div class="he-visual">
-      <div class="he-books">
-        <img src="images/ilove-reading-1.png" class="he-book he-b1"
-             onclick="location.href='book-detail.html?id=16'"
-             alt="I Love Reading Level 1">
-        <img src="images/ilove-reading-2.png" class="he-book he-b-main"
-             onclick="location.href='book-detail.html?id=17'"
-             alt="I Love Reading Level 2">
-        <img src="images/ilove-reading-3.png" class="he-book he-b3"
-             onclick="location.href='book-detail.html?id=18'"
-             alt="I Love Reading Level 3">
+  <button class="hs-arrow hs-prev" id="hsPrev" aria-label="이전">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="hs-arrow hs-next" id="hsNext" aria-label="다음">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <div class="hs-track" id="hsTrack">
+
+    <!-- Slide 1: I Love Reading -->
+    <div class="hs-slide" data-theme="light">
+      <div class="hs-inner">
+        <div class="hs-text">
+          <div class="hs-tags"><span class="hs-tag">2025개정</span><span class="hs-tag-acc">중학</span></div>
+          <h1 class="hs-title">최신 교육과정을 완벽 반영한<br><em>내신 대비 중학 독해 시리즈</em></h1>
+          <p class="hs-desc">최신 교육과정 완벽 반영, 최신 개정판!<br>중학 내신 대비 독해 시리즈</p>
+          <div class="hs-btns">
+            <button class="hs-btn-p" onclick="location.href='book-detail.html?id=16'">교재 자세히 보기</button>
+            <button class="hs-btn-o" onclick="location.href='resources.html?tab=curation'">내 맞춤 플랜 찾기</button>
+          </div>
+        </div>
+        <div class="hs-books">
+          <img src="images/ilove-reading-1.png" class="hs-bk hs-bk1" onclick="location.href='book-detail.html?id=16'" alt="I Love Reading 1">
+          <img src="images/ilove-reading-2.png" class="hs-bk hs-bkm" onclick="location.href='book-detail.html?id=17'" alt="I Love Reading 2">
+          <img src="images/ilove-reading-3.png" class="hs-bk hs-bk3" onclick="location.href='book-detail.html?id=18'" alt="I Love Reading 3">
+        </div>
       </div>
     </div>
 
-    <!-- 우: 텍스트 콘텐츠 -->
-    <div class="he-content">
-      <div class="he-tags">
-        <span class="he-tag">2025개정</span>
-        <span class="he-tag he-tag-accent">중학</span>
-      </div>
-      <h1 class="he-title">
-        최신 교육과정을 완벽 반영한<br>
-        <em>내신 대비 중학 독해 시리즈</em>
-      </h1>
-      <p class="he-desc">
-        최신 교육과정 완벽 반영, 최신 개정판!<br>
-        중학 내신 대비 독해 시리즈
-      </p>
-      <div class="he-btns">
-        <button class="he-btn-primary" onclick="location.href='book-detail.html?id=16'">교재 자세히 보기</button>
-        <button class="he-btn-outline" onclick="location.href='resources.html?tab=curation'">내 맞춤 플랜 찾기</button>
+    <!-- Slide 2: Booster Voca -->
+    <div class="hs-slide" data-theme="dark">
+      <div class="hs-inner">
+        <div class="hs-text">
+          <div class="hs-tags"><span class="hs-tag">중학</span><span class="hs-tag-acc purple">어휘</span></div>
+          <h1 class="hs-title">50일로 끝내는 중학 영단어 마스터<br><em>부스터 보카 시리즈</em></h1>
+          <p class="hs-desc">최신 교육과정 반영, 내신·수능 대비<br>중학 필수 영단어를 단계별로 완성하세요</p>
+          <div class="hs-btns">
+            <button class="hs-btn-p" onclick="location.href='book-detail.html?id=6'">교재 자세히 보기</button>
+            <button class="hs-btn-o" onclick="location.href='books.html?cat=middle&amp;type=참고서&amp;subject=영어'">중학 교재 전체보기</button>
+          </div>
+        </div>
+        <div class="hs-books">
+          <img src="images/booster-voca-basic.png" class="hs-bk hs-bk1" alt="Booster Voca 기본">
+          <img src="images/booster-voca-power.png" class="hs-bk hs-bkm" alt="Booster Voca 실력">
+          <img src="images/booster-voca-complete.png" class="hs-bk hs-bk3" alt="Booster Voca 완성">
+        </div>
       </div>
     </div>
+
+    <!-- Slide 3: Reading Booster -->
+    <div class="hs-slide" data-theme="dark">
+      <div class="hs-inner">
+        <div class="hs-text">
+          <div class="hs-tags"><span class="hs-tag">고등</span><span class="hs-tag-acc navy">수능</span></div>
+          <h1 class="hs-title">수능 영어 1등급 완성 프로젝트<br><em>Reading Booster 시리즈</em></h1>
+          <p class="hs-desc">수능 독해 유형별 전략 수록<br>모의고사 10+2회 &amp; 15회로 실전 감각 완성</p>
+          <div class="hs-btns">
+            <button class="hs-btn-p" onclick="location.href='book-detail.html?id=23'">교재 자세히 보기</button>
+            <button class="hs-btn-o" onclick="location.href='books.html?cat=high&amp;type=참고서&amp;subject=영어'">고등 교재 전체보기</button>
+          </div>
+        </div>
+        <div class="hs-books hs-books-2">
+          <img src="images/reading-booster-10plus2.png" class="hs-bk hs-bkm" onclick="location.href='book-detail.html?id=27'" alt="Reading Booster 10+2">
+          <img src="images/reading-booster-15.png" class="hs-bk hs-bk3" onclick="location.href='book-detail.html?id=23'" alt="Reading Booster 15회">
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Phonics NOW -->
+    <div class="hs-slide" data-theme="dark">
+      <div class="hs-inner">
+        <div class="hs-text">
+          <div class="hs-tags"><span class="hs-tag">초등</span><span class="hs-tag-acc orange">파닉스</span></div>
+          <h1 class="hs-title">파닉스의 기초부터 탄탄하게<br><em>Phonics NOW 시리즈</em></h1>
+          <p class="hs-desc">AR 기반 체험형 학습으로 파닉스를<br>재미있고 체계적으로 배우는 단계별 시리즈</p>
+          <div class="hs-btns">
+            <button class="hs-btn-p" onclick="location.href='book-detail.html?id=1'">교재 자세히 보기</button>
+            <button class="hs-btn-o" onclick="location.href='books.html?cat=elementary&amp;type=참고서&amp;subject=영어'">초등 교재 전체보기</button>
+          </div>
+        </div>
+        <div class="hs-books">
+          <img src="images/phonics-now-1.png" class="hs-bk hs-bk1" onclick="location.href='book-detail.html?id=1'" alt="Phonics NOW 1">
+          <img src="images/phonics-now-2.png" class="hs-bk hs-bkm" onclick="location.href='book-detail.html?id=2'" alt="Phonics NOW 2">
+          <img src="images/phonics-now-3.png" class="hs-bk hs-bk3" onclick="location.href='book-detail.html?id=19'" alt="Phonics NOW 3">
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hs-track -->
+
+  <div class="hs-dots" id="hsDots">
+    <button class="hs-dot active" data-idx="0"></button>
+    <button class="hs-dot" data-idx="1"></button>
+    <button class="hs-dot" data-idx="2"></button>
+    <button class="hs-dot" data-idx="3"></button>
   </div>
+
 </section>
 
 <!-- ===== 베스트 교재 ===== -->
@@ -811,37 +832,49 @@ function doSearch(){
 }
 document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
 
-// 슬라이드
-const slides = [
-  { badge:'EXCLUSIVE', title:'최신 교육과정을 완벽 반영한\n<span>내신 대비 중학 독해 시리즈</span>', desc:'최신 교육과정 완벽 반영, 최신 개정판!\n중학 내신 대비 독해 시리즈', btn1:'교재 자세히 보기', btn2:'내 맞춤 플랜 찾기', colors:['#2e7d32','#6a1b9a','#1565c0'] },
-];
-let current = 0;
-let paused = false;
-let timer;
+// ─── Hero Slider ───
+(function(){
+  const BG = [
+    'linear-gradient(135deg,#8fcde6 0%,#b8dff7 55%,#ddf0ff 100%)',   // I Love Reading
+    'linear-gradient(135deg,#5b3085 0%,#8b5ebe 55%,#b48fe0 100%)',   // Booster Voca
+    'linear-gradient(135deg,#0a1628 0%,#1a3555 55%,#2a4f7a 100%)',   // Reading Booster
+    'linear-gradient(135deg,#c85e2a 0%,#e8803c 55%,#f5b842 100%)',   // Phonics NOW
+  ];
+  let cur = 0, tmr;
+  const track = document.getElementById('hsTrack');
+  const wrap  = document.getElementById('heroSlider');
+  const dots  = document.querySelectorAll('.hs-dot');
+  const slides = document.querySelectorAll('.hs-slide');
+  const N = BG.length;
 
-function renderSlide(idx){
-  const s = slides[idx];
-  document.querySelector('.hero-exclusive').textContent = s.badge;
-  document.querySelector('.hero-title').innerHTML = s.title.replace(/\n/g,'<br>');
-  document.querySelector('.hero-desc').innerHTML = s.desc.replace(/\n/g,'<br>');
-  document.querySelector('.hero-btn-primary').textContent = s.btn1;
-  document.querySelector('.hero-btn-outline').textContent = s.btn2;
-  // 이미지 카드는 배경색 변경 불필요
-  document.getElementById('slideCounter').textContent = `${idx+1} / ${slides.length}`;
-}
+  function goTo(idx) {
+    cur = ((idx % N) + N) % N;
+    if (track) track.style.transform = `translateX(-${cur * 100}%)`;
+    dots.forEach((d,i) => d.classList.toggle('active', i === cur));
+    document.body.style.background = BG[cur];
+    if (wrap) {
+      const theme = slides[cur]?.dataset.theme || 'dark';
+      wrap.dataset.theme = theme;
+      document.body.setAttribute('data-hero-theme', theme);
+    }
+    clearInterval(tmr);
+    tmr = setInterval(() => goTo(cur + 1), 5000);
+  }
 
-function nextSlide(){current=(current+1)%slides.length;renderSlide(current);}
-function prevSlide(){current=(current-1+slides.length)%slides.length;renderSlide(current);}
-function togglePause(){
-  paused=!paused;
-  document.getElementById('pauseBtn').textContent = paused?'▶':'⏸';
-  if(!paused) startTimer(); else clearInterval(timer);
-}
-function startTimer(){
-  clearInterval(timer);
-  if(!paused) timer=setInterval(nextSlide,4000);
-}
-startTimer();
+  document.getElementById('hsPrev')?.addEventListener('click', () => goTo(cur - 1));
+  document.getElementById('hsNext')?.addEventListener('click', () => goTo(cur + 1));
+  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
+
+  // 터치 스와이프
+  let tx = 0;
+  wrap?.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  wrap?.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) goTo(cur + (dx < 0 ? 1 : -1));
+  }, {passive:true});
+
+  goTo(0); // 초기화
+})();
 </script>
 
 <!-- ===== 데일리 외국어 모달 ===== -->
