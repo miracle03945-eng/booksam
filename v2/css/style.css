@@ -863,7 +863,7 @@ img{max-width:100%;display:block;}
 
   /* 검색 드롭다운 오버레이 */
   .gnb-search-overlay{
-    position:fixed;top:72px;left:0;right:0;
+    position:fixed;top:96px;left:0;right:0;
     background:white;
     border-bottom:2px solid var(--red);
     padding:18px 40px;
@@ -959,18 +959,34 @@ img{max-width:100%;display:block;}
   body.hero-page .gnb-bar.gnb-scrolled .gnb-search-btn{color:#666;}
   body.hero-page .gnb-bar.gnb-scrolled .gnb-toeic-btn{border-color:var(--red);color:var(--red);}
 
-  /* GNB — 단일 통합 헤더 */
-  .gnb-bar{box-shadow:0 1px 4px rgba(0,0,0,.07);}
+  /* GNB — 2행 헤더 (로고+유틸 위 / 네비 아래) */
+  .gnb-bar{box-shadow:0 2px 8px rgba(0,0,0,.08);}
   .gnb-inner{
     max-width:1280px;margin:0 auto;
-    height:72px;
+    height:auto;
     padding:0 var(--sp-10);
     overflow-x:visible;
     align-items:center;
+    flex-wrap:wrap;        /* 2행 레이아웃 활성화 */
   }
-  .gnb-all{font-size:13px;font-weight:700;padding:0 10px 0 0;margin-right:8px;gap:6px;}
+
+  /* ── 행 1: 로고(좌) + 유틸(우) ── */
+  .gnb-logo-link{ order:1; flex-shrink:0; padding:12px 0; }
+  .gnb-util-right{ order:1; margin-left:auto; flex-shrink:0; padding:12px 0; }
+  /* 행 구분선 — ::after가 100% 너비를 차지해 행 강제 분리 */
+  .gnb-inner::after{
+    content:'';flex-basis:100%;order:1;
+    height:1px;
+    background:rgba(0,0,0,.07);
+  }
+  body.hero-page .gnb-inner::after{background:rgba(255,255,255,.15);}
+  body.hero-page[data-hero-theme="light"] .gnb-inner::after{background:rgba(26,46,68,.1);}
+
+  /* ── 행 2: 전체카테고리 + 네비 ── */
+  .gnb-all{ order:2; font-size:13px;font-weight:700;padding:0 10px 0 0;margin-right:6px;gap:6px; }
   .hamburger{font-size:18px;}
-  .gnb-link{padding:0 18px;height:72px;font-size:15px;letter-spacing:-.2px;}
+  .gnb-nav{ order:2; flex:1; }
+  .gnb-link{ padding:0 16px; height:46px; font-size:15px; letter-spacing:-.2px; }
 
   /* GNB 이벤트 옆 외부 링크 버튼 (override) */
   .gnb-toeic-btn{
