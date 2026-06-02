@@ -663,6 +663,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // ── 모바일 필터 사이드바 토글 ──
+  const filterSidebar = document.querySelector('.filter-sidebar');
+  if (filterSidebar) {
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'filter-mobile-toggle';
+    toggleBtn.innerHTML = '⚙ 필터 보기 <span>▼</span>';
+    filterSidebar.parentNode.insertBefore(toggleBtn, filterSidebar);
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = filterSidebar.classList.toggle('mobile-open');
+      toggleBtn.innerHTML = isOpen
+        ? '⚙ 필터 접기 <span>▲</span>'
+        : '⚙ 필터 보기 <span>▼</span>';
+    });
+  }
+
   // GNB 현재 페이지 활성화
   const page = location.pathname.split('/').pop() || 'index.html';
   const cat = getParam('cat') || '';

@@ -107,6 +107,23 @@
     }
     .ev-join-btn:hover{background:#0d1b2e;}
 
+    /* 모바일 */
+    @media(max-width:768px){
+      .ev-card{flex-direction:column;}
+      .ev-card-thumb{flex:0 0 160px;min-height:160px;}
+      .ev-card-body{padding:18px 20px;}
+      .ev-card-title{font-size:15px;}
+      .ev-how-grid{grid-template-columns:1fr;}
+      .spring-banner-title{font-size:26px;}
+      .spring-banner{padding:32px 20px;min-height:220px;}
+      .ev-join-btn{padding:16px 32px;font-size:15px;width:100%;border-radius:12px;}
+    }
+    @media(max-width:480px){
+      .ev-card-thumb{flex:0 0 130px;min-height:130px;}
+      .spring-banner-title{font-size:22px;}
+      .ev-info-row{grid-template-columns:90px 1fr;}
+    }
+
     /* 유의사항 */
     .ev-caution{margin-bottom:40px;}
     .ev-caution-title{font-size:18px;font-weight:900;margin-bottom:16px;color:var(--navy);}

@@ -71,6 +71,18 @@
       display:flex;align-items:center;gap:4px;
       opacity:.8;
     }
+
+    /* 모바일 */
+    @media(max-width:768px){
+      .event-banner{grid-template-columns:1fr;height:auto;}
+      .event-half{padding:24px 20px;}
+      .event-title{font-size:16px;}
+      .new-rank-grid{grid-template-columns:1fr !important;}
+    }
+    @media(max-width:480px){
+      .rank-item{gap:10px;}
+      .rank-thumb{width:36px;height:48px;}
+    }
   </style>
 </head>
 <body>
@@ -580,7 +592,7 @@
 <!-- ===== 베스트 + 신간 좌우 분할 ===== -->
 <section class="section">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start;">
+    <div class="new-rank-grid" style="display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start;">
 
       <!-- 신간 목록 -->
       <div>
