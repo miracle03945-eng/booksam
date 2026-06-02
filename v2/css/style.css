@@ -67,6 +67,7 @@ img{max-width:100%;display:block;}
 
 /* 신규 GNB 요소: 모바일 기본 숨김 */
 .gnb-logo-link{display:none;}
+.gnb-logo-shortcut{display:none;}
 .gnb-util-right{display:none;}
 .gnb-toeic-btn{display:none;}
 .topbar-brand-link{display:none;}
@@ -832,6 +833,42 @@ img{max-width:100%;display:block;}
   }
   .gnb-brand-ext span{font-size:11px;font-weight:400;}
   .gnb-brand-ext:hover{opacity:.75;}
+
+  /* ── 로고 옆 Y튜터 바로가기 ── */
+  .gnb-logo-shortcut{
+    order:1;                        /* 로고(order:1)와 같은 행 */
+    display:flex;align-items:center;gap:3px;
+    margin-left:var(--sp-2);
+    align-self:center;
+    font-size:11px;font-weight:700;
+    color:var(--red);
+    background:rgba(192,57,43,.09);
+    border:1px solid rgba(192,57,43,.28);
+    padding:4px 10px;
+    border-radius:20px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background .15s, color .15s, border-color .15s;
+    flex-shrink:0;
+  }
+  .gnb-logo-shortcut .sc-arrow{font-size:10px;font-weight:400;}
+  .gnb-logo-shortcut:hover{background:rgba(192,57,43,.18);}
+
+  /* hero-page dark 테마: 흰색 pill */
+  body.hero-page[data-hero-theme="dark"] .gnb-logo-shortcut{
+    color:white;
+    background:rgba(255,255,255,.18);
+    border-color:rgba(255,255,255,.4);
+  }
+  body.hero-page[data-hero-theme="dark"] .gnb-logo-shortcut:hover{
+    background:rgba(255,255,255,.3);
+  }
+  /* gnb-scrolled: 다시 레드 */
+  body.hero-page .gnb-bar.gnb-scrolled .gnb-logo-shortcut{
+    color:var(--red) !important;
+    background:rgba(192,57,43,.09) !important;
+    border-color:rgba(192,57,43,.28) !important;
+  }
   .gnb-util-link{
     font-size:12px;color:#666;
     padding:0 8px;line-height:1;
