@@ -309,7 +309,7 @@ function renderBookCard(book) {
         </div>
       </div>
       <div class="book-actions">
-        <button class="btn-cart" onclick="event.stopPropagation(); ${book.id === 28 ? `addToCart(${book.id})` : `goKyobo(${book.id})`}">🛒 구매하기</button>
+        <button class="btn-cart" onclick="event.stopPropagation(); ${book.id === 28 ? `buyNow(${book.id})` : `goKyobo(${book.id})`}">🛒 구매하기</button>
         <button class="btn-wish ${isWished ? 'active' : ''}" onclick="event.stopPropagation(); toggleWish(this, ${book.id})">
           ${isWished ? '❤️' : '🤍'}
         </button>
