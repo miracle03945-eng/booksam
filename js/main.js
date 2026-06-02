@@ -210,6 +210,7 @@ const BOOKS = [
   { id: 6,  cat: 'middle', type: '참고서', subject: '영어', area: '어휘', title: 'Booster Voca 기본',
     author: 'YBM 편집부',  price: 13000, originalPrice: 15000, badge: 'best',
     img: 'images/booster-voca-basic.png', publisher: 'YBM', date: '2024.01.01',
+    kyoboUrl: 'https://product.kyobobook.co.kr/detail/S000218135543',
     desc: '50일로 끝내는 중등 필수 영단어 1000! 최신 교육과정 반영, 내신·수능 대비 필수 어휘 완성.' },
   { id: 7,  cat: 'middle', type: '참고서', subject: '영어', area: '어휘', title: 'Booster Voca 실력',
     author: 'YBM 편집부',  price: 13000, originalPrice: 15000, badge: '',
@@ -222,6 +223,7 @@ const BOOKS = [
   { id: 16, cat: 'middle', type: '참고서', subject: '영어', area: '독해', title: 'I Love Reading Level 1 (2025)',
     author: '북샘 편집부', price: 13500, originalPrice: 15000, badge: 'best',
     img: 'images/ilove-reading-1.png', publisher: '북샘 교육출판', date: '2025.02.01',
+    kyoboUrl: 'https://product.kyobobook.co.kr/detail/S000218082162',
     desc: '2025 개정 교육과정을 완벽 반영한 중학 영어 독해 시리즈.', tags: ['베스트셀러', '중학독해', 'MP3'] },
   { id: 17, cat: 'middle', type: '참고서', subject: '영어', area: '독해', title: 'I Love Reading Level 2 (2025)',
     author: '북샘 편집부', price: 13500, originalPrice: 15000, badge: 'new',
@@ -245,6 +247,7 @@ const BOOKS = [
     title: 'Reading Booster 영어독해 모의고사 15회 (3rd Edition)',
     author: 'YBM 편집부', price: 14000, originalPrice: 16000, badge: 'best',
     img: 'images/reading-booster-15.png', publisher: 'YBM', date: '2025.01.10',
+    kyoboUrl: 'https://product.kyobobook.co.kr/detail/S000218082161',
     desc: '수능 영어 1등급 완성 프로젝트. 고난도 유형 집중 공략 수록, 실전 모의고사 15회 완성.',
     tags: ['베스트셀러', '수능', 'MP3'] },
 
@@ -273,6 +276,7 @@ const BOOKS = [
     title: 'Reading Booster 영어독해 모의고사 10+2회 기본 (2nd Edition)',
     author: 'YBM 편집부', price: 13000, originalPrice: 15000, badge: 'new',
     img: 'images/reading-booster-10plus2.png', publisher: 'YBM', date: '2025.08.01',
+    kyoboUrl: 'https://product.kyobobook.co.kr/detail/S000218082165',
     desc: '수능 독해유형별 전략 수록. 기본 모의고사 10회 + 심화 2회로 실전 감각 완성.',
     tags: ['신규', '수능', 'MP3'] },
 ];
@@ -304,7 +308,7 @@ function renderBookCard(book) {
         </div>
       </div>
       <div class="book-actions">
-        <button class="btn-cart" onclick="event.stopPropagation(); ${book.id === 28 ? `addToCart(${book.id})` : `goKyobo(${book.id})`}">🛒 담기</button>
+        <button class="btn-cart" onclick="event.stopPropagation(); ${book.id === 28 ? `addToCart(${book.id})` : `goKyobo(${book.id})`}">🛒 구매하기</button>
         <button class="btn-wish ${isWished ? 'active' : ''}" onclick="event.stopPropagation(); toggleWish(this, ${book.id})">
           ${isWished ? '❤️' : '🤍'}
         </button>
