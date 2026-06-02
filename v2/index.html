@@ -84,108 +84,82 @@
       .rank-thumb{width:36px;height:48px;}
     }
 
-    /* ─── Bento Hero ─── */
-    .bento-hero{max-width:1280px;margin:0 auto;padding:56px 40px 48px;}
-    .bento-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      grid-template-areas:
-        "feature feature new   mp3"
-        "feature feature level plan"
-        "stat    stat    stat  stat";
-      gap:14px;
+    /* ─── 3D 커버플로우 히어로 ─── */
+    .cf-hero{max-width:1180px;margin:0 auto;padding:48px 40px 46px;}
+    /* 3D 무대 */
+    .cf-stage{
+      position:relative;height:300px;
+      perspective:1500px;
+      display:flex;align-items:center;justify-content:center;
+      margin-bottom:26px;
     }
-    /* 공통 카드 */
-    .bento-card{
-      background:rgba(255,255,255,.7);
-      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-      border:1px solid rgba(255,255,255,.7);
-      border-radius:22px;
-      box-shadow:0 10px 30px rgba(30,60,110,.13);
-      position:relative;overflow:hidden;
-      text-decoration:none;color:#1a2e44;
-      transition:transform .25s ease, box-shadow .25s ease;
+    .cf-book{
+      position:absolute;top:50%;left:50%;
+      width:204px;height:272px;
+      margin:-136px 0 0 -102px;       /* 중앙 정렬 */
+      border-radius:7px;overflow:hidden;
+      box-shadow:0 22px 50px rgba(0,40,90,.32);
+      cursor:pointer;
+      transition:transform .6s cubic-bezier(.25,.8,.3,1),opacity .6s ease,filter .6s ease;
+      will-change:transform;
     }
-    a.bento-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(30,60,110,.22);}
-
-    /* 피처 카드 (회전) */
-    .bento-feature{
-      grid-area:feature;
-      background:rgba(255,255,255,.82);
-      display:flex;align-items:center;gap:20px;
-      padding:32px 36px;min-height:308px;
+    .cf-book img{width:100%;height:100%;object-fit:cover;display:block;}
+    /* 가운데 책 살짝 떠오르는 글로우 */
+    .cf-book.is-center{box-shadow:0 30px 70px rgba(0,40,90,.42);}
+    /* 화살표 */
+    .cf-arrow{
+      position:absolute;top:50%;transform:translateY(-50%);
+      width:48px;height:48px;border-radius:50%;
+      background:rgba(255,255,255,.85);
+      border:none;box-shadow:0 6px 18px rgba(0,40,90,.2);
+      color:var(--navy);font-size:24px;line-height:1;
+      cursor:pointer;z-index:30;
+      display:flex;align-items:center;justify-content:center;
+      transition:background .15s,transform .15s;
     }
-    .bf-text{flex:1;min-width:0;}
-    .bf-eyebrow{font-size:12px;font-weight:800;letter-spacing:2.5px;color:var(--red);margin-bottom:13px;}
-    .bf-tags{display:flex;gap:6px;margin-bottom:13px;}
-    .bf-tag{font-size:12px;font-weight:700;padding:4px 13px;border-radius:20px;background:rgba(26,46,68,.08);color:#1a2e44;}
-    .bf-tag.acc{background:var(--navy);color:#fff;}
-    .bf-title{font-size:27px;font-weight:900;line-height:1.32;color:#1a2e44;letter-spacing:-.6px;margin-bottom:7px;}
-    .bf-sub{font-size:15px;font-weight:800;color:var(--red);margin-bottom:12px;}
-    .bf-desc{font-size:14px;color:#5a6b7e;line-height:1.7;margin-bottom:20px;}
-    .bf-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:800;color:#1a2e44;cursor:pointer;transition:gap .2s;}
-    .bf-link:hover{gap:11px;}
-    .bf-dots{display:flex;gap:7px;margin-top:22px;}
-    .bf-dot{width:8px;height:8px;border-radius:4px;background:rgba(26,46,68,.22);border:none;cursor:pointer;padding:0;transition:all .3s ease;}
-    .bf-dot.active{width:26px;background:var(--navy);}
-    /* 표지 */
-    .bf-covers{flex:0 0 210px;display:flex;align-items:flex-end;justify-content:center;height:250px;cursor:pointer;}
-    .bf-cv{height:198px;width:auto;border-radius:5px;box-shadow:0 12px 30px rgba(0,40,90,.26);position:relative;}
-    .bf-cv1{transform:rotate(-6deg) translateY(8px);margin-right:-30px;z-index:1;filter:brightness(.94);}
-    .bf-cvm{height:228px;z-index:3;}
-    .bf-cv3{transform:rotate(6deg) translateY(8px);margin-left:-30px;z-index:1;filter:brightness(.94);}
-    /* 전환 페이드 */
-    .bento-feature.bf-anim .bf-text,.bento-feature.bf-anim .bf-covers{animation:bfFade .55s ease;}
-    @keyframes bfFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-
-    /* 작은 유틸 카드 */
-    .bento-sm{padding:20px 22px;display:flex;flex-direction:column;justify-content:space-between;min-height:147px;}
-    .bento-new{grid-area:new;}
-    .bento-mp3{grid-area:mp3;}
-    .bento-level{grid-area:level;}
-    .bento-plan{grid-area:plan;background:var(--navy);border-color:var(--navy);color:#fff;}
-    a.bento-plan:hover{box-shadow:0 16px 40px rgba(13,27,42,.4);}
-    /* 아이콘 타일 (카드별 색상 차별화) */
-    .bs-icon{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;font-size:23px;line-height:1;}
-    .bento-new  .bs-icon{background:rgba(192,57,43,.12);}
-    .bento-mp3  .bs-icon{background:rgba(46,125,50,.13);}
-    .bento-level .bs-icon{background:rgba(21,101,192,.13);}
-    .bento-plan .bs-icon{background:rgba(255,255,255,.16);}
-    .bs-badge{position:absolute;top:15px;right:15px;background:var(--red);color:#fff;font-size:9px;font-weight:800;padding:2px 8px;border-radius:10px;letter-spacing:.5px;}
-    .bs-label{font-size:15px;font-weight:800;line-height:1.35;}
-    .bs-sub{font-size:12px;color:#5a6b7e;margin-top:3px;}
-    .bento-plan .bs-sub{color:rgba(255,255,255,.72);}
-    .bs-arrow{font-size:13px;font-weight:800;margin-top:8px;}
-
-    /* 통계 스트립 */
-    .bento-stat{
-      grid-area:stat;display:flex;flex-direction:row;align-items:center;gap:10px;
-      padding:16px 26px;font-size:14px;font-weight:600;color:#1a2e44;
+    .cf-arrow:hover{background:#fff;transform:translateY(-50%) scale(1.08);}
+    .cf-prev{left:0;}
+    .cf-next{right:0;}
+    /* 텍스트 정보 */
+    .cf-info{text-align:center;position:relative;}
+    .cf-tag{
+      display:inline-block;font-size:12px;font-weight:700;letter-spacing:1px;
+      color:#1a2e44;background:rgba(255,255,255,.7);
+      padding:5px 15px;border-radius:20px;margin-bottom:14px;
+      backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
     }
-    .bento-stat .bs-icon{width:auto;height:auto;background:none;font-size:20px;border-radius:0;}
-    .bento-stat b{color:var(--red);font-weight:800;}
+    .cf-title{
+      font-size:31px;font-weight:900;color:#fff;line-height:1.3;
+      letter-spacing:-.6px;margin-bottom:6px;
+      text-shadow:0 2px 16px rgba(0,0,0,.22),0 1px 4px rgba(0,0,0,.12);
+    }
+    .cf-sub{font-size:15px;font-weight:800;color:#fff;opacity:.92;margin-bottom:20px;text-shadow:0 1px 8px rgba(0,0,0,.2);}
+    .cf-cta{
+      background:#1a2e44;color:#fff;border:none;
+      padding:13px 30px;border-radius:7px;
+      font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;
+      box-shadow:0 8px 22px rgba(13,27,42,.28);
+      transition:transform .15s,background .15s;
+    }
+    .cf-cta:hover{background:#0d1b2a;transform:translateY(-2px);}
+    /* 전환 시 텍스트 페이드 */
+    .cf-info.cf-anim .cf-tag,.cf-info.cf-anim .cf-title,.cf-info.cf-anim .cf-sub{animation:cfFade .55s ease;}
+    @keyframes cfFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    /* 닷 */
+    .cf-dots{display:flex;gap:8px;justify-content:center;margin-top:22px;}
+    .cf-dot{width:9px;height:9px;border-radius:5px;background:rgba(255,255,255,.5);border:none;cursor:pointer;padding:0;transition:all .3s ease;}
+    .cf-dot.active{width:28px;background:#fff;}
 
     /* 모바일 */
     @media(max-width:768px){
-      .bento-hero{padding:18px 16px 32px;}
-      .bento-grid{
-        grid-template-columns:1fr 1fr;
-        grid-template-areas:
-          "feature feature"
-          "new     mp3"
-          "level   plan"
-          "stat    stat";
-        gap:10px;
-      }
-      .bento-feature{flex-direction:column;text-align:center;padding:24px 20px;min-height:auto;gap:14px;}
-      .bf-text{order:2;}
-      .bf-covers{order:1;flex:none;height:auto;}
-      .bf-cv{height:120px;}
-      .bf-cvm{height:138px;}
-      .bf-tags,.bf-dots{justify-content:center;}
-      .bf-title{font-size:21px;}
-      .bento-sm{min-height:118px;padding:16px 18px;}
-      .bento-stat{justify-content:center;text-align:center;font-size:12.5px;padding:14px 18px;}
+      .cf-hero{padding:24px 16px 32px;}
+      .cf-stage{height:210px;margin-bottom:18px;}
+      .cf-book{width:138px;height:184px;margin:-92px 0 0 -69px;border-radius:5px;}
+      .cf-arrow{width:38px;height:38px;font-size:20px;}
+      .cf-prev{left:-4px;} .cf-next{right:-4px;}
+      .cf-title{font-size:21px;}
+      .cf-sub{font-size:13px;margin-bottom:16px;}
+      .cf-cta{padding:11px 24px;}
     }
   </style>
 </head>
@@ -363,73 +337,30 @@
   </div>
 </nav>
 
-<!-- ===== BENTO HERO ===== -->
-<section class="bento-hero">
-  <div class="bento-grid">
+<!-- ===== 3D 커버플로우 히어로 ===== -->
+<section class="cf-hero">
+  <div class="cf-stage" id="cfStage">
+    <button class="cf-arrow cf-prev" id="cfPrev" aria-label="이전">‹</button>
 
-    <!-- 피처 카드 (4개 시리즈 자동 순환) -->
-    <div class="bento-card bento-feature bf-anim" id="bentoFeature">
-      <div class="bf-text">
-        <div class="bf-eyebrow">FEATURED SERIES</div>
-        <div class="bf-tags" id="bfTags"></div>
-        <h2 class="bf-title" id="bfTitle"></h2>
-        <div class="bf-sub" id="bfSub"></div>
-        <p class="bf-desc" id="bfDesc"></p>
-        <span class="bf-link" id="bfLink">교재 자세히 보기 <span>→</span></span>
-        <div class="bf-dots" id="bfDots">
-          <button class="bf-dot active" data-i="0" aria-label="1번 시리즈"></button>
-          <button class="bf-dot" data-i="1" aria-label="2번 시리즈"></button>
-          <button class="bf-dot" data-i="2" aria-label="3번 시리즈"></button>
-          <button class="bf-dot" data-i="3" aria-label="4번 시리즈"></button>
-        </div>
-      </div>
-      <div class="bf-covers" id="bfCovers"></div>
+    <img class="cf-book" data-i="0" src="images/ilove-reading-1.png" alt="I Love Reading">
+    <img class="cf-book" data-i="1" src="images/booster-voca-basic.png" alt="부스터 보카">
+    <img class="cf-book" data-i="2" src="images/reading-booster-15.png" alt="Reading Booster">
+    <img class="cf-book" data-i="3" src="images/phonics-now-1.png" alt="Phonics NOW">
+
+    <button class="cf-arrow cf-next" id="cfNext" aria-label="다음">›</button>
+  </div>
+
+  <div class="cf-info cf-anim" id="cfInfo">
+    <div class="cf-tag" id="cfTag"></div>
+    <h2 class="cf-title" id="cfTitle"></h2>
+    <div class="cf-sub" id="cfSub"></div>
+    <button class="cf-cta" id="cfCta">교재 자세히 보기 →</button>
+    <div class="cf-dots" id="cfDots">
+      <button class="cf-dot active" data-i="0" aria-label="1"></button>
+      <button class="cf-dot" data-i="1" aria-label="2"></button>
+      <button class="cf-dot" data-i="2" aria-label="3"></button>
+      <button class="cf-dot" data-i="3" aria-label="4"></button>
     </div>
-
-    <!-- 신간 -->
-    <a class="bento-card bento-sm bento-new" href="books.html?sort=new">
-      <span class="bs-badge">NEW</span>
-      <span class="bs-icon">📚</span>
-      <div>
-        <div class="bs-label">신간 교재</div>
-        <div class="bs-sub">방금 나온 최신 교재</div>
-      </div>
-    </a>
-
-    <!-- MP3 음원 -->
-    <a class="bento-card bento-sm bento-mp3" href="resources.html?tab=materials">
-      <span class="bs-icon">🎧</span>
-      <div>
-        <div class="bs-label">MP3 음원</div>
-        <div class="bs-sub">전 교재 무료 다운로드</div>
-      </div>
-    </a>
-
-    <!-- 레벨 진단 -->
-    <a class="bento-card bento-sm bento-level" href="resources.html?tab=curation">
-      <span class="bs-icon">🎯</span>
-      <div>
-        <div class="bs-label">레벨 진단</div>
-        <div class="bs-sub">내 수준 맞춤 추천</div>
-      </div>
-    </a>
-
-    <!-- 맞춤 플랜 (강조 CTA) -->
-    <a class="bento-card bento-sm bento-plan" href="resources.html?tab=curation">
-      <span class="bs-icon">🗺️</span>
-      <div>
-        <div class="bs-label">맞춤 플랜 찾기</div>
-        <div class="bs-sub">단계별 학습 로드맵</div>
-      </div>
-      <div class="bs-arrow">바로가기 →</div>
-    </a>
-
-    <!-- 통계 스트립 -->
-    <div class="bento-card bento-stat">
-      <span class="bs-icon">📈</span>
-      <span>이번 달 <b>12,847명</b>이 YBM북스와 함께 영어 공부를 시작했어요</span>
-    </div>
-
   </div>
 </section>
 
@@ -831,7 +762,7 @@ function doSearch(){
 }
 document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
 
-// ─── Bento Hero: 피처 카드 자동 순환 ───
+// ─── 3D 커버플로우 히어로 ───
 (function(){
   // 슬라이드별 배경(투명 GNB가 비치는 body 배경) — 파스텔 멀티컬러
   const BG = [
@@ -840,63 +771,78 @@ document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==
     'linear-gradient(135deg, #f8e08a 0%, #f8b890 28%, #f098b8 58%, #c898e0 100%)', // Reading Booster
     'linear-gradient(135deg, #90e8c8 0%, #78b8f0 30%, #b098e8 62%, #e898c8 100%)', // Phonics NOW
   ];
-  // 피처 카드에 표시할 시리즈 데이터
-  const FEAT = [
-    { tags:[{t:'2025개정'},{t:'중학',acc:1}], title:'내신 대비 중학 독해 시리즈', sub:'I Love Reading',
-      desc:'최신 교육과정 완벽 반영 · 최신 개정판', href:'book-detail.html?id=16',
-      covers:['ilove-reading-1.png','ilove-reading-2.png','ilove-reading-3.png'] },
-    { tags:[{t:'중학'},{t:'어휘',acc:1}], title:'50일 완성 중학 영단어', sub:'부스터 보카 시리즈',
-      desc:'내신·수능 대비 필수 어휘 단계별 학습', href:'book-detail.html?id=6',
-      covers:['booster-voca-basic.png','booster-voca-power.png','booster-voca-complete.png'] },
-    { tags:[{t:'고등'},{t:'수능',acc:1}], title:'수능 1등급 영어 독해', sub:'Reading Booster 시리즈',
-      desc:'유형별 전략 + 실전 모의고사로 완성', href:'book-detail.html?id=23',
-      covers:['reading-booster-10plus2.png','reading-booster-15.png'] },
-    { tags:[{t:'초등'},{t:'파닉스',acc:1}], title:'파닉스 기초부터 탄탄하게', sub:'Phonics NOW 시리즈',
-      desc:'AR 체험형 학습으로 재미있게', href:'book-detail.html?id=1',
-      covers:['phonics-now-1.png','phonics-now-2.png','phonics-now-3.png'] },
+  const CF = [
+    { tag:'2025개정 · 중학 독해', title:'내신 대비 중학 독해 시리즈', sub:'I Love Reading', href:'book-detail.html?id=16' },
+    { tag:'중학 · 어휘',          title:'50일 완성 중학 영단어',      sub:'부스터 보카',        href:'book-detail.html?id=6'  },
+    { tag:'고등 · 수능',          title:'수능 1등급 영어 독해',       sub:'Reading Booster',   href:'book-detail.html?id=23' },
+    { tag:'초등 · 파닉스',        title:'파닉스 기초부터 탄탄하게',    sub:'Phonics NOW',       href:'book-detail.html?id=1'  },
   ];
-  const N = FEAT.length;
+  const N = CF.length;
   let cur = 0, tmr;
 
-  const feat   = document.getElementById('bentoFeature');
-  const elTags = document.getElementById('bfTags');
-  const elTitle= document.getElementById('bfTitle');
-  const elSub  = document.getElementById('bfSub');
-  const elDesc = document.getElementById('bfDesc');
-  const elLink = document.getElementById('bfLink');
-  const elCov  = document.getElementById('bfCovers');
-  const dots   = document.querySelectorAll('.bf-dot');
-  if (!feat) return;
+  const stage = document.getElementById('cfStage');
+  const books = [...document.querySelectorAll('.cf-book')];
+  const info  = document.getElementById('cfInfo');
+  const elTag = document.getElementById('cfTag');
+  const elTit = document.getElementById('cfTitle');
+  const elSub = document.getElementById('cfSub');
+  const elCta = document.getElementById('cfCta');
+  const dots  = document.querySelectorAll('.cf-dot');
+  if (!stage) return;
 
-  function render(i){
-    const f = FEAT[i];
-    elTags.innerHTML = f.tags.map(t => `<span class="bf-tag${t.acc?' acc':''}">${t.t}</span>`).join('');
-    elTitle.textContent = f.title;
-    elSub.textContent   = f.sub;
-    elDesc.textContent  = f.desc;
-    elCov.innerHTML = f.covers.map((c,idx) => {
-      const cls = f.covers.length === 2
-        ? (idx === 0 ? 'bf-cvm' : 'bf-cv3')
-        : (idx === 0 ? 'bf-cv1' : idx === 1 ? 'bf-cvm' : 'bf-cv3');
-      return `<img src="images/${c}" class="bf-cv ${cls}" alt="">`;
-    }).join('');
-    elLink.onclick = () => location.href = f.href;
-    elCov.onclick  = () => location.href = f.href;
-    // 페이드 애니메이션 재트리거
-    feat.classList.remove('bf-anim'); void feat.offsetWidth; feat.classList.add('bf-anim');
+  // 상대 위치별 3D 변형 (가운데 / 오른쪽 / 왼쪽 / 뒤)
+  function place(book, rel){
+    let t, op, z, fil, center=false;
+    if (rel === 0){           // 가운데 — 크게, 정면
+      t='translateX(0) translateZ(0) rotateY(0) scale(1)'; op=1; z=5; fil='none'; center=true;
+    } else if (rel === 1){    // 오른쪽
+      t='translateX(180px) translateZ(-150px) rotateY(-42deg) scale(.82)'; op=.92; z=3; fil='brightness(.82)';
+    } else if (rel === N-1){  // 왼쪽
+      t='translateX(-180px) translateZ(-150px) rotateY(42deg) scale(.82)'; op=.92; z=3; fil='brightness(.82)';
+    } else {                  // 뒤(숨김)
+      t='translateX(0) translateZ(-320px) scale(.6)'; op=0; z=1; fil='brightness(.6)';
+    }
+    book.style.transform = t;
+    book.style.opacity   = op;
+    book.style.zIndex    = z;
+    book.style.filter    = fil;
+    book.classList.toggle('is-center', center);
   }
 
   function goTo(idx){
     cur = ((idx % N) + N) % N;
+    books.forEach((b,i) => place(b, ((i - cur) % N + N) % N));
+    const c = CF[cur];
+    elTag.textContent = c.tag;
+    elTit.textContent = c.title;
+    elSub.textContent = c.sub;
+    elCta.onclick = () => location.href = c.href;
+    dots.forEach((d,i) => d.classList.toggle('active', i === cur));
     document.body.style.background = BG[cur];
     document.body.setAttribute('data-hero-theme', 'dark');
-    dots.forEach((d,i) => d.classList.toggle('active', i === cur));
-    render(cur);
+    // 텍스트 페이드 재트리거
+    info.classList.remove('cf-anim'); void info.offsetWidth; info.classList.add('cf-anim');
     clearInterval(tmr);
     tmr = setInterval(() => goTo(cur + 1), 5000);
   }
 
+  // 책 클릭: 가운데면 상세로, 옆이면 그 위치로 회전
+  books.forEach((b,i) => b.addEventListener('click', () => {
+    if (i === cur) location.href = CF[cur].href;
+    else goTo(i);
+  }));
+  document.getElementById('cfPrev').addEventListener('click', () => goTo(cur - 1));
+  document.getElementById('cfNext').addEventListener('click', () => goTo(cur + 1));
   dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.i)));
+
+  // 터치 스와이프
+  let tx = 0;
+  stage.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  stage.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) goTo(cur + (dx < 0 ? 1 : -1));
+  }, {passive:true});
+
   goTo(0);
 })();
 </script>
