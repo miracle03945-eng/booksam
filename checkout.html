@@ -372,6 +372,14 @@
 
 <script src="js/main.js"></script>
 <script>
+// 바로구매 → 로그인 후 복귀: 예약된 교재를 장바구니에 추가
+const _pendingBuy = localStorage.getItem('pendingBuyId');
+if (_pendingBuy && localStorage.getItem('isLoggedIn') === 'true') {
+  localStorage.removeItem('pendingBuyId');
+  const pb = BOOKS.find(b => b.id === parseInt(_pendingBuy));
+  if (pb && !Cart.items.some(i => i.id === pb.id)) Cart.add(pb);
+}
+
 const items = Cart.items;
 if(items.length===0) location.href='cart.html';
 
