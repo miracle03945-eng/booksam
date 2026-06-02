@@ -179,6 +179,7 @@ const BOOKS = [
   { id: 1,  cat: 'elementary', type: '참고서', subject: '영어', area: '파닉스', title: 'Phonics NOW 1',
     author: 'YBM 편집부',  price: 14000, originalPrice: 16000, badge: 'best',
     img: 'images/phonics-now-1.png', publisher: 'YBM', date: '2024.03.01',
+    kyoboUrl: 'https://product.kyobobook.co.kr/detail/S000216467389',
     desc: '파닉스의 기초부터 탄탄하게! AR 기반 체험형 학습으로 파닉스를 즐겁게 배우는 시리즈입니다.' },
   { id: 2,  cat: 'elementary', type: '참고서', subject: '영어', area: '파닉스', title: 'Phonics NOW 2',
     author: 'YBM 편집부',  price: 14000, originalPrice: 16000, badge: '',
@@ -382,11 +383,13 @@ function addToCart(id) {
   if (book) Cart.add(book);
 }
 
-// 교보문고 구매 페이지(검색 결과)로 이동
+// 교보문고 구매 페이지로 이동 (kyoboUrl 지정 시 해당 상품 페이지, 아니면 검색 결과)
 function goKyobo(id) {
   const book = BOOKS.find(b => b.id === id);
   if (!book) return;
-  const url = 'https://search.kyobobook.co.kr/search?keyword=' + encodeURIComponent(book.title);
+  const url = book.kyoboUrl
+    ? book.kyoboUrl
+    : 'https://search.kyobobook.co.kr/search?keyword=' + encodeURIComponent(book.title);
   window.open(url, '_blank');
 }
 
