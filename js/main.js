@@ -346,7 +346,7 @@ function renderListCard(book) {
           <div class="book-list-actions">
             <button class="btn-list-wish ${isWished ? 'active' : ''}" onclick="event.stopPropagation(); toggleWish(this, ${book.id})">♡</button>
             <button class="btn-list-study" onclick="event.stopPropagation();location.href='book-detail.html?id=${book.id}'">학습자료</button>
-            <button class="btn-list-buy" onclick="event.stopPropagation(); addToCart(${book.id})">바로구매</button>
+            <button class="btn-list-buy" onclick="event.stopPropagation(); ${book.id === 28 ? `addToCart(${book.id})` : `goKyobo(${book.id})`}">바로구매</button>
           </div>
         </div>
       </div>
@@ -380,6 +380,14 @@ function addToCart(id) {
   }
   const book = BOOKS.find(b => b.id === id);
   if (book) Cart.add(book);
+}
+
+// 교보문고 구매 페이지(검색 결과)로 이동
+function goKyobo(id) {
+  const book = BOOKS.find(b => b.id === id);
+  if (!book) return;
+  const url = 'https://search.kyobobook.co.kr/search?keyword=' + encodeURIComponent(book.title);
+  window.open(url, '_blank');
 }
 
 // toggleWish는 Wishlist 블록 위에 정의됨

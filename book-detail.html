@@ -830,8 +830,8 @@ if (!book) {
           <button class="btn-detail-wish ${isWished?'active':''}" id="wishBtn"
             onclick="toggleWish(this,${book.id})">♡</button>
           <button class="btn-detail-buy"
-            onclick="addToCart(${book.id}); showToast('구매 페이지로 이동합니다.')">
-            종이책 구매 (교보문고) &nbsp;🛒
+            onclick="${book.id === 28 ? `addToCart(${book.id}); showToast('구매 페이지로 이동합니다.')` : `goKyobo(${book.id})`}">
+            ${book.id === 28 ? '종이책 구매 &nbsp;🛒' : '종이책 구매 (교보문고) &nbsp;🛒'}
           </button>
           <button class="btn-detail-cart"
             onclick="addToCart(${book.id}); showToast('장바구니에 담겼습니다.')">🛒</button>
