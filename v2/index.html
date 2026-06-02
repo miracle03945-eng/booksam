@@ -114,7 +114,12 @@
       position:relative;z-index:2;
     }
     /* 책 영역 */
-    .he-visual{flex:0 0 420px;display:flex;align-items:center;justify-content:center;}
+    .he-visual{
+      flex:0 0 400px;
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;          /* 회전 넘침 방지 */
+      padding:20px 0 20px 20px; /* 상하·좌 여백으로 잘림 최소화 */
+    }
     .he-books{display:flex;align-items:flex-end;gap:6px;}
     .he-book{
       height:230px;width:auto;border-radius:5px;
@@ -127,7 +132,7 @@
     .he-b3{transform:rotate(5deg) translateX(-14px);z-index:1;}
     .he-book:hover{filter:brightness(1.05);transform:translateY(-8px)!important;}
     /* 텍스트 */
-    .he-content{flex:1;}
+    .he-content{flex:1;min-width:0;padding-left:16px;}
     .he-tags{display:flex;gap:8px;margin-bottom:18px;}
     .he-tag{
       background:rgba(255,255,255,.9);color:#1565c0;
