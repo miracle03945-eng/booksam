@@ -900,7 +900,7 @@ img{max-width:100%;display:block;}
 
   /* hero-page: GNB 투명 + 배경 슬라이드별로 변경 */
   body.hero-page{
-    background:linear-gradient(135deg,#8fcde6 0%,#b8dff7 55%,#ddf0ff 100%);
+    background:linear-gradient(135deg, #f5be82 0%, #f09ab0 30%, #c898e8 65%, #98b8f8 100%);
     transition:background 0.7s ease;
   }
   body.hero-page .gnb-bar{

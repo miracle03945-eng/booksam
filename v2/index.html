@@ -114,13 +114,10 @@
     .hs-tag-acc.navy{color:#0d1b2a;}
     .hs-tag-acc.orange{color:#c85e2a;}
     /* 제목 */
-    .hs-title{font-size:36px;font-weight:900;color:white;line-height:1.3;margin-bottom:14px;letter-spacing:-.5px;text-shadow:0 2px 8px rgba(0,0,0,.12);}
-    .hs-title em{font-style:normal;color:rgba(255,255,255,.82);}
-    .hs-slide[data-theme="light"] .hs-title{color:#1a2e44;text-shadow:none;}
-    .hs-slide[data-theme="light"] .hs-title em{color:#1565c0;}
+    .hs-title{font-size:36px;font-weight:900;color:white;line-height:1.3;margin-bottom:14px;letter-spacing:-.5px;text-shadow:0 2px 16px rgba(0,0,0,.22),0 1px 4px rgba(0,0,0,.12);}
+    .hs-title em{font-style:normal;color:rgba(255,255,255,.88);}
     /* 설명 */
-    .hs-desc{font-size:15px;color:rgba(255,255,255,.82);line-height:1.75;margin-bottom:32px;text-shadow:0 1px 4px rgba(0,0,0,.08);}
-    .hs-slide[data-theme="light"] .hs-desc{color:rgba(26,46,68,.72);text-shadow:none;}
+    .hs-desc{font-size:15px;color:rgba(255,255,255,.9);line-height:1.75;margin-bottom:32px;text-shadow:0 1px 8px rgba(0,0,0,.18);}
     /* 버튼 */
     .hs-btns{display:flex;gap:12px;flex-wrap:wrap;}
     .hs-btn-p{background:rgba(255,255,255,.95);color:#1a2e44;border:none;padding:12px 26px;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;}
@@ -345,7 +342,7 @@
   <div class="hs-track" id="hsTrack">
 
     <!-- Slide 1: I Love Reading -->
-    <div class="hs-slide" data-theme="light">
+    <div class="hs-slide" data-theme="dark">
       <div class="hs-inner">
         <div class="hs-text">
           <div class="hs-tags"><span class="hs-tag">2025개정</span><span class="hs-tag-acc">중학</span></div>
@@ -835,10 +832,14 @@ document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==
 // ─── Hero Slider ───
 (function(){
   const BG = [
-    'linear-gradient(135deg,#8fcde6 0%,#b8dff7 55%,#ddf0ff 100%)',   // I Love Reading
-    'linear-gradient(135deg,#5b3085 0%,#8b5ebe 55%,#b48fe0 100%)',   // Booster Voca
-    'linear-gradient(135deg,#0a1628 0%,#1a3555 55%,#2a4f7a 100%)',   // Reading Booster
-    'linear-gradient(135deg,#c85e2a 0%,#e8803c 55%,#f5b842 100%)',   // Phonics NOW
+    // I Love Reading — 오렌지→핑크→라벤더 파스텔
+    'linear-gradient(135deg, #f5be82 0%, #f09ab0 30%, #c898e8 65%, #98b8f8 100%)',
+    // Booster Voca — 블루→민트→라일락 파스텔
+    'linear-gradient(135deg, #78c8f8 0%, #90e0d8 28%, #b0a8f0 58%, #d8a0e0 100%)',
+    // Reading Booster — 노랑→피치→로즈→라벤더 파스텔
+    'linear-gradient(135deg, #f8e08a 0%, #f8b890 28%, #f098b8 58%, #c898e0 100%)',
+    // Phonics NOW — 민트→스카이→퍼플→핑크 파스텔
+    'linear-gradient(135deg, #90e8c8 0%, #78b8f0 30%, #b098e8 62%, #e898c8 100%)',
   ];
   let cur = 0, tmr;
   const track = document.getElementById('hsTrack');
