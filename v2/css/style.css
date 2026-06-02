@@ -2041,10 +2041,18 @@ img{max-width:100%;display:block;}
   .sort-tabs::-webkit-scrollbar{display:none;}
   .sort-tab{flex-shrink:0;}
 
-  /* 도서 그리드 */
-  .book-grid{grid-template-columns:repeat(2,1fr);}
+  /* 도서 그리드 — !important로 인라인 style 속성 덮어씀 */
+  .book-grid{grid-template-columns:repeat(2,1fr) !important;}
   .book-grid-4{grid-template-columns:repeat(2,1fr);}
   .book-detail-grid{grid-template-columns:1fr;}
+
+  /* 가격 텍스트 줄바꿈 방지 */
+  .price-original,.price-sale,.price-rate{white-space:nowrap;}
+  .price-sale{font-size:13px;}
+  .book-info{padding:10px 10px 4px;}
+  .book-actions{padding:6px 10px 10px;gap:5px;}
+  .btn-cart{font-size:11px;padding:7px 4px;white-space:nowrap;}
+  .btn-wish{padding:7px 8px;font-size:13px;}
 
   /* 도서 목록형 카드 */
   .book-list-cover{flex:0 0 110px;width:110px;}
@@ -2129,9 +2137,10 @@ img{max-width:100%;display:block;}
   .page-hero-desc{font-size:12px;}
 
   /* 도서 카드 */
-  .book-info{padding:10px 10px 4px;}
-  .book-actions{padding:6px 10px 10px;}
-  .btn-cart{font-size:11px;}
+  .price-original{font-size:10px;}
+  .price-rate{font-size:10px;}
+  .book-title{font-size:12px;}
+  .book-author{font-size:11px;}
 
   /* 도서 목록형 카드 */
   .book-list-cover{flex:0 0 85px;width:85px;}
