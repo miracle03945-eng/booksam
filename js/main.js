@@ -288,7 +288,7 @@ function renderBookCard(book) {
     : `<div class="book-thumb-placeholder">${info.emoji}<small>${book.type}</small></div>`;
 
   return `
-    <div class="book-card" data-id="${book.id}" onclick="location.href='book-detail.html?id=${book.id}'">
+    <div class="book-card" data-id="${book.id}" onclick="${book.id === 28 ? `location.href='book-detail.html?id=${book.id}'` : `goKyobo(${book.id})`}">
       <div class="book-thumb">
         ${thumbContent}
         ${book.badge ? `<span class="book-badge ${book.badge}">${book.badge === 'best' ? 'BEST' : 'NEW'}</span>` : ''}
@@ -304,7 +304,7 @@ function renderBookCard(book) {
         </div>
       </div>
       <div class="book-actions">
-        <button class="btn-cart" onclick="event.stopPropagation(); addToCart(${book.id})">🛒 담기</button>
+        <button class="btn-cart" onclick="event.stopPropagation(); ${book.id === 28 ? `addToCart(${book.id})` : `goKyobo(${book.id})`}">🛒 담기</button>
         <button class="btn-wish ${isWished ? 'active' : ''}" onclick="event.stopPropagation(); toggleWish(this, ${book.id})">
           ${isWished ? '❤️' : '🤍'}
         </button>
