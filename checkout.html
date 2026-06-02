@@ -157,25 +157,25 @@
       <div style="background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
         <div style="background:var(--navy);color:white;padding:13px 20px;font-size:14px;font-weight:700;">🚚 배송지 정보</div>
         <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          ${[
-            {label:'받는 분',    type:'text',  val:'홍길동',        col:1},
-            {label:'휴대폰',     type:'tel',   val:'010-1234-5678', col:1},
-            {label:'주소',       type:'text',  val:'',              col:2, addr:true},
-          ].map(f=>f.addr?`
-            <div style="grid-column:1/-1;">
-              <label style="font-size:12px;font-weight:700;color:var(--text2);display:block;margin-bottom:6px;">${f.label}</label>
-              <div style="display:flex;gap:8px;margin-bottom:7px;">
-                <input type="text" placeholder="우편번호" style="width:130px;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;">
-                <button onclick="Toast.show('주소 검색','success')" style="background:var(--navy);color:white;border:none;padding:10px 16px;border-radius:var(--radius);font-size:12px;font-weight:700;cursor:pointer;">주소 검색</button>
-              </div>
-              <input type="text" placeholder="기본 주소" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;margin-bottom:7px;">
-              <input type="text" placeholder="상세 주소" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;">
-            </div>`:`
-            <div>
-              <label style="font-size:12px;font-weight:700;color:var(--text2);display:block;margin-bottom:6px;">${f.label}</label>
-              <input type="${f.type}" value="${f.val}" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;transition:border-color .2s;"
-                onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'">
-            </div>`).join('')}
+          <div>
+            <label style="font-size:12px;font-weight:700;color:var(--text2);display:block;margin-bottom:6px;">받는 분</label>
+            <input type="text" value="홍길동" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;transition:border-color .2s;"
+              onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'">
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:700;color:var(--text2);display:block;margin-bottom:6px;">휴대폰</label>
+            <input type="tel" value="010-1234-5678" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;transition:border-color .2s;"
+              onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'">
+          </div>
+          <div style="grid-column:1/-1;">
+            <label style="font-size:12px;font-weight:700;color:var(--text2);display:block;margin-bottom:6px;">주소</label>
+            <div style="display:flex;gap:8px;margin-bottom:7px;">
+              <input type="text" placeholder="우편번호" style="width:130px;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;">
+              <button onclick="Toast.show('주소 검색','success')" style="background:var(--navy);color:white;border:none;padding:10px 16px;border-radius:var(--radius);font-size:12px;font-weight:700;cursor:pointer;">주소 검색</button>
+            </div>
+            <input type="text" placeholder="기본 주소" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;margin-bottom:7px;">
+            <input type="text" placeholder="상세 주소" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;box-sizing:border-box;">
+          </div>
           <div style="grid-column:1/-1;">
             <label style="font-size:12px;font-weight:700;color:var(--text2);display:block;margin-bottom:6px;">배송 메모</label>
             <select style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none;cursor:pointer;">

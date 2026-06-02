@@ -352,7 +352,7 @@ function renderListCard(book) {
           <div class="book-list-actions">
             <button class="btn-list-wish ${isWished ? 'active' : ''}" onclick="event.stopPropagation(); toggleWish(this, ${book.id})">♡</button>
             <button class="btn-list-study" onclick="event.stopPropagation();location.href='book-detail.html?id=${book.id}'">학습자료</button>
-            <button class="btn-list-buy" onclick="event.stopPropagation(); ${book.id === 28 ? `addToCart(${book.id})` : `goKyobo(${book.id})`}">바로구매</button>
+            <button class="btn-list-buy" onclick="event.stopPropagation(); ${book.id === 28 ? `buyNow(${book.id})` : `goKyobo(${book.id})`}">바로구매</button>
           </div>
         </div>
       </div>
@@ -386,6 +386,16 @@ function addToCart(id) {
   }
   const book = BOOKS.find(b => b.id === id);
   if (book) Cart.add(book);
+}
+
+// 바로구매: 로그인 시 장바구니 담고 결제 화면으로 이동, 비로그인 시 로그인 알럿
+function buyNow(id) {
+  if (localStorage.getItem('isLoggedIn') !== 'true') { addToCart(id); return; }
+  const book = BOOKS.find(b => b.id === id);
+  if (book) {
+    Cart.add(book);
+    location.href = 'checkout.html';
+  }
 }
 
 // 교보문고 구매 페이지로 이동 (kyoboUrl 지정 시 해당 상품 페이지, 아니면 검색 결과)
