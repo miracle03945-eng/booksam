@@ -1045,13 +1045,75 @@ img{max-width:100%;display:block;}
   .gnb-toeic-btn span{font-size:11px;font-weight:400;}
   .gnb-toeic-btn:hover{background:var(--red);color:white;}
 
-  /* 데스크톱 드롭다운 */
-  .gnb-item:hover .gnb-dropdown{display:block;}
+  /* 데스크톱 드롭다운 — 가로 풀Width 바 */
+  .gnb-item{position:static;}  /* gnb-bar 기준으로 배치되도록 */
+
+  .gnb-item:hover .gnb-dropdown{display:flex;}
+
   .gnb-dropdown{
-    position:absolute;top:100%;left:50%;transform:translateX(-50%);
-    background:white;border:1px solid var(--border);border-radius:var(--radius-lg);
-    box-shadow:0 12px 32px rgba(0,0,0,.16);z-index:200;
-    min-width:210px;overflow:hidden;margin-top:6px;
+    /* 위치: gnb-bar 하단 꽉 참 */
+    position:absolute;
+    top:100%;left:0;right:0;
+    width:100%;
+    transform:none;
+    margin-top:0;
+
+    /* 가로 배치 */
+    display:none;
+    flex-direction:row;
+    align-items:stretch;
+
+    /* 스타일 */
+    background:white;
+    border:none;
+    border-top:2px solid var(--red);
+    border-bottom:1px solid #ebebeb;
+    border-radius:0;
+    box-shadow:0 6px 20px rgba(0,0,0,.09);
+    z-index:200;
+    min-width:0;
+    overflow:visible;
+  }
+
+  /* 카테고리 헤더(초등/중학 등) 숨김 */
+  .dropdown-cat{display:none !important;}
+
+  /* 드롭다운 본문: 가로 flex + max-width 맞춤 */
+  .gnb-dropdown .dropdown-body{
+    display:flex;
+    flex-direction:row;
+    align-items:stretch;
+    padding:0;
+    max-width:1280px;
+    margin:0 auto;
+    width:100%;
+    padding-left:40px;
+  }
+
+  /* 대분류 항목: 가로 탭 스타일 */
+  .gnb-dropdown .mega-group-title{
+    display:flex;
+    align-items:center;
+    height:52px;
+    padding:0 22px;
+    font-size:15px;
+    font-weight:600;
+    color:#444;
+    white-space:nowrap;
+    border:none;
+    border-bottom:3px solid transparent;
+    border-radius:0;
+    background:transparent;
+    margin:0;
+    letter-spacing:-.2px;
+    position:relative;
+    text-decoration:none;
+    transition:color .15s, border-color .15s;
+  }
+  .gnb-dropdown .mega-group-title:hover{
+    color:var(--red);
+    border-bottom-color:var(--red);
+    background:transparent;
   }
 
   /* 메가메뉴 */
