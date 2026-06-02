@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인 - 북샘</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:var(--bg);min-height:100vh;display:flex;flex-direction:column;">
+
+<div class="util-topbar">
+  <div class="util-topbar-inner">
+    <div class="util-links">
+      <a href="login.html" class="util-link">로그인</a>
+      <a href="login.html" class="util-link">회원가입</a>
+      <a href="customer.html" class="util-link">고객센터</a>
+      <a href="cart.html" class="util-link">장바구니 <span class="cart-badge" style="display:none">0</span></a>
+      <a href="mypage.html" class="util-link">마이페이지</a>
+    </div>
+  </div>
+</div>
+<div class="util-bar">
+  <div class="util-bar-inner">
+    <a href="index.html" class="util-logo">
+      <span class="logo-mark">YBM북스</span><span class="logo-badge">초중고</span>
+    </a>
+    <div class="gnb-special">
+      <a href="https://www.ybmbooksam.com/html/main/index" target="_blank" class="btn-orange">강사용 Y튜터 ↗</a>
+      <a href="books.html" class="btn-blue">YBM북스-성인 ↗</a>
+    </div>
+  </div>
+</div>
+
+<nav class="gnb-bar">
+  <div class="gnb-inner">
+    <button class="gnb-all"><span class="hamburger">☰</span> 전체 카테고리</button>
+    <div class="gnb-nav">
+      <div class="gnb-item" data-cat="elementary">
+        <a href="books.html?cat=elementary" class="gnb-link">초등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--elem);">
+            <span class="dropdown-cat-icon">🎒</span>
+            <span class="dropdown-cat-label">초등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=elementary&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=elementary&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=elementary&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=elementary&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=elementary&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=elementary&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=elementary&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="middle">
+        <a href="books.html?cat=middle" class="gnb-link">중학</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--mid);">
+            <span class="dropdown-cat-icon">📚</span>
+            <span class="dropdown-cat-label">중학</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=middle&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=middle&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=middle&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=middle&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=middle&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=middle&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=middle&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=middle&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=middle&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="high">
+        <a href="books.html?cat=high" class="gnb-link">고등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--high);">
+            <span class="dropdown-cat-icon">🎓</span>
+            <span class="dropdown-cat-label">고등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=high&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=high&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=high&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=high&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=high&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=high&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=high&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=high&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=high&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="resources">
+        <a href="resources.html" class="gnb-link">자료실</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--res);">
+            <span class="dropdown-cat-icon">📂</span>
+            <span class="dropdown-cat-label">자료실</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="resources.html?tab=materials" class="mega-group-title">교재 자료실</a>
+            <a href="resources.html?tab=daily" class="mega-group-title">데일리 외국어</a>
+            <a href="resources.html?tab=howto" class="mega-group-title">교재 활용법</a>
+            <a href="resources.html?tab=curation" class="mega-group-title">큐레이션</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="events">
+        <a href="events.html" class="gnb-link">이벤트</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--red);">
+            <span class="dropdown-cat-icon">🎁</span>
+            <span class="dropdown-cat-label">이벤트</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="events.html" class="mega-group-title">이벤트</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div style="flex:1;display:flex;align-items:center;justify-content:center;padding:52px 20px;">
+  <div style="width:100%;max-width:400px;">
+
+    <!-- 로고 -->
+    <div style="text-align:center;margin-bottom:32px;">
+      <a href="index.html" class="util-logo" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;">
+        <span class="logo-mark" style="font-size:26px;">YBM북스</span>
+        <span class="logo-badge">초중고</span>
+      </a>
+    </div>
+
+    <!-- 탭 -->
+    <div style="display:flex;border-bottom:2px solid var(--border);margin-bottom:28px;">
+      <button id="tab-login" onclick="switchLoginTab('login')" style="flex:1;padding:11px;background:none;border:none;font-size:14px;font-weight:700;color:var(--red);border-bottom:2px solid var(--red);margin-bottom:-2px;cursor:pointer;">로그인</button>
+      <button id="tab-join" onclick="switchLoginTab('join')" style="flex:1;padding:11px;background:none;border:none;font-size:14px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;cursor:pointer;">회원가입</button>
+    </div>
+
+    <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow);">
+
+      <!-- 로그인 폼 -->
+      <div id="form-login">
+        <div style="margin-bottom:16px;">
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;">이메일</label>
+          <input type="email" id="email" placeholder="이메일을 입력하세요" style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:14px;font-family:inherit;outline:none;box-sizing:border-box;transition:border-color .2s;"
+            onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;">
+            비밀번호
+            <a href="#" style="float:right;font-weight:400;color:var(--muted);font-size:11px;">비밀번호 찾기</a>
+          </label>
+          <div style="position:relative;">
+            <input type="password" id="password" placeholder="비밀번호를 입력하세요" style="width:100%;padding:12px 42px 12px 14px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:14px;font-family:inherit;outline:none;box-sizing:border-box;transition:border-color .2s;"
+              onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'"
+              onkeydown="if(event.key==='Enter')doLogin()">
+            <button onclick="togglePw()" id="pwEye" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:16px;cursor:pointer;color:var(--muted);">👁</button>
+          </div>
+        </div>
+        <label style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text2);margin-bottom:20px;cursor:pointer;">
+          <input type="checkbox" style="width:14px;height:14px;accent-color:var(--red);"> 로그인 상태 유지
+        </label>
+        <button onclick="doLogin()" style="width:100%;background:var(--red);color:white;border:none;padding:14px;border-radius:var(--radius);font-size:15px;font-weight:800;cursor:pointer;transition:background .15s;"
+          onmouseover="this.style.background='var(--red-dark)'" onmouseout="this.style.background='var(--red)'">로그인</button>
+
+        <div style="display:flex;align-items:center;gap:10px;margin:18px 0;">
+          <div style="flex:1;height:1px;background:var(--border);"></div>
+          <span style="font-size:12px;color:var(--muted);">또는 간편 로그인</span>
+          <div style="flex:1;height:1px;background:var(--border);"></div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button onclick="socialLogin('카카오')" style="width:100%;background:#FEE500;color:#1a1a1a;border:none;padding:12px;border-radius:var(--radius);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <span>💬</span> 카카오로 로그인
+          </button>
+          <button onclick="socialLogin('네이버')" style="width:100%;background:#03C75A;color:white;border:none;padding:12px;border-radius:var(--radius);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <strong>N</strong> 네이버로 로그인
+          </button>
+        </div>
+      </div>
+
+      <!-- 회원가입 폼 -->
+      <div id="form-join" style="display:none;">
+        <div style="margin-bottom:24px;font-size:14px;color:var(--text2);text-align:center;">의사결정 필요</div>
+        <button onclick="doJoin()" style="width:100%;background:var(--navy);color:white;border:none;padding:14px;border-radius:var(--radius);font-size:15px;font-weight:800;cursor:pointer;">회원가입</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer style="text-align:center;padding:18px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);">
+  © 2026 북샘 교육출판 · <a href="#" style="color:var(--muted);">이용약관</a> · <a href="#" style="color:var(--muted);">개인정보처리방침</a>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+const initTab = new URLSearchParams(location.search).get('tab');
+if (initTab === 'join') switchLoginTab('join');
+
+function switchLoginTab(tab) {
+  document.getElementById('form-login').style.display = tab==='login'?'':'none';
+  document.getElementById('form-join').style.display  = tab==='join'?'':'none';
+  document.getElementById('tab-login').style.color = tab==='login'?'var(--red)':'var(--muted)';
+  document.getElementById('tab-login').style.borderBottomColor = tab==='login'?'var(--red)':'transparent';
+  document.getElementById('tab-join').style.color  = tab==='join'?'var(--red)':'var(--muted)';
+  document.getElementById('tab-join').style.borderBottomColor  = tab==='join'?'var(--red)':'transparent';
+}
+
+function togglePw() {
+  const pw = document.getElementById('password');
+  const eye = document.getElementById('pwEye');
+  pw.type = pw.type==='password'?'text':'password';
+  eye.textContent = pw.type==='password'?'👁':'🙈';
+}
+
+function doLogin() {
+  const email = document.getElementById('email').value;
+  const pw    = document.getElementById('password').value;
+  if(!email||!pw){Toast.show('이메일과 비밀번호를 입력하세요.','error');return;}
+  Toast.show('로그인 중...','success');
+  setTimeout(() => {
+    localStorage.setItem('booksam_user', JSON.stringify({email, name: email.split('@')[0]}));
+    localStorage.setItem('isLoggedIn', 'true');
+    const redirectUrl = localStorage.getItem('redirectAfterLogin') || 'index.html';
+    localStorage.removeItem('redirectAfterLogin');
+    location.href = redirectUrl;
+  }, 1000);
+}
+
+function doJoin() {
+  Toast.show('회원가입이 완료되었습니다! 🎉','success');
+  setTimeout(()=>switchLoginTab('login'),1200);
+}
+
+function socialLogin(provider) {
+  Toast.show(`${provider} 로그인을 시도합니다...`,'success');
+  setTimeout(()=>location.href='index.html',1200);
+}
+</script>
+</body>
+</html>

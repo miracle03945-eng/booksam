@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>고객센터 - 북샘</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="util-topbar">
+  <div class="util-topbar-inner">
+    <div class="util-links">
+      <a href="login.html" class="util-link">로그인</a>
+      <a href="login.html" class="util-link">회원가입</a>
+      <a href="customer.html" class="util-link">고객센터</a>
+      <a href="cart.html" class="util-link">장바구니 <span class="cart-badge" style="display:none">0</span></a>
+      <a href="mypage.html" class="util-link">마이페이지</a>
+    </div>
+  </div>
+</div>
+<div class="util-bar">
+  <div class="util-bar-inner">
+    <a href="index.html" class="util-logo">
+      <span class="logo-mark">YBM북스</span><span class="logo-badge">초중고</span>
+    </a>
+    <div class="header-search">
+      <div class="search-wrap">
+        <select class="search-select"><option>카테고리 전체</option></select>
+        <select class="search-select2"><option>전체</option></select>
+        <input type="text" class="search-input" placeholder="초등, 중등, 고등 교재명을 입력하세요">
+        <button class="search-btn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      </div>
+    </div>
+    <div class="gnb-special">
+      <a href="https://www.ybmbooksam.com/html/main/index" target="_blank" class="btn-orange">강사용 Y튜터 ↗</a>
+      <a href="books.html" class="btn-blue">YBM북스-성인 ↗</a>
+    </div>
+  </div>
+</div>
+
+<nav class="gnb-bar">
+  <div class="gnb-inner">
+    <button class="gnb-all"><span class="hamburger">☰</span> 전체 카테고리</button>
+    <div class="gnb-nav">
+      <div class="gnb-item" data-cat="elementary">
+        <a href="books.html?cat=elementary" class="gnb-link">초등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--elem);">
+            <span class="dropdown-cat-icon">🎒</span>
+            <span class="dropdown-cat-label">초등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=elementary&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=elementary&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=elementary&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=elementary&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=elementary&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=elementary&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=elementary&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="middle">
+        <a href="books.html?cat=middle" class="gnb-link">중학</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--mid);">
+            <span class="dropdown-cat-icon">📚</span>
+            <span class="dropdown-cat-label">중학</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=middle&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=middle&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=middle&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=middle&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=middle&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=middle&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=middle&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=middle&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=middle&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="high">
+        <a href="books.html?cat=high" class="gnb-link">고등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--high);">
+            <span class="dropdown-cat-icon">🎓</span>
+            <span class="dropdown-cat-label">고등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=high&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=high&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=high&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=high&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=high&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=high&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=high&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=high&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=high&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="resources">
+        <a href="resources.html" class="gnb-link">자료실</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--res);">
+            <span class="dropdown-cat-icon">📂</span>
+            <span class="dropdown-cat-label">자료실</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="resources.html?tab=materials" class="mega-group-title">교재 자료실</a>
+            <a href="resources.html?tab=daily" class="mega-group-title">데일리 외국어</a>
+            <a href="resources.html?tab=howto" class="mega-group-title">교재 활용법</a>
+            <a href="resources.html?tab=curation" class="mega-group-title">큐레이션</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="events">
+        <a href="events.html" class="gnb-link">이벤트</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--red);">
+            <span class="dropdown-cat-icon">🎁</span>
+            <span class="dropdown-cat-label">이벤트</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="events.html" class="mega-group-title">이벤트</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero default">
+  <div class="page-hero-inner">
+    <h1 class="page-hero-title">💬 고객센터</h1>
+    <p class="page-hero-desc">무엇이든 도와드리겠습니다 · 평일 09:00 ~ 18:00</p>
+  </div>
+</div>
+
+<div class="container" style="padding-top:28px;padding-bottom:80px;">
+  <div class="cs-layout">
+    <nav class="cs-nav">
+      <div class="cs-nav-group">
+        <div class="cs-nav-title">고객센터</div>
+        <a href="#" class="cs-nav-link active" data-tab="notice" onclick="switchTab('notice',this);return false;">📢 공지사항</a>
+        <a href="#" class="cs-nav-link" data-tab="faq"    onclick="switchTab('faq',this);return false;">❓ 자주 묻는 질문</a>
+        <a href="#" class="cs-nav-link" data-tab="remote" onclick="switchTab('remote',this);return false;">🖥 원격 지원</a>
+      </div>
+      <div class="cs-nav-group" id="cs-nav-mypage" style="display:none;">
+        <div class="cs-nav-title">마이페이지</div>
+        <a href="cart.html"               class="cs-nav-link">🛒 장바구니</a>
+        <a href="mypage.html?tab=orders"  class="cs-nav-link">📦 주문 내역</a>
+        <a href="mypage.html?tab=wish"    class="cs-nav-link">❤️ 관심 교재</a>
+        <a href="mypage.html?tab=profile" class="cs-nav-link">👤 개인정보 변경</a>
+      </div>
+      <div class="cs-nav-group" style="padding:14px 16px;">
+        <div style="background:var(--bg);border-radius:var(--radius);padding:14px;text-align:center;border:1px solid var(--border);">
+          <div style="font-size:20px;margin-bottom:6px;">📞</div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:3px;">1:1 문의</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">평일 09:00~18:00</div>
+          <a href="#" onclick="Toast.show('1:1 문의 페이지로 이동합니다.','success');return false;"
+            style="background:var(--red);color:white;padding:7px 14px;border-radius:var(--radius);font-size:12px;font-weight:700;display:inline-block;">문의하기</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="cs-content">
+
+      <!-- 공지사항 -->
+      <div id="panel-notice">
+        <h2 class="cs-content-title">📢 공지사항</h2>
+        <table class="notice-table">
+          <thead>
+            <tr>
+              <th style="width:68px;">번호</th>
+              <th>제목</th>
+              <th style="width:96px;">작성일</th>
+              <th style="width:56px;">조회</th>
+            </tr>
+          </thead>
+          <tbody id="noticeBody"></tbody>
+        </table>
+        <div class="pagination" style="margin-top:20px;">
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">›</button>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div id="panel-faq" style="display:none;">
+        <h2 class="cs-content-title">❓ 자주 묻는 질문</h2>
+        <div id="faqCats" style="display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;"></div>
+        <div id="faqList"></div>
+      </div>
+
+      <!-- 원격 지원 -->
+      <div id="panel-remote" style="display:none;">
+        <h2 class="cs-content-title">🖥 원격 지원</h2>
+        <div style="background:var(--bg);border-radius:var(--radius-lg);padding:28px;text-align:center;margin-bottom:22px;border:1px solid var(--border);">
+          <div style="font-size:44px;margin-bottom:14px;">🖥</div>
+          <h3 style="font-size:18px;font-weight:800;margin-bottom:8px;">원격 지원 서비스</h3>
+          <p style="color:var(--muted);line-height:1.7;font-size:13px;margin-bottom:22px;">교재 학습 중 어려운 점이 있으신가요?<br>전문 상담사가 원격으로 직접 도와드립니다.</p>
+          <button onclick="Toast.show('원격 지원 신청이 접수되었습니다. 담당자가 곧 연락드립니다.','success')"
+            style="background:var(--navy);color:white;border:none;padding:13px 36px;border-radius:40px;font-size:15px;font-weight:800;cursor:pointer;transition:background .15s;"
+            onmouseover="this.style.background='#0d1b2e'" onmouseout="this.style.background='var(--navy)'">
+            🖥 원격 지원 신청
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <div>© 2026 북샘 교육출판. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">이용약관</a><a href="#" style="color:white;font-weight:700;">개인정보처리방침</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// ── 마이페이지 nav: 로그인 시에만 표시 ──
+if (localStorage.getItem('isLoggedIn') === 'true') {
+  document.getElementById('cs-nav-mypage').style.display = '';
+}
+
+// ── 공지사항 렌더링 ──
+const NOTICES = [
+  {id:'공지', title:'[필독] 2026 신학기 교재 출시 안내',        date:'2026.03.01', views:8420,  pin:true},
+  {id:'공지', title:'개인정보처리방침 개정 안내',                 date:'2026.02.15', views:3215,  pin:true},
+  {id:8,      title:'2026년 1분기 신규 교재 출시 목록',          date:'2026.02.10', views:2187,  pin:false},
+  {id:7,      title:'설 연휴 배송 일정 안내',                    date:'2026.01.20', views:1934,  pin:false},
+  {id:6,      title:'무료배송 기준 변경 안내 (15,000원 이상)',    date:'2026.01.10', views:4521,  pin:false},
+  {id:5,      title:'사이트 리뉴얼 오픈 안내',                   date:'2025.12.01', views:9876,  pin:false},
+  {id:4,      title:'포인트 적립/사용 제도 안내',                 date:'2025.11.20', views:2341,  pin:false},
+  {id:3,      title:'교재 정오표 업데이트 안내',                  date:'2025.11.05', views:1122,  pin:false},
+];
+document.getElementById('noticeBody').innerHTML = NOTICES.map(n => `
+  <tr style="cursor:pointer;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''"
+      onclick="Toast.show('${n.title}','success')">
+    <td style="text-align:center;font-size:12px;${n.pin?'':'color:var(--muted);'}">
+      ${n.pin ? '<span class="notice-pin">공지</span>' : n.id}
+    </td>
+    <td style="font-size:13px;">${n.pin ? `<strong>${n.title}</strong>` : n.title}</td>
+    <td style="color:var(--muted);font-size:12px;">${n.date}</td>
+    <td style="color:var(--muted);font-size:12px;text-align:right;">${n.views.toLocaleString()}</td>
+  </tr>`).join('');
+
+// ── FAQ 렌더링 ──
+const FAQ_CATS = ['전체','주문/결제','배송','교환/반품','회원','교재'];
+const FAQS = [
+  {cat:'주문/결제', q:'주문은 어떻게 하나요?',
+   a:'원하는 교재를 장바구니에 담고, 결제 페이지에서 배송지와 결제 수단을 선택하신 후 결제하시면 됩니다.'},
+  {cat:'주문/결제', q:'결제 수단에는 무엇이 있나요?',
+   a:'신용카드, 체크카드, 카카오페이, 네이버페이, 무통장 입금 등 다양한 결제 수단을 지원합니다.'},
+  {cat:'주문/결제', q:'주문 취소는 어떻게 하나요?',
+   a:'출고 전이라면 마이페이지 > 주문 내역에서 취소 가능합니다. 이미 출고된 경우 반품 절차를 이용해 주세요.'},
+  {cat:'배송',      q:'배송은 얼마나 걸리나요?',
+   a:'주문 확인 후 1~2 영업일 이내에 출고되며, 출고 후 1~2일 내 수령 가능합니다. (주말·공휴일 제외)'},
+  {cat:'배송',      q:'무료배송 기준이 있나요?',
+   a:'15,000원 이상 구매 시 무료배송이 적용됩니다. 미만 시 배송비 2,500원이 부과됩니다.'},
+  {cat:'배송',      q:'배송 조회는 어떻게 하나요?',
+   a:'마이페이지 > 주문 내역에서 운송장 번호를 확인하신 후 택배사 사이트에서 조회하실 수 있습니다.'},
+  {cat:'교환/반품', q:'교환·반품은 어떻게 신청하나요?',
+   a:'수령 후 7일 이내에 마이페이지 > 주문 내역에서 신청하거나 고객센터로 연락 주시기 바랍니다.'},
+  {cat:'교환/반품', q:'반품 시 배송비는 누가 부담하나요?',
+   a:'상품 불량·오배송의 경우 무료 반품이 가능합니다. 고객 변심의 경우 왕복 배송비 5,000원을 부담하셔야 합니다.'},
+  {cat:'회원',      q:'회원가입 혜택이 있나요?',
+   a:'신규 회원 가입 시 5,000원 할인 쿠폰이 지급됩니다. 또한 구매 금액의 1%가 포인트로 적립됩니다.'},
+  {cat:'회원',      q:'비밀번호를 잊어버렸어요.',
+   a:'로그인 페이지의 "비밀번호 찾기"를 클릭하여 가입 시 등록한 이메일로 재설정 링크를 받으실 수 있습니다.'},
+  {cat:'교재',      q:'교재 자료(MP3, 정답지 등)는 어디서 받나요?',
+   a:'자료실 > 교재 자료실에서 교재별 자료를 무료로 다운로드하실 수 있습니다.'},
+  {cat:'교재',      q:'절판된 교재는 어떻게 구매하나요?',
+   a:'절판 교재는 현재 판매가 불가합니다. 고객센터로 문의 주시면 유사 교재를 안내해 드리겠습니다.'},
+];
+
+document.getElementById('faqCats').innerHTML = FAQ_CATS.map((c, i) => `
+  <button onclick="filterFaq(this,'${c}')"
+    style="padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;
+      background:${i===0?'var(--red)':'var(--bg2)'};color:${i===0?'white':'var(--muted)'};
+      border:1px solid ${i===0?'var(--red)':'var(--border)'};">${c}</button>`).join('');
+
+document.getElementById('faqList').innerHTML = FAQS.map(f => `
+  <div class="faq-item" data-cat="${f.cat}">
+    <button class="faq-question">
+      <span class="faq-q-icon">Q</span>${f.q}<span class="faq-arrow">▾</span>
+    </button>
+    <div class="faq-answer"><strong style="color:var(--red);">A.</strong> ${f.a}</div>
+  </div>`).join('');
+
+// ── 탭 전환 ──
+const initTab = getParam('tab') || 'notice';
+switchTab(initTab, document.querySelector(`[data-tab="${initTab}"]`));
+
+function switchTab(tab, el) {
+  document.querySelectorAll('.cs-nav-link[data-tab]').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('[id^="panel-"]').forEach(p => p.style.display = 'none');
+  if (el) el.classList.add('active');
+  const panel = document.getElementById(`panel-${tab}`);
+  if (panel) panel.style.display = '';
+}
+
+function filterFaq(btn, cat) {
+  document.querySelectorAll('#faqCats button').forEach(b => {
+    b.style.background = 'var(--bg2)'; b.style.color = 'var(--muted)'; b.style.borderColor = 'var(--border)';
+  });
+  btn.style.background = 'var(--red)'; btn.style.color = 'white'; btn.style.borderColor = 'var(--red)';
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.style.display = (cat === '전체' || item.dataset.cat === cat) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

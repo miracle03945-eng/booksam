@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결제 - 북샘</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .co-wrap{max-width:860px;margin:0 auto;padding:32px 20px 80px;}
+    .co-title{font-size:22px;font-weight:900;color:var(--navy);margin-bottom:20px;}
+    /* 스텝 */
+    .co-steps{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:34px;}
+    .co-step{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:30px;padding:8px 18px;font-size:13px;color:var(--muted);background:#fff;}
+    .co-step.active{border-color:var(--red);color:var(--red);font-weight:800;background:#fff5f5;}
+    .co-step .co-step-num{width:20px;height:20px;border-radius:50%;background:var(--border);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;}
+    .co-step.active .co-step-num{background:var(--red);}
+    .co-step-line{width:34px;height:1px;background:var(--border);}
+    /* 섹션 */
+    .co-sec{margin-bottom:34px;}
+    .co-sec-title{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:12px;}
+    /* 주문상품 테이블 */
+    .co-table{width:100%;border-collapse:collapse;border-top:2px solid var(--navy);font-size:13px;}
+    .co-table thead th{background:#2b3a4d;color:#fff;font-weight:700;padding:11px 10px;font-size:12px;}
+    .co-table tbody td{padding:14px 10px;border-bottom:1px solid var(--border);text-align:center;color:var(--text2);vertical-align:middle;}
+    .co-prod{display:flex;align-items:center;gap:12px;text-align:left;}
+    .co-prod-thumb{width:46px;height:60px;border-radius:4px;overflow:hidden;flex-shrink:0;border:1px solid var(--border);background:var(--bg2);}
+    .co-prod-thumb img{width:100%;height:100%;object-fit:cover;}
+    .co-prod-title{font-size:13px;font-weight:700;color:var(--navy);line-height:1.4;}
+    .co-strike{color:var(--muted);text-decoration:line-through;font-size:12px;}
+    .co-sale{color:var(--red);font-weight:800;}
+    /* 합계 박스 */
+    .co-sum{display:flex;align-items:stretch;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:14px;}
+    .co-sum-cell{flex:1;text-align:center;padding:18px 10px;}
+    .co-sum-cell .co-sum-label{font-size:12px;color:var(--muted);margin-bottom:8px;}
+    .co-sum-cell .co-sum-val{font-size:18px;font-weight:900;color:var(--navy);}
+    .co-sum-cell.total .co-sum-val{color:var(--red);}
+    .co-sum-op{display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--muted);width:24px;flex-shrink:0;}
+    /* 정보 박스 */
+    .co-info{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 22px;}
+    .co-info-row{display:flex;align-items:center;padding:13px 0;border-bottom:1px solid var(--border);font-size:13px;}
+    .co-info-row:last-child{border-bottom:none;}
+    .co-info-row .co-info-label{width:90px;color:var(--muted);font-weight:700;}
+    .co-info-row .co-info-val{color:var(--text);}
+    .co-info-note{font-size:12px;color:var(--muted);line-height:1.7;margin-top:12px;}
+    .co-info-note a{color:var(--red);font-weight:700;}
+    /* 폼 */
+    .co-form-row{display:flex;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border);}
+    .co-form-row:last-child{border-bottom:none;}
+    .co-form-label{width:120px;font-size:13px;font-weight:700;color:var(--text2);padding-top:9px;flex-shrink:0;}
+    .co-form-label .req{color:var(--red);}
+    .co-form-field{flex:1;}
+    .co-input{padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font-size:13px;outline:none;box-sizing:border-box;font-family:inherit;transition:border-color .15s;}
+    .co-input:focus{border-color:var(--red);}
+    .co-btn-sub{background:var(--navy);color:#fff;border:none;padding:9px 16px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
+    .co-hint{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6;}
+    /* 결제수단 */
+    .co-pay-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+    .co-pay-card{border:1.5px solid var(--border);border-radius:8px;padding:16px 12px;text-align:center;cursor:pointer;transition:all .15s;background:#fff;}
+    .co-pay-card.active{border-color:var(--red);background:#fff5f5;}
+    .co-pay-card .co-pay-cat{font-size:11px;color:var(--muted);margin-bottom:8px;}
+    .co-pay-card.active .co-pay-cat{color:var(--red);}
+    .co-pay-card .co-pay-name{font-size:13px;font-weight:800;color:var(--navy);border:1px solid var(--border);border-radius:5px;padding:6px;background:var(--bg);}
+    .co-pay-card.active .co-pay-name{border-color:var(--red);color:var(--red);background:#fff;}
+    /* 유의사항 */
+    .co-notice{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px 20px;font-size:12px;color:var(--muted);line-height:1.9;}
+    .co-notice-title{font-size:13px;font-weight:800;color:var(--text2);margin-bottom:8px;}
+    /* 동의 + 결제 */
+    .co-agree{text-align:center;margin:24px 0 16px;font-size:13px;color:var(--text);}
+    .co-agree b{color:var(--red);}
+    .co-pay-btn{display:block;width:260px;margin:0 auto;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;transition:background .15s;}
+    .co-pay-btn:hover{background:#0d1b2e;}
+    @media(max-width:640px){
+      .co-sum{flex-wrap:wrap;}
+      .co-pay-grid{grid-template-columns:repeat(2,1fr);}
+      .co-form-row{flex-direction:column;}
+      .co-form-label{width:auto;padding-top:0;margin-bottom:6px;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="util-topbar">
+  <div class="util-topbar-inner">
+    <div class="util-links">
+      <a href="login.html" class="util-link">로그인</a>
+      <a href="login.html" class="util-link">회원가입</a>
+      <a href="customer.html" class="util-link">고객센터</a>
+      <a href="cart.html" class="util-link">장바구니 <span class="cart-badge" style="display:none">0</span></a>
+      <a href="mypage.html" class="util-link">마이페이지</a>
+    </div>
+  </div>
+</div>
+<div class="util-bar">
+  <div class="util-bar-inner">
+    <a href="index.html" class="util-logo">
+      <span class="logo-mark">YBM북스</span><span class="logo-badge">초중고</span>
+    </a>
+    <div class="gnb-special">
+      <a href="https://www.ybmbooksam.com/html/main/index" target="_blank" class="btn-orange">강사용 Y튜터 ↗</a>
+      <a href="books.html" class="btn-blue">YBM북스-성인 ↗</a>
+    </div>
+  </div>
+</div>
+
+<nav class="gnb-bar">
+  <div class="gnb-inner">
+    <button class="gnb-all"><span class="hamburger">☰</span> 전체 카테고리</button>
+    <div class="gnb-nav">
+      <div class="gnb-item" data-cat="elementary">
+        <a href="books.html?cat=elementary" class="gnb-link">초등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--elem);">
+            <span class="dropdown-cat-icon">🎒</span>
+            <span class="dropdown-cat-label">초등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=elementary&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=elementary&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=elementary&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=elementary&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=elementary&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=elementary&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=elementary&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=elementary&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=elementary&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="middle">
+        <a href="books.html?cat=middle" class="gnb-link">중학</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--mid);">
+            <span class="dropdown-cat-icon">📚</span>
+            <span class="dropdown-cat-label">중학</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=middle&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=middle&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=middle&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=middle&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=middle&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=middle&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=middle&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=middle&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=middle&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=middle&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="high">
+        <a href="books.html?cat=high" class="gnb-link">고등</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--high);">
+            <span class="dropdown-cat-icon">🎓</span>
+            <span class="dropdown-cat-label">고등</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="books.html?cat=high&type=참고서" class="mega-group-title">참고서</a>
+            <a href="books.html?cat=high&type=참고서&subject=영어" class="mega-sub-link">영어</a>
+            <a href="books.html?cat=high&type=참고서&subject=수학" class="mega-sub-link">수학</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-group-title">교과서</a>
+            <a href="books.html?cat=high&type=교과서" class="mega-sub-link">교과서</a>
+            <a href="books.html?cat=high&type=평가문제집" class="mega-sub-link">평가문제집/자습서</a>
+            <a href="books.html?cat=high&type=지도서" class="mega-sub-link">지도서</a>
+            <a href="books.html?cat=high&type=자료집" class="mega-sub-link">자료집</a>
+            <a href="books.html?cat=high&type=교구재" class="mega-sub-link">교구재</a>
+            <a href="books.html?cat=high&type=ELT" class="mega-group-title">ELT</a>
+            <a href="books.html?cat=high&type=일반" class="mega-group-title">일반 · 수험서</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="resources">
+        <a href="resources.html" class="gnb-link">자료실</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--res);">
+            <span class="dropdown-cat-icon">📂</span>
+            <span class="dropdown-cat-label">자료실</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="resources.html?tab=materials" class="mega-group-title">교재 자료실</a>
+            <a href="resources.html?tab=daily" class="mega-group-title">데일리 외국어</a>
+            <a href="resources.html?tab=howto" class="mega-group-title">교재 활용법</a>
+            <a href="resources.html?tab=curation" class="mega-group-title">큐레이션</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item" data-cat="events">
+        <a href="events.html" class="gnb-link">이벤트</a>
+        <div class="gnb-dropdown">
+          <div class="dropdown-cat" style="background:var(--red);">
+            <span class="dropdown-cat-icon">🎁</span>
+            <span class="dropdown-cat-label">이벤트</span>
+          </div>
+          <div class="dropdown-body">
+            <a href="events.html" class="mega-group-title">이벤트</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="co-wrap">
+  <h1 class="co-title">주문 및 결제</h1>
+
+  <!-- 단계 -->
+  <div class="co-steps">
+    <div class="co-step"><span class="co-step-num">1</span> 장바구니 구매</div>
+    <div class="co-step-line"></div>
+    <div class="co-step active"><span class="co-step-num">2</span> 주문 및 결제</div>
+    <div class="co-step-line"></div>
+    <div class="co-step"><span class="co-step-num">3</span> 주문 완료</div>
+  </div>
+
+  <!-- 주문상품 -->
+  <div class="co-sec">
+    <div class="co-sec-title">주문상품</div>
+    <table class="co-table">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding-left:14px;">상품정보</th>
+          <th style="width:70px;">수량</th>
+          <th style="width:100px;">정가</th>
+          <th style="width:100px;">판매가</th>
+          <th style="width:90px;">주문관리</th>
+        </tr>
+      </thead>
+      <tbody id="checkoutItems"></tbody>
+    </table>
+
+    <!-- 합계 -->
+    <div class="co-sum">
+      <div class="co-sum-cell"><div class="co-sum-label">총 수량</div><div class="co-sum-val" id="coQty">-</div></div>
+      <div class="co-sum-op">|</div>
+      <div class="co-sum-cell"><div class="co-sum-label">총 상품금액</div><div class="co-sum-val" id="coOriginal">-</div></div>
+      <div class="co-sum-op">−</div>
+      <div class="co-sum-cell"><div class="co-sum-label">총 할인금액</div><div class="co-sum-val" id="coDiscount">-</div></div>
+      <div class="co-sum-op">+</div>
+      <div class="co-sum-cell"><div class="co-sum-label">배송비</div><div class="co-sum-val" id="coShipping">-</div></div>
+      <div class="co-sum-op">=</div>
+      <div class="co-sum-cell total"><div class="co-sum-label">총 결제금액</div><div class="co-sum-val" id="coTotal">-</div></div>
+    </div>
+  </div>
+
+  <!-- 주문 고객 정보 -->
+  <div class="co-sec">
+    <div class="co-sec-title" style="display:flex;align-items:center;justify-content:space-between;">
+      <span>주문 고객 정보</span>
+      <button class="co-btn-sub" onclick="saveCustomer()">정보 저장</button>
+    </div>
+    <div class="co-info" style="background:#fff;">
+      <div class="co-form-row">
+        <div class="co-form-label">이름</div>
+        <div class="co-form-field"><input type="text" id="custName" class="co-input" style="width:240px;"></div>
+      </div>
+      <div class="co-form-row">
+        <div class="co-form-label">휴대폰</div>
+        <div class="co-form-field"><input type="tel" id="custPhone" class="co-input" style="width:240px;"></div>
+      </div>
+      <div class="co-form-row">
+        <div class="co-form-label">이메일</div>
+        <div class="co-form-field"><input type="email" id="custEmail" class="co-input" style="width:280px;"></div>
+      </div>
+    </div>
+    <div class="co-info-note">
+      입력하신 정보는 주문/배송 안내에 사용되며, <b>정보 저장</b> 시 회원 정보에 반영됩니다.
+    </div>
+  </div>
+
+  <!-- 받는 고객 정보 -->
+  <div class="co-sec">
+    <div class="co-sec-title" style="display:flex;align-items:center;justify-content:space-between;">
+      <span>받는 고객 정보</span>
+      <button class="co-btn-sub" onclick="copyCustomer()">주문 고객 정보와 동일</button>
+    </div>
+    <div class="co-info" style="background:#fff;">
+      <div class="co-form-row">
+        <div class="co-form-label">이름 <span class="req">*</span></div>
+        <div class="co-form-field"><input type="text" id="rcvName" class="co-input" style="width:240px;" placeholder="받는 분 이름"></div>
+      </div>
+      <div class="co-form-row">
+        <div class="co-form-label">휴대폰 <span class="req">*</span></div>
+        <div class="co-form-field">
+          <div style="display:flex;gap:6px;align-items:center;">
+            <select id="rcvPhonePrefix" class="co-input" style="width:80px;"><option>010</option><option>011</option><option>016</option><option>017</option><option>019</option></select>
+            <input type="tel" id="rcvPhone" class="co-input" style="width:220px;" placeholder="'-' 제외하고 입력해주세요.">
+          </div>
+          <div class="co-hint">* 배송 관련 안내(예: 도착 예정 알림)가 입력하신 번호로 발송되오니, 반드시 정확한 휴대폰 번호를 기재해주시기 바랍니다.</div>
+        </div>
+      </div>
+      <div class="co-form-row">
+        <div class="co-form-label">연락처</div>
+        <div class="co-form-field"><input type="tel" class="co-input" style="width:240px;" placeholder="'-' 제외하고 입력해주세요."></div>
+      </div>
+      <div class="co-form-row">
+        <div class="co-form-label">배송지 주소</div>
+        <div class="co-form-field">
+          <div style="display:flex;gap:8px;margin-bottom:7px;">
+            <input type="text" class="co-input" style="width:130px;" placeholder="우편번호" id="coZip">
+            <button class="co-btn-sub" onclick="Toast.show('우편번호 검색','success')">우편번호찾기</button>
+          </div>
+          <input type="text" class="co-input" style="width:100%;margin-bottom:7px;" placeholder="기본 주소">
+          <input type="text" class="co-input" style="width:100%;" placeholder="상세주소 입력">
+        </div>
+      </div>
+      <div class="co-form-row">
+        <div class="co-form-label">배송요청사항</div>
+        <div class="co-form-field">
+          <select class="co-input" style="width:100%;">
+            <option>배송 시 택배회사 직원에게 전달하실 내용을 입력해주세요.</option>
+            <option>문 앞에 놔주세요</option>
+            <option>경비실에 맡겨주세요</option>
+            <option>배송 전 연락 바랍니다</option>
+            <option>파손 위험 상품입니다. 주의해주세요</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 결제 수단 -->
+  <div class="co-sec">
+    <div class="co-sec-title">결제 수단</div>
+    <div class="co-pay-grid">
+      <div class="co-pay-card active" onclick="selectPay(this)">
+        <div class="co-pay-cat">일반결제</div><div class="co-pay-name">신용카드</div>
+      </div>
+      <div class="co-pay-card" onclick="selectPay(this)">
+        <div class="co-pay-cat">간편결제</div><div class="co-pay-name">간편결제</div>
+      </div>
+      <div class="co-pay-card" onclick="selectPay(this)">
+        <div class="co-pay-cat">현금결제</div><div class="co-pay-name">무통장계좌이체</div>
+      </div>
+      <div class="co-pay-card" onclick="selectPay(this)">
+        <div class="co-pay-cat">기타결제</div><div class="co-pay-name">무통장입금</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 유의사항 -->
+  <div class="co-sec">
+    <div class="co-notice">
+      <div class="co-notice-title">결제시 유의사항</div>
+      · 온라인 소득공제 대상 도서를 구매하는 경우에는 소득공제 처리되며, 현금 영수증 발급은 결제 완료 후 추가 정보를 입력하여야 발급됩니다.<br>
+      · 온라인 소득공제 대상 도서 외에 일반 상품을 구매하는 경우에는 온라인 소득공제 대상이 아니며, 현금 영수증 발급이 가능합니다.<br>
+      · 일부 도서는 정오표, 부록 등 콘텐츠 제공 시 별도 안내될 수 있습니다.<br>
+      · 무통장 입금 주문 시 입금기한(주문 후 3일) 이내 미입금 시 자동 주문취소 처리됩니다.
+    </div>
+  </div>
+
+  <!-- 동의 + 결제 -->
+  <div class="co-agree">
+    <label style="cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+      <input type="checkbox" id="agreeChk" checked style="width:16px;height:16px;accent-color:var(--red);">
+      <span>주문내용 보증, 가격, 배송정보, 환불정책 등을 확인하였으며, 구매에 동의하시겠습니까? <b>(필수)</b></span>
+    </label>
+  </div>
+  <button class="co-pay-btn" onclick="completePayment()">결제하기</button>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <div>© 2026 북샘 교육출판. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">이용약관</a><a href="#" style="color:white;font-weight:700;">개인정보처리방침</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// 바로구매 → 로그인 후 복귀: 예약된 교재를 장바구니에 추가
+const _pendingBuy = localStorage.getItem('pendingBuyId');
+if (_pendingBuy && localStorage.getItem('isLoggedIn') === 'true') {
+  localStorage.removeItem('pendingBuyId');
+  const pb = BOOKS.find(b => b.id === parseInt(_pendingBuy));
+  if (pb && !Cart.items.some(i => i.id === pb.id)) Cart.add(pb);
+}
+
+const items = Cart.items;
+if(items.length===0) location.href='cart.html';
+
+// 주문 고객 정보 (로그인 회원) — 수정 가능 입력란에 채움
+const user = JSON.parse(localStorage.getItem('booksam_user') || '{}');
+document.getElementById('custName').value  = user.name  || '';
+document.getElementById('custPhone').value = user.phone || '010-3035-4378';
+document.getElementById('custEmail').value = user.email || '';
+
+// 주문 고객 정보 저장
+function saveCustomer() {
+  const u = JSON.parse(localStorage.getItem('booksam_user') || '{}');
+  u.name  = document.getElementById('custName').value.trim();
+  u.phone = document.getElementById('custPhone').value.trim();
+  u.email = document.getElementById('custEmail').value.trim();
+  localStorage.setItem('booksam_user', JSON.stringify(u));
+  Toast.show('주문 고객 정보가 저장되었습니다.','success');
+}
+
+// 주문 고객 정보 → 받는 고객 정보 복사
+function copyCustomer() {
+  const name  = document.getElementById('custName').value.trim();
+  const phone = document.getElementById('custPhone').value.trim().replace(/-/g,'');
+  document.getElementById('rcvName').value = name;
+  // 010 등 앞자리 분리
+  const pre = ['010','011','016','017','019'].find(p => phone.startsWith(p)) || '010';
+  document.getElementById('rcvPhonePrefix').value = pre;
+  document.getElementById('rcvPhone').value = phone.slice(pre.length);
+  Toast.show('주문 고객 정보를 가져왔습니다.','success');
+}
+
+// 주문상품 테이블
+document.getElementById('checkoutItems').innerHTML = items.map(item=>{
+  const thumb = item.img
+    ? `<img src="${item.img}" alt="${item.title}">`
+    : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:20px;">${CAT_INFO[item.cat].emoji}</div>`;
+  return `
+    <tr>
+      <td>
+        <div class="co-prod">
+          <div class="co-prod-thumb">${thumb}</div>
+          <div class="co-prod-title">${item.title}</div>
+        </div>
+      </td>
+      <td>${item.qty}</td>
+      <td class="co-strike">${fmtPrice(item.originalPrice)}원</td>
+      <td class="co-sale">${fmtPrice(item.price*item.qty)}원</td>
+      <td><button class="co-btn-sub" style="background:var(--bg2);color:var(--text2);" onclick="removeItem(${item.id})">주문삭제</button></td>
+    </tr>`;
+}).join('');
+
+const totalQty = items.reduce((s,i)=>s+i.qty,0);
+const original = items.reduce((s,i)=>s+i.originalPrice*i.qty,0);
+const sale     = items.reduce((s,i)=>s+i.price*i.qty,0);
+const shipping = sale>=15000?0:2500;
+document.getElementById('coQty').textContent      = totalQty+'개';
+document.getElementById('coOriginal').textContent = fmtPrice(original)+'원';
+document.getElementById('coDiscount').textContent = fmtPrice(original-sale)+'원';
+document.getElementById('coShipping').textContent = shipping===0?'무료':fmtPrice(shipping)+'원';
+document.getElementById('coTotal').textContent    = fmtPrice(sale+shipping)+'원';
+
+function removeItem(id) {
+  Cart.remove(id);
+  location.reload();
+}
+
+function selectPay(card) {
+  document.querySelectorAll('.co-pay-card').forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
+}
+
+function completePayment() {
+  if (!document.getElementById('agreeChk').checked) {
+    Toast.show('구매 동의에 체크해주세요.','error');
+    return;
+  }
+  Toast.show('결제가 완료되었습니다! 🎉','success');
+  Cart.items=[]; Cart.save(); Cart.updateBadge();
+  setTimeout(()=>location.href='mypage.html?tab=orders',1500);
+}
+</script>
+</body>
+</html>
