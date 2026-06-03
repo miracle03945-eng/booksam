@@ -231,7 +231,7 @@ const BOOKS = [
     kyoboUrl: 'https://product.kyobobook.co.kr/detail/S000218082160',
     desc: '다양한 유형의 지문과 심화 독해 전략으로 수준 높은 독해 능력을 키웁니다.', tags: ['신규', '중학독해', 'MP3'] },
   { id: 18, cat: 'middle', type: '참고서', subject: '영어', area: '독해', title: 'I Love Reading Level 3 (2025)',
-    author: '북샘 편집부', price: 13500, originalPrice: 15000, badge: '',
+    author: '북샘 편집부', price: 13500, originalPrice: 15000, badge: 'new',
     img: 'images/ilove-reading-3.png', publisher: '북샘 교육출판', date: '2025.02.01',
     desc: '실전 수준의 지문과 독해 전략으로 내신 최고 등급을 목표로 합니다.', tags: ['중학독해', 'MP3'] },
 
@@ -254,7 +254,7 @@ const BOOKS = [
 
   { id: 24, cat: 'high', type: '참고서', subject: '영어', area: '어법/어휘',
     title: 'Reading Booster 어법어휘',
-    author: 'YBM 편집부', price: 14000, originalPrice: 16000, badge: '',
+    author: 'YBM 편집부', price: 14000, originalPrice: 16000, badge: 'new',
     img: 'images/reading-booster-vocab.png', publisher: 'YBM', date: '2025.01.10',
     desc: '수능영어 1등급 프로젝트. 핵심개념·기출예제·실전문제 한 권으로 완성. MID-TEST 및 모의고사 10회 수록.',
     tags: ['수능', 'MP3'] },
@@ -451,22 +451,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const inner = document.createElement('div');
     inner.className = 'mega-menu-inner';
 
-    // 각 gnb-item의 dropdown-body 내용을 그대로 복제
+    // 카테고리별 아이콘·색상 매핑
+    const COL_META = {
+      '초등': { icon: '🎒', color: '#2e7d32', topBg: '#e8f5e9' },
+      '중학': { icon: '📚', color: '#1565c0', topBg: '#e3f2fd' },
+      '고등': { icon: '🎓', color: '#6a1b9a', topBg: '#f3e5f5' },
+      '자료실': { icon: '📂', color: '#e65100', topBg: '#fff3e0' },
+      '이벤트': { icon: '🎁', color: '#c62828', topBg: '#ffebee' },
+    };
+
     document.querySelectorAll('.gnb-item').forEach(item => {
       const gnbLink = item.querySelector('.gnb-link');
       const dropBody = item.querySelector('.dropdown-body');
       if (!gnbLink || !dropBody) return;
+      const label = gnbLink.textContent.trim();
+      const meta = COL_META[label] || { icon: '📌', color: '#333', topBg: '#f5f5f5' };
+
       const col = document.createElement('div');
       col.className = 'mega-col';
+      col.style.borderTop = `4px solid ${meta.color}`;
+
       const title = document.createElement('div');
       title.className = 'mega-col-title';
-      title.innerHTML = `<a href="${gnbLink.href}">${gnbLink.textContent.trim()}</a>`;
+      title.style.borderBottomColor = meta.color;
+      title.innerHTML = `<span style="font-size:20px">${meta.icon}</span><a href="${gnbLink.href}" style="color:${meta.color}">${label}</a>`;
       col.appendChild(title);
       col.appendChild(dropBody.cloneNode(true));
       inner.appendChild(col);
     });
 
+    // 하단 배너
+    const footer = document.createElement('div');
+    footer.className = 'mega-footer';
+    footer.innerHTML = `
+      <a href="books.html?sort=best" class="mega-footer-link">🏆 베스트셀러</a>
+      <a href="books.html?badge=new" class="mega-footer-link">✨ 신간 교재</a>
+      <a href="resources.html?tab=daily" class="mega-footer-link">📖 데일리 외국어</a>
+      <a href="events.html" class="mega-footer-link">🎉 이벤트</a>
+    `;
     mega.appendChild(inner);
+    mega.appendChild(footer);
     gnbBar.style.position = 'relative';
     gnbBar.appendChild(mega);
 

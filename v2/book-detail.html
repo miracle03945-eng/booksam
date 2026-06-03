@@ -865,16 +865,22 @@ if (!book) {
       <button class="detail-tab" data-tab="tab-review">리뷰 (3)</button>
     </div>
     <div id="tab-intro" class="tab-panel active tab-content">
-      <h3 style="font-size:16px;font-weight:800;margin-bottom:14px;">도서 소개</h3>
-      <p>『${book.title}』은 ${info.label} 학생들을 위한 <strong>${book.area}</strong> 집중 학습 교재입니다.</p><br>
-      <p>체계적인 단계별 학습 구성으로 기초부터 심화까지 자연스럽게 실력을 높일 수 있습니다.</p><br>
-      <h4 style="font-weight:700;margin-bottom:10px;">📌 이 책의 특징</h4>
-      <ul style="padding-left:20px;line-height:2.2;">
-        <li>단계별 학습으로 자연스러운 실력 향상</li>
-        <li>핵심 개념과 예문을 한눈에 정리</li>
-        <li>다양한 유형의 연습 문제 수록</li>
-        <li>QR코드를 통한 음원 및 해설 영상 제공</li>
-      </ul>
+      ${book.id === 1 ? `
+        <img src="images/phonics-now-1-detail.jpg"
+             alt="Phonics NOW 1 도서 소개"
+             style="width:100%;max-width:860px;display:block;margin:0 auto;border-radius:8px;">
+      ` : `
+        <h3 style="font-size:16px;font-weight:800;margin-bottom:14px;">도서 소개</h3>
+        <p>『${book.title}』은 ${info.label} 학생들을 위한 <strong>${book.area}</strong> 집중 학습 교재입니다.</p><br>
+        <p>체계적인 단계별 학습 구성으로 기초부터 심화까지 자연스럽게 실력을 높일 수 있습니다.</p><br>
+        <h4 style="font-weight:700;margin-bottom:10px;">📌 이 책의 특징</h4>
+        <ul style="padding-left:20px;line-height:2.2;">
+          <li>단계별 학습으로 자연스러운 실력 향상</li>
+          <li>핵심 개념과 예문을 한눈에 정리</li>
+          <li>다양한 유형의 연습 문제 수록</li>
+          <li>QR코드를 통한 음원 및 해설 영상 제공</li>
+        </ul>
+      `}
     </div>
     <div id="tab-contents" class="tab-panel tab-content">
       <h3 style="font-size:16px;font-weight:800;margin-bottom:14px;">목차</h3>
