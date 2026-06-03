@@ -725,6 +725,21 @@ function mp3Stop() {
   if (np) np.style.display = 'none';
 }
 
+// ── 자료 일괄 다운로드 ──
+function handleBulkDownload() {
+  const freeMats = materials.filter(m => !m.loginRequired && m.type === 'download');
+  if (!isLoggedIn) {
+    // 로그인 필요 자료가 있으면 로그인 유도
+    openLoginAlert({ id:'bulk', title:'자료 일괄 다운로드' });
+    return;
+  }
+  if (freeMats.length === 0) {
+    showToast('다운로드 가능한 자료가 없습니다.');
+    return;
+  }
+  showToast(`${freeMats.length}개 자료 일괄 다운로드가 시작됩니다.`);
+}
+
 // ── 자료 클릭 처리 ──
 function handleMaterialClick(matId) {
   const mat = materials.find(m => m.id === matId);
@@ -779,9 +794,10 @@ if (!book) {
 
   // 부가자료 카드
   const matsHtml = materials.map(m => `
-    <button class="material-card" onclick="handleMaterialClick('${m.id}')">
+    <button class="material-card${m.loginRequired ? ' mat-locked' : ''}" onclick="handleMaterialClick('${m.id}')">
       ${MAT_ICONS[m.id]}
       <span class="mat-label">${m.title}</span>
+      ${m.loginRequired ? '<span class="mat-lock-badge">🔒 로그인</span>' : ''}
     </button>`).join('');
 
   // 커버
@@ -806,34 +822,22 @@ if (!book) {
         <div class="detail-tags">${tagsHtml}</div>
         <h1 class="detail-title-new">${book.title}</h1>
 
-        <div class="detail-meta-new">
-          <div class="detail-meta-row-new">
-            <span class="meta-key-new">저자</span>
-            <span class="meta-sep-new">|</span>
-            <span class="meta-val-new">${book.author}</span>
-          </div>
-          <div class="detail-meta-row-new">
-            <span class="meta-key-new">출판사</span>
-            <span class="meta-sep-new">|</span>
-            <span class="meta-val-new">${book.publisher || '북샘 교육출판'}</span>
-          </div>
-          ${book.date ? `<div class="detail-meta-row-new">
-            <span class="meta-key-new">출간일</span>
-            <span class="meta-sep-new">|</span>
-            <span class="meta-val-new">${book.date}</span>
-          </div>` : ''}
-        </div>
+        ${book.desc ? `<p class="detail-summary">${book.desc}</p>` : ''}
 
-        <div class="detail-price-new">
-          <span class="detail-sale-price">${fmtPrice(book.price)}원</span>
-          <span class="detail-orig-price">${fmtPrice(book.originalPrice)}원</span>
-          <span class="detail-discount-badge">(${discount}% OFF)</span>
+        <div class="detail-meta-oneline">
+          <span>저자 <strong style="color:#555">${book.author}</strong></span>
+          <span class="meta-dot">·</span>
+          <span>출판사 <strong style="color:#555">${book.publisher || '북샘 교육출판'}</strong></span>
+          ${book.date ? `<span class="meta-dot">·</span><span>${book.date}</span>` : ''}
         </div>
 
         <hr class="detail-divider">
 
         <div class="materials-section">
-          <p class="materials-section-title">제공 서비스 및 부가자료</p>
+          <div class="materials-section-header">
+            <p class="materials-section-title">제공 서비스 및 부가자료</p>
+            <button class="btn-bulk-download" onclick="handleBulkDownload()">⬇ 자료 일괄 다운로드</button>
+          </div>
           <div class="materials-grid">${matsHtml}</div>
         </div>
 
@@ -842,9 +846,9 @@ if (!book) {
             onclick="toggleWish(this,${book.id})">♡</button>
           <button class="btn-detail-buy"
             onclick="${book.id === 28 ? `buyNow(${book.id})` : `goKyobo(${book.id})`}">
-            ${book.id === 28 ? '종이책 구매 &nbsp;🛒' : '종이책 구매 (교보문고) &nbsp;🛒'}
+            종이책 구매 &nbsp; ${fmtPrice(book.price)}원 &nbsp;🛒
           </button>
-          <button class="btn-detail-cart"
+          <button class="btn-detail-cart" title="장바구니 담기"
             onclick="addToCart(${book.id}); showToast('장바구니에 담겼습니다.')">🛒</button>
         </div>
       </div>
@@ -859,7 +863,6 @@ if (!book) {
       <button class="detail-tab active" data-tab="tab-intro">도서 소개</button>
       <button class="detail-tab" data-tab="tab-contents">목차</button>
       <button class="detail-tab" data-tab="tab-review">리뷰 (3)</button>
-      <button class="detail-tab" data-tab="tab-delivery">배송/교환</button>
     </div>
     <div id="tab-intro" class="tab-panel active tab-content">
       <h3 style="font-size:16px;font-weight:800;margin-bottom:14px;">도서 소개</h3>
@@ -899,25 +902,7 @@ if (!book) {
           <p style="font-size:13px;line-height:1.7;color:var(--text2);">${r.text}</p>
         </div>`).join('')}
     </div>
-    <div id="tab-delivery" class="tab-panel tab-content">
-      <h3 style="font-size:16px;font-weight:800;margin-bottom:14px;">배송/교환 안내</h3>
-      <div style="display:flex;flex-direction:column;gap:14px;">
-        <div style="padding:16px 18px;background:var(--bg);border-radius:var(--radius);border-left:3px solid var(--navy);">
-          <div style="font-weight:700;margin-bottom:8px;font-size:14px;">🚚 배송 안내</div>
-          <ul style="font-size:13px;line-height:2;color:var(--text2);padding-left:16px;">
-            <li>주문 확인 후 1~2 영업일 이내 출고</li>
-            <li>15,000원 이상 구매 시 무료 배송</li>
-          </ul>
-        </div>
-        <div style="padding:16px 18px;background:var(--bg);border-radius:var(--radius);border-left:3px solid var(--red);">
-          <div style="font-weight:700;margin-bottom:8px;font-size:14px;">🔄 교환/반품 안내</div>
-          <ul style="font-size:13px;line-height:2;color:var(--text2);padding-left:16px;">
-            <li>수령 후 7일 이내 교환/반품 가능</li>
-            <li>고객 변심 반품 시 배송비 고객 부담</li>
-          </ul>
-        </div>
-      </div>
-    </div>`;
+    `;
   document.getElementById('detailGrid').after(tabArea);
 
 
