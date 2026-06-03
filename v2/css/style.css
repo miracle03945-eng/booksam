@@ -311,7 +311,27 @@ img{max-width:100%;display:block;}
 /* ─────────── SECTION ─────────── */
 .section{padding:var(--sp-8) 0;}
 .section-compact{padding:var(--sp-5) 0;}
-.section-bg{background:var(--bg);}
+.section-bg{background:white;}
+
+/* ── Video Carousel ── */
+.vid-nav-btns{display:flex;gap:8px;}
+.vid-arrow-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid #ddd;background:white;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;line-height:1;font-weight:300;}
+.vid-arrow-btn:hover{border-color:#333;background:#f5f5f5;}
+.vid-viewport{overflow:hidden;}
+.vid-track{display:flex;gap:20px;transition:transform .45s cubic-bezier(.25,.8,.25,1);}
+.vid-card{min-width:calc(33.33% - 14px);border-radius:12px;overflow:hidden;cursor:pointer;background:white;box-shadow:0 2px 12px rgba(0,0,0,.09);transition:transform .2s,box-shadow .2s;flex-shrink:0;}
+.vid-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.15);}
+.vid-thumb-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;background:#111;}
+.vid-thumb-wrap img{width:100%;height:100%;object-fit:cover;opacity:.82;transition:opacity .2s;}
+.vid-card:hover .vid-thumb-wrap img{opacity:1;}
+.vid-play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;background:rgba(255,255,255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:#1a2e44;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:transform .2s;}
+.vid-card:hover .vid-play-btn{transform:translate(-50%,-50%) scale(1.1);}
+.vid-overlay{position:absolute;bottom:0;left:0;right:0;padding:10px 14px;background:linear-gradient(transparent,rgba(0,0,0,.72));}
+.vid-overlay-pub{font-size:11px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.5px;margin-bottom:3px;}
+.vid-overlay-title{font-size:13px;font-weight:700;color:white;line-height:1.4;}
+.vid-meta{padding:10px 14px 14px;}
+.vid-meta-title{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:3px;}
+.vid-meta-sub{font-size:12px;color:#aaa;}
 .section-header{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-5);}
 .section-eyebrow{font-size:12px;font-weight:800;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
 .section-title{font-size:18px;font-weight:900;color:var(--text);letter-spacing:-.5px;}
