@@ -309,8 +309,8 @@ img{max-width:100%;display:block;}
 .slide-pause{background:rgba(255,255,255,.15);border:none;color:rgba(255,255,255,.6);width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:2px;font-size:10px;}
 
 /* ─────────── SECTION ─────────── */
-.section{padding:var(--sp-8) 0;}
-.section-compact{padding:var(--sp-5) 0;}
+.section{padding:var(--sp-8) 0;background:white;}
+.section-compact{padding:var(--sp-5) 0;background:white;}
 .section-bg{background:white;}
 
 /* ── Video Carousel ── */

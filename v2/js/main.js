@@ -293,7 +293,7 @@ function renderBookCard(book) {
     : `<div class="book-thumb-placeholder">${info.emoji}<small>${book.type}</small></div>`;
 
   return `
-    <div class="book-card" data-id="${book.id}" onclick="location.href='book-detail.html?id=${book.id}'"
+    <div class="book-card" data-id="${book.id}" onclick="location.href='book-detail.html?id=${book.id}'">
       <div class="book-thumb">
         ${thumbContent}
         ${book.badge ? `<span class="book-badge ${book.badge}">${book.badge === 'best' ? 'BEST' : 'NEW'}</span>` : ''}
