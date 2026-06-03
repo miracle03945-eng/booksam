@@ -471,61 +471,66 @@
   </div>
 </section>
 
-<!-- ===== 나에게 맞는 교재 찾기 (큐레이션) ===== -->
+<!-- ===== 나에게 맞는 교재 찾기 + 영상 ===== -->
 <section class="section">
   <div class="container">
-    <div class="section-header">
-      <div>
-        <div class="section-eyebrow">RECOMMEND</div>
-        <h2 class="section-title">나에게 맞는 교재 찾기</h2>
-        <p class="section-sub">나에게 맞는 단계별 학습 로드맵을 확인하세요</p>
-      </div>
-    </div>
+    <div class="recommend-video-grid">
 
-    <div class="curric-char-tabs">
-      <div class="curric-char-tab" data-level="all"
-           onclick="location.href='resources.html?tab=curation&amp;level=all'">
-        <div class="char-tab-desc">인기 커리큘럼을<br>한눈에</div>
-        <div class="char-tab-avatar">👨‍🏫</div>
-        <div class="char-tab-label">전체</div>
-      </div>
-      <div class="curric-char-tab" data-level="elementary"
-           onclick="location.href='resources.html?tab=curation&amp;level=elementary'">
-        <div class="char-tab-desc">기초부터 쉽고<br>재미있게 학습하는</div>
-        <div class="char-tab-avatar">👧</div>
-        <div class="char-tab-label">초등</div>
-      </div>
-      <div class="curric-char-tab" data-level="middle"
-           onclick="location.href='resources.html?tab=curation&amp;level=middle'">
-        <div class="char-tab-desc">체계적으로 탄탄하게<br>실력을 쌓는</div>
-        <div class="char-tab-avatar">🧑‍🎒</div>
-        <div class="char-tab-label">중학</div>
-      </div>
-      <div class="curric-char-tab" data-level="high"
-           onclick="location.href='resources.html?tab=curation&amp;level=high'">
-        <div class="char-tab-desc">수능 기본기부터<br>실전 대비까지</div>
-        <div class="char-tab-avatar">👩‍🎓</div>
-        <div class="char-tab-label">고등</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== YBM 교재 소개 영상 ===== -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
+      <!-- 왼쪽: 나에게 맞는 교재 찾기 -->
       <div>
-        <div class="section-eyebrow">VIDEO</div>
-        <h2 class="section-title">YBM 교재 소개 영상</h2>
+        <div class="section-header" style="margin-bottom:var(--sp-4)">
+          <div>
+            <div class="section-eyebrow">RECOMMEND</div>
+            <h2 class="section-title">나에게 맞는 교재 찾기</h2>
+            <p class="section-sub">나에게 맞는 단계별 학습 로드맵을 확인하세요</p>
+          </div>
+        </div>
+        <div class="curric-char-tabs">
+          <div class="curric-char-tab" data-level="all"
+               onclick="location.href='resources.html?tab=curation&amp;level=all'">
+            <div class="char-tab-desc">인기 커리큘럼을<br>한눈에</div>
+            <div class="char-tab-avatar">👨‍🏫</div>
+            <div class="char-tab-label">전체</div>
+          </div>
+          <div class="curric-char-tab" data-level="elementary"
+               onclick="location.href='resources.html?tab=curation&amp;level=elementary'">
+            <div class="char-tab-desc">기초부터 쉽고<br>재미있게 학습하는</div>
+            <div class="char-tab-avatar">👧</div>
+            <div class="char-tab-label">초등</div>
+          </div>
+          <div class="curric-char-tab" data-level="middle"
+               onclick="location.href='resources.html?tab=curation&amp;level=middle'">
+            <div class="char-tab-desc">체계적으로 탄탄하게<br>실력을 쌓는</div>
+            <div class="char-tab-avatar">🧑‍🎒</div>
+            <div class="char-tab-label">중학</div>
+          </div>
+          <div class="curric-char-tab" data-level="high"
+               onclick="location.href='resources.html?tab=curation&amp;level=high'">
+            <div class="char-tab-desc">수능 기본기부터<br>실전 대비까지</div>
+            <div class="char-tab-avatar">👩‍🎓</div>
+            <div class="char-tab-label">고등</div>
+          </div>
+        </div>
       </div>
-      <div class="vid-nav-btns">
-        <button class="vid-arrow-btn" id="vidPrev">&#8249;</button>
-        <button class="vid-arrow-btn" id="vidNext">&#8250;</button>
+
+      <!-- 오른쪽: VIDEO 단일 카드 슬라이더 -->
+      <div>
+        <div class="section-header" style="margin-bottom:var(--sp-4)">
+          <div>
+            <div class="section-eyebrow">VIDEO</div>
+            <h2 class="section-title">YBM 교재 소개 영상</h2>
+          </div>
+        </div>
+        <div class="vid-single-wrap">
+          <button class="vid-side-arrow" id="vidPrev">&#8249;</button>
+          <div class="vid-single-viewport">
+            <div class="vid-single-track" id="vidTrack"></div>
+          </div>
+          <button class="vid-side-arrow" id="vidNext">&#8250;</button>
+        </div>
+        <div class="vid-dots" id="vidDots"></div>
       </div>
-    </div>
-    <div class="vid-viewport">
-      <div class="vid-track" id="vidTrack"></div>
+
     </div>
   </div>
 </section>
@@ -791,69 +796,96 @@ document.getElementById('new-books').innerHTML  = newBooks.map(renderBookCard).j
 // ── 비디오 캐러셀 ──
 (function(){
   const VIDEO_DATA = [
-    { thumb:'images/ilove-reading-1.png',   pub:'북샘 편집부', title:'I Love Reading 시리즈 완전 정복',   views:'12,847' },
-    { thumb:'images/booster-voca-basic.png', pub:'YBM 편집부',  title:'Booster Voca 50일 영단어 완성법',   views:'9,223'  },
-    { thumb:'images/reading-booster-15.png', pub:'YBM 편집부',  title:'Reading Booster 수능 1등급 전략',   views:'18,504' },
-    { thumb:'images/phonics-now-1.png',      pub:'YBM 편집부',  title:'Phonics NOW 파닉스 입문 가이드',    views:'7,631'  },
-    { thumb:'images/benchmark-reading-1-1.png', pub:'YBM 편집부', title:'Benchmark Reading 영어 독서 전략', views:'5,412' },
+    {
+      thumb:'images/ilove-reading-1.png',
+      bg:'linear-gradient(135deg,#1a1a2e 0%,#16213e 55%,#0f3460 100%)',
+      accent:'#e94560', pub:'북샘 편집부', pubColor:'#e94560',
+      label:'중학 독해', headline:'I Love Reading', sub:'시리즈 완전 정복',
+      desc:'2025 개정 교육과정 완벽 반영', views:'12,847'
+    },
+    {
+      thumb:'images/booster-voca-basic.png',
+      bg:'linear-gradient(135deg,#0d1b2a 0%,#1b4332 50%,#2d6a4f 100%)',
+      accent:'#52b788', pub:'YBM 편집부', pubColor:'#52b788',
+      label:'중학 어휘', headline:'Booster Voca', sub:'50일 영단어 완성법',
+      desc:'내신·수능 대비 필수 어휘 1000', views:'9,223'
+    },
+    {
+      thumb:'images/reading-booster-15.png',
+      bg:'linear-gradient(135deg,#1a0533 0%,#3d0066 50%,#6b21a8 100%)',
+      accent:'#c084fc', pub:'YBM 편집부', pubColor:'#c084fc',
+      label:'고등 수능', headline:'Reading Booster', sub:'수능 1등급 전략',
+      desc:'유형별 전략 + 모의고사 15회', views:'18,504'
+    },
+    {
+      thumb:'images/phonics-now-1.png',
+      bg:'linear-gradient(135deg,#1c3a6e 0%,#0e5f8c 50%,#0284c7 100%)',
+      accent:'#38bdf8', pub:'YBM 편집부', pubColor:'#38bdf8',
+      label:'초등 파닉스', headline:'Phonics NOW', sub:'파닉스 입문 가이드',
+      desc:'AR 기반 단계별 파닉스 완성', views:'7,631'
+    },
+    {
+      thumb:'images/benchmark-reading-1-1.png',
+      bg:'linear-gradient(135deg,#1a1200 0%,#3d2800 50%,#7c4d00 100%)',
+      accent:'#f59e0b', pub:'YBM 편집부', pubColor:'#f59e0b',
+      label:'초등 독해', headline:'Benchmark Reading', sub:'영어 독서 전략',
+      desc:'픽션·논픽션 균형 잡힌 독해력', views:'5,412'
+    },
   ];
+
   const track = document.getElementById('vidTrack');
+  const dotsEl = document.getElementById('vidDots');
   if (!track) return;
 
-  // 무한 루프를 위해 앞뒤 복제
-  const items = [...VIDEO_DATA, ...VIDEO_DATA, ...VIDEO_DATA];
-  track.innerHTML = items.map(v => `
-    <div class="vid-card" onclick="Toast.show('영상을 재생합니다.','success')">
-      <div class="vid-thumb-wrap">
-        <img src="${v.thumb}" alt="${v.title}">
-        <div class="vid-play-btn">&#9654;</div>
-        <div class="vid-overlay">
-          <div class="vid-overlay-pub">${v.pub}</div>
-          <div class="vid-overlay-title">${v.title}</div>
+  const N = VIDEO_DATA.length;
+
+  // 카드 렌더 (썸네일 = 영상 스타일)
+  track.innerHTML = VIDEO_DATA.map((v, i) => `
+    <div class="vid-single-card" onclick="Toast.show('영상을 재생합니다.','success')">
+      <div class="vid-thumb-art" style="background:${v.bg}">
+        <img src="${v.thumb}" class="vid-thumb-bg-img" alt="">
+        <div class="vid-thumb-gradient"></div>
+        <div class="vid-thumb-top">
+          <span class="vid-pub-badge" style="border-color:${v.accent};color:${v.accent}">${v.pub}</span>
+          <span class="vid-label-badge">${v.label}</span>
+        </div>
+        <div class="vid-play-overlay">&#9654;</div>
+        <div class="vid-thumb-bottom">
+          <div class="vid-thumb-headline">${v.headline}</div>
+          <div class="vid-thumb-sub">${v.sub}</div>
+          <div class="vid-thumb-desc">${v.desc}</div>
         </div>
       </div>
-      <div class="vid-meta">
-        <div class="vid-meta-title">${v.title}</div>
-        <div class="vid-meta-sub">조회 ${v.views}회</div>
+      <div class="vid-card-footer">
+        <div class="vid-card-footer-title">${v.headline} — ${v.sub}</div>
+        <div class="vid-card-footer-sub">조회 ${v.views}회</div>
       </div>
     </div>`).join('');
 
-  const N = VIDEO_DATA.length;
-  let cur = N; // 중간 세트에서 시작
-  let timer;
-
-  function getCardW() {
-    const c = track.firstElementChild;
-    return c ? c.offsetWidth + 20 : 320;
+  // 도트 렌더
+  if (dotsEl) {
+    dotsEl.innerHTML = VIDEO_DATA.map((_, i) =>
+      `<button class="vid-dot${i===0?' active':''}" data-i="${i}"></button>`).join('');
+    dotsEl.querySelectorAll('.vid-dot').forEach(d =>
+      d.addEventListener('click', () => { stopAuto(); goTo(+d.dataset.i); startAuto(); }));
   }
 
-  function slideTo(idx, animate) {
-    cur = idx;
-    track.style.transition = animate === false ? 'none' : 'transform .45s cubic-bezier(.25,.8,.25,1)';
-    track.style.transform = `translateX(-${cur * getCardW()}px)`;
+  let cur = 0, timer;
+
+  function goTo(idx) {
+    cur = ((idx % N) + N) % N;
+    track.style.transition = 'transform .42s cubic-bezier(.25,.8,.25,1)';
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    dotsEl?.querySelectorAll('.vid-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
   }
 
-  function next() {
-    cur++;
-    slideTo(cur, true);
-    // 끝 세트에 도달하면 소리없이 중간으로 점프
-    if (cur >= N * 2) setTimeout(() => slideTo(N, false), 460);
-  }
-  function prev() {
-    cur--;
-    slideTo(cur, true);
-    if (cur < N) setTimeout(() => slideTo(N * 2 - 1, false), 460);
-  }
-
-  slideTo(N, false);
-
-  function startAuto() { timer = setInterval(next, 4000); }
+  function startAuto() { timer = setInterval(() => goTo(cur + 1), 4500); }
   function stopAuto()  { clearInterval(timer); }
 
-  document.getElementById('vidPrev')?.addEventListener('click', () => { stopAuto(); prev(); startAuto(); });
-  document.getElementById('vidNext')?.addEventListener('click', () => { stopAuto(); next(); startAuto(); });
+  document.getElementById('vidPrev')?.addEventListener('click', () => { stopAuto(); goTo(cur - 1); startAuto(); });
+  document.getElementById('vidNext')?.addEventListener('click', () => { stopAuto(); goTo(cur + 1); startAuto(); });
 
-  const vp = track.parentElement;
+  const vp = track.closest('.vid-single-wrap');
   vp?.addEventListener('mouseenter', stopAuto);
   vp?.addEventListener('mouseleave', startAuto);
 
