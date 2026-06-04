@@ -1169,7 +1169,8 @@ img{max-width:100%;display:block;}
     background:transparent;
     border-bottom-color:rgba(255,255,255,.12);
   }
-  body.hero-page .util-logo .logo-mark{color:var(--red);}
+  body.hero-page .util-logo .logo-mark{color:white;text-shadow:0 1px 8px rgba(0,0,0,.18);}
+  body.hero-page .util-logo .logo-badge{background:rgba(255,255,255,.25);color:white;border:1px solid rgba(255,255,255,.5);}
 
   /* frosted glass 검색창 */
   body.hero-page .search-wrap{

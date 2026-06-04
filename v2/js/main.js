@@ -658,33 +658,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ── 로그인/로그아웃 헤더 토글 + 마이페이지 조건부 표시 ──
+  // ── 로그인 상태에 따른 상단 헤더 토글 ──
   const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-  const loginLink = [...document.querySelectorAll('.util-links .util-link')]
-    .find(a => a.textContent.trim() === '로그인');
-  const mypageLink = [...document.querySelectorAll('.util-links .util-link')]
-    .find(a => a.textContent.trim() === '마이페이지');
 
-  // 마이페이지 링크: 비로그인 시 숨김
-  if (mypageLink) mypageLink.style.display = loggedIn ? '' : 'none';
-
-  // 회원가입 링크: 로그인 시 숨김
-  const joinLink = [...document.querySelectorAll('.util-links .util-link')]
-    .find(a => a.textContent.trim() === '회원가입');
-  if (joinLink) joinLink.style.display = loggedIn ? 'none' : '';
-
-  // 장바구니 링크: 상단 헤더에서 항상 숨김 (고객센터 > 마이페이지에서 접근)
-  const cartLink = [...document.querySelectorAll('.util-links .util-link')]
-    .find(a => a.textContent.includes('장바구니'));
-  if (cartLink) cartLink.style.display = 'none';
-
-  if (loginLink) {
+  // 로그인 버튼: 비로그인 시 표시, 로그인 시 '로그아웃' 버튼으로 전환
+  document.querySelectorAll('.topbar-login-btn').forEach(btn => {
     if (loggedIn) {
-      // 로그인 상태 → 로그아웃으로 변경
-      loginLink.textContent = '로그아웃';
-      loginLink.removeAttribute('href');
-      loginLink.style.cursor = 'pointer';
-      loginLink.onclick = (e) => {
+      btn.textContent = '로그아웃';
+      btn.href = '#';
+      btn.style.cursor = 'pointer';
+      btn.onclick = (e) => {
         e.preventDefault();
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('booksam_user');
@@ -692,16 +675,25 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('pendingMaterialId');
         localStorage.removeItem('pendingMaterialTitle');
         localStorage.removeItem('pendingWishId');
-        localStorage.removeItem('booksam_wish');   // 로그아웃 시 관심 교재 초기화
+        localStorage.removeItem('booksam_wish');
         location.reload();
       };
     } else {
-      // 비로그인 상태 → 클릭 시 현재 URL 저장 후 로그인 페이지 이동
-      loginLink.addEventListener('click', () => {
-        localStorage.setItem('redirectAfterLogin', location.href);
-      });
+      btn.textContent = '로그인';
+      btn.href = 'login.html';
+      btn.onclick = () => { localStorage.setItem('redirectAfterLogin', location.href); };
     }
-  }
+  });
+
+  // 회원가입 버튼: 비로그인 시만 표시
+  document.querySelectorAll('.topbar-join-btn').forEach(btn => {
+    btn.style.display = loggedIn ? 'none' : '';
+  });
+
+  // 마이페이지 버튼: 로그인 시만 표시
+  document.querySelectorAll('.topbar-mypage-btn').forEach(btn => {
+    btn.style.display = loggedIn ? '' : 'none';
+  });
 
   // ── 모바일 필터 사이드바 토글 ──
   const filterSidebar = document.querySelector('.filter-sidebar');
