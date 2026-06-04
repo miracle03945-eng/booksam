@@ -67,8 +67,8 @@ img{max-width:100%;display:block;}
 .util-topbar-left{display:flex;align-items:center;gap:10px;}
 .topbar-home-btn{display:flex;align-items:center;justify-content:center;width:28px;height:28px;color:#999;text-decoration:none;border-radius:4px;transition:color .15s;}
 .topbar-home-btn:hover{color:var(--red);}
-.topbar-ytutpr{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--red);background:rgba(192,57,43,.09);border:1px solid rgba(192,57,43,.28);padding:3px 10px;border-radius:20px;text-decoration:none;transition:background .15s;white-space:nowrap;}
-.topbar-ytutpr:hover{background:rgba(192,57,43,.18);}
+.topbar-ytutpr{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:800;color:var(--red);background:rgba(192,57,43,.1);border:1.5px solid rgba(192,57,43,.4);padding:4px 12px;border-radius:20px;text-decoration:none;transition:all .15s;white-space:nowrap;box-shadow:0 1px 4px rgba(192,57,43,.12);}
+.topbar-ytutpr:hover{background:rgba(192,57,43,.2);box-shadow:0 2px 8px rgba(192,57,43,.2);}
 .topbar-ytutpr .topbar-arrow{font-size:10px;}
 .util-topbar .util-links{display:flex;align-items:center;}
 .util-topbar .util-link{font-size:12px;color:#666;padding:0 10px;border-right:1px solid #e0e0e0;text-decoration:none;white-space:nowrap;transition:color .15s;line-height:1;}
@@ -1082,12 +1082,14 @@ img{max-width:100%;display:block;}
     margin-left:10px;
     padding:6px 13px;height:auto;align-self:center;
     font-size:12px;font-weight:700;
-    color:var(--red);border:1.5px solid var(--red);
-    border-radius:4px;white-space:nowrap;
-    text-decoration:none;transition:background .15s,color .15s;flex-shrink:0;
+    color:var(--red);border:2px solid var(--red);
+    border-radius:6px;white-space:nowrap;
+    text-decoration:none;transition:all .15s;flex-shrink:0;
+    background:rgba(192,57,43,.06);
+    box-shadow:0 1px 5px rgba(192,57,43,.15);
   }
   .gnb-toeic-btn span{font-size:11px;font-weight:400;}
-  .gnb-toeic-btn:hover{background:var(--red);color:white;}
+  .gnb-toeic-btn:hover{background:var(--red);color:white;box-shadow:0 2px 10px rgba(192,57,43,.3);}
 
   /* 검색 드롭다운 오버레이 */
   .gnb-search-overlay{
@@ -1160,7 +1162,7 @@ img{max-width:100%;display:block;}
   body.hero-page[data-hero-theme="dark"] .gnb-util-link{color:rgba(255,255,255,.78);}
   body.hero-page[data-hero-theme="dark"] .gnb-search-btn{color:rgba(255,255,255,.78);}
   body.hero-page[data-hero-theme="dark"] .gnb-brand-ext{color:rgba(255,255,255,.88);border-right-color:rgba(255,255,255,.3);}
-  body.hero-page[data-hero-theme="dark"] .gnb-toeic-btn{border-color:rgba(255,255,255,.5);color:white;}
+  body.hero-page[data-hero-theme="dark"] .gnb-toeic-btn{border-color:rgba(255,255,255,.75);color:white;background:rgba(255,255,255,.18);box-shadow:0 1px 6px rgba(0,0,0,.15);}
   body.hero-page[data-hero-theme="dark"] .gnb-bar{
     background:linear-gradient(to bottom,rgba(0,0,0,.15),transparent) !important;
   }
@@ -1189,10 +1191,11 @@ img{max-width:100%;display:block;}
   body.hero-page .topbar-home-btn:hover{color:white;}
   body.hero-page .topbar-ytutpr{
     color:white;
-    background:rgba(255,255,255,.18);
-    border-color:rgba(255,255,255,.4);
+    background:rgba(255,255,255,.26);
+    border-color:rgba(255,255,255,.65);
+    box-shadow:0 1px 6px rgba(0,0,0,.12);
   }
-  body.hero-page .topbar-ytutpr:hover{background:rgba(255,255,255,.30);}
+  body.hero-page .topbar-ytutpr:hover{background:rgba(255,255,255,.38);box-shadow:0 2px 10px rgba(0,0,0,.18);}
 
   body.hero-page .util-bar{
     background:transparent;
@@ -1253,12 +1256,14 @@ img{max-width:100%;display:block;}
     margin-left:10px;
     padding:6px 13px;height:auto;align-self:center;
     font-size:13px;font-weight:700;
-    color:var(--red);border:1.5px solid var(--red);
-    border-radius:4px;white-space:nowrap;
-    text-decoration:none;transition:background .15s,color .15s;flex-shrink:0;
+    color:var(--red);border:2px solid var(--red);
+    border-radius:6px;white-space:nowrap;
+    text-decoration:none;transition:all .15s;flex-shrink:0;
+    background:rgba(192,57,43,.06);
+    box-shadow:0 1px 5px rgba(192,57,43,.15);
   }
   .gnb-toeic-btn span{font-size:11px;font-weight:400;}
-  .gnb-toeic-btn:hover{background:var(--red);color:white;}
+  .gnb-toeic-btn:hover{background:var(--red);color:white;box-shadow:0 2px 10px rgba(192,57,43,.3);}
 
   /* (gnb-toeic-btn 위에서 이미 정의됨) */
 
