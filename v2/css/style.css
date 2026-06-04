@@ -187,6 +187,11 @@ img{max-width:100%;display:block;}
 /* ── 모바일 hero-page: util-bar/topbar 투명 처리 (배너 배경과 일치) ── */
 body.hero-page .util-topbar{background:transparent;border-bottom-color:rgba(255,255,255,.15);}
 body.hero-page .util-bar{background:transparent;border-bottom-color:rgba(255,255,255,.12);}
+body.hero-page .gnb-bar{background:transparent !important;border-bottom:none !important;box-shadow:none !important;}
+body.hero-page .gnb-link{color:rgba(255,255,255,.9);}
+body.hero-page .gnb-link:hover,body.hero-page .gnb-link.active{color:white;opacity:.85;}
+body.hero-page .gnb-all{color:rgba(255,255,255,.9);}
+body.hero-page .hamburger{color:white;}
 body.hero-page .util-logo .logo-mark{color:white;text-shadow:0 1px 8px rgba(0,0,0,.18);}
 body.hero-page .util-logo .logo-badge{background:rgba(255,255,255,.25);color:white;border:1px solid rgba(255,255,255,.5);}
 body.hero-page .search-wrap{background:rgba(255,255,255,.88);border-color:rgba(255,255,255,.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(0,0,0,.12);}
