@@ -114,8 +114,8 @@ img{max-width:100%;display:block;}
 .logo-sub{font-size:13px;color:var(--text2);font-weight:500;}
 .logo-badge{background:var(--red);color:var(--white);font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.3px;flex-shrink:0;}
 
-/* 검색창: 모바일 — 로고 옆 남은 공간 채움 */
-.header-search{flex:1;min-width:0;}
+/* 검색창 */
+.header-search{flex:1;min-width:0;display:flex;align-items:center;}
 .search-wrap{
   display:flex;
   align-items:center;
@@ -123,7 +123,9 @@ img{max-width:100%;display:block;}
   border-radius:40px;
   overflow:hidden;
   background:var(--white);
-  transition:box-shadow .2s;
+  transition:box-shadow .2s,border-color .2s,background .2s;
+  max-width:520px;
+  width:100%;
 }
 .search-wrap:focus-within{box-shadow:0 0 0 3px rgba(220,38,38,.12);}
 .search-select{
@@ -980,6 +982,9 @@ img{max-width:100%;display:block;}
   /* search-select 데스크탑에서 표시 */
   .search-select{display:block;}
   .search-select2{display:block;}
+  /* 검색창 적정 너비 */
+  .search-wrap{max-width:540px;}
+  .header-search{justify-content:flex-start;}
 
   /* GNB 로고 — util-bar로 이동, gnb에서는 숨김 */
   .gnb-logo-link{display:none;}
@@ -1131,6 +1136,47 @@ img{max-width:100%;display:block;}
   body.hero-page .gnb-util-link,body.hero-page .gnb-search-btn,
   body.hero-page .gnb-brand-ext,body.hero-page .gnb-toeic-btn,
   body.hero-page .gnb-logo-link .logo-mark{transition:color 0.5s ease,opacity .15s;}
+
+  /* ── hero-page: util-topbar & util-bar 투명 처리 ── */
+  body.hero-page .util-topbar{
+    background:transparent;
+    border-bottom-color:rgba(255,255,255,.15);
+  }
+  body.hero-page .util-topbar .util-link{
+    color:rgba(255,255,255,.82);
+    border-right-color:rgba(255,255,255,.2);
+  }
+  body.hero-page .util-topbar .util-link:hover{color:white;}
+  body.hero-page .topbar-home-btn{color:rgba(255,255,255,.75);}
+  body.hero-page .topbar-home-btn:hover{color:white;}
+  body.hero-page .topbar-ytutpr{
+    color:white;
+    background:rgba(255,255,255,.18);
+    border-color:rgba(255,255,255,.4);
+  }
+  body.hero-page .topbar-ytutpr:hover{background:rgba(255,255,255,.30);}
+
+  body.hero-page .util-bar{
+    background:transparent;
+    border-bottom-color:rgba(255,255,255,.12);
+  }
+  body.hero-page .util-logo .logo-mark{color:var(--red);}
+
+  /* frosted glass 검색창 */
+  body.hero-page .search-wrap{
+    background:rgba(255,255,255,.88);
+    border-color:rgba(255,255,255,.65);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 4px 20px rgba(0,0,0,.12);
+  }
+  body.hero-page .search-wrap:focus-within{
+    background:rgba(255,255,255,.96);
+    border-color:rgba(255,255,255,.9);
+    box-shadow:0 4px 28px rgba(0,0,0,.18);
+  }
+  body.hero-page .search-select,
+  body.hero-page .search-select2{background:rgba(255,255,255,.5);}
 
   /* 스크롤 후 → 흰 배경으로 전환 */
   body.hero-page .gnb-bar.gnb-scrolled{
