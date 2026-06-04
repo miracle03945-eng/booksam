@@ -119,7 +119,7 @@ img{max-width:100%;display:block;}
 .search-wrap{
   display:flex;
   align-items:center;
-  border:2px solid var(--red);
+  border:2px solid #d0d5dd;
   border-radius:40px;
   overflow:hidden;
   background:var(--white);
@@ -127,21 +127,30 @@ img{max-width:100%;display:block;}
   max-width:520px;
   width:100%;
 }
-.search-wrap:focus-within{box-shadow:0 0 0 3px rgba(220,38,38,.12);}
-.search-select{
-  background:var(--bg);
+.search-wrap:focus-within{border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,46,68,.1);}
+/* 카테고리 셀렉트 (공통) */
+.search-select,
+.search-select2{
+  background:#f7f8fa;
   border:none;
-  border-right:1.5px solid #ddd;
-  padding:0 var(--sp-3);
+  border-right:1.5px solid #e0e0e0;
+  padding:0 10px 0 14px;
   height:40px;
   font-size:13px;
   font-family:inherit;
-  color:var(--text2);
+  color:#555;
   cursor:pointer;
   outline:none;
-  min-width:80px;
-  border-radius:40px 0 0 40px;
   flex-shrink:0;
+  appearance:auto;
+}
+.search-select{
+  min-width:100px;
+  border-radius:40px 0 0 40px;
+}
+.search-select2{
+  min-width:72px;
+  border-radius:0;
 }
 .search-select{display:none;}  /* 모바일: 카테고리 셀렉트 숨김 */
 .search-select2{display:none;} /* 모바일 숨김 */
@@ -157,18 +166,18 @@ img{max-width:100%;display:block;}
   color:var(--text);
   background:transparent;
 }
-.search-input::placeholder{color:#bbb;}
+.search-input::placeholder{color:#aaa;}
 .search-btn{
-  background:var(--red);
+  background:var(--navy);
   border:none;
-  width:34px;height:34px;min-width:34px;
-  margin:0 3px 0 0;
+  width:36px;height:36px;min-width:36px;
+  margin:0 2px 0 0;
   color:var(--white);
   display:flex;align-items:center;justify-content:center;
   border-radius:50%;cursor:pointer;flex-shrink:0;
-  transition:background .15s;
+  transition:background .15s, transform .1s;
 }
-.search-btn:hover{background:var(--red-dark);}
+.search-btn:hover{background:#243b55;transform:scale(1.05);}
 
 /* 우측 버튼: 모바일 숨김 */
 .gnb-special{display:none;}
@@ -1176,7 +1185,9 @@ img{max-width:100%;display:block;}
     box-shadow:0 4px 28px rgba(0,0,0,.18);
   }
   body.hero-page .search-select,
-  body.hero-page .search-select2{background:rgba(255,255,255,.5);}
+  body.hero-page .search-select2{background:rgba(255,255,255,.4);border-right-color:rgba(255,255,255,.4);color:#333;}
+  body.hero-page .search-btn{background:rgba(26,46,68,.75);backdrop-filter:blur(4px);}
+  body.hero-page .search-btn:hover{background:rgba(26,46,68,.92);}
 
   /* 스크롤 후 → 흰 배경으로 전환 */
   body.hero-page .gnb-bar.gnb-scrolled{
