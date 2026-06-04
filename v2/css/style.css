@@ -181,6 +181,8 @@ img{max-width:100%;display:block;}
 
 /* 우측 버튼: 모바일 숨김 */
 .gnb-special{display:none;}
+/* 검색 오버레이: 기본 숨김 (데스크탑 미디어쿼리에만 있어 모바일에서 노출되는 버그 방지) */
+.gnb-search-overlay{display:none;}
 
 /* 링크 공통 */
 .util-links{display:flex;align-items:center;}
