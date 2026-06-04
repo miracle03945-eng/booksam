@@ -303,9 +303,7 @@ function renderBookCard(book) {
         <div class="book-title">${book.title}</div>
         <div class="book-author">${book.author}</div>
         <div class="book-price">
-          <span class="price-original">${fmtPrice(book.originalPrice)}원</span>
           <span class="price-sale">${fmtPrice(book.price)}원</span>
-          <span class="price-rate">${discount}%</span>
         </div>
       </div>
       <div class="book-actions">
@@ -352,7 +350,6 @@ function renderListCard(book) {
         <div class="book-list-footer">
           <div class="book-list-price">
             <span class="book-list-price-sale">${fmtPrice(book.price)}원</span>
-            <span class="book-list-price-original">${fmtPrice(book.originalPrice)}원</span>
           </div>
           <div class="book-list-actions">
             <button class="btn-list-wish ${isWished ? 'active' : ''}" onclick="event.stopPropagation(); toggleWish(this, ${book.id})">♡</button>

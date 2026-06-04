@@ -184,6 +184,20 @@ img{max-width:100%;display:block;}
 /* 검색 오버레이: 기본 숨김 (데스크탑 미디어쿼리에만 있어 모바일에서 노출되는 버그 방지) */
 .gnb-search-overlay{display:none;}
 
+/* ── 모바일 hero-page: util-bar/topbar 투명 처리 (배너 배경과 일치) ── */
+body.hero-page .util-topbar{background:transparent;border-bottom-color:rgba(255,255,255,.15);}
+body.hero-page .util-bar{background:transparent;border-bottom-color:rgba(255,255,255,.12);}
+body.hero-page .util-logo .logo-mark{color:white;text-shadow:0 1px 8px rgba(0,0,0,.18);}
+body.hero-page .util-logo .logo-badge{background:rgba(255,255,255,.25);color:white;border:1px solid rgba(255,255,255,.5);}
+body.hero-page .search-wrap{background:rgba(255,255,255,.88);border-color:rgba(255,255,255,.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(0,0,0,.12);}
+body.hero-page .search-wrap:focus-within{background:rgba(255,255,255,.96);}
+body.hero-page .search-select,body.hero-page .search-select2{background:rgba(255,255,255,.4);border-right-color:rgba(255,255,255,.4);color:#333;}
+body.hero-page .search-btn{background:rgba(26,46,68,.75);}
+body.hero-page .util-topbar .util-link{color:rgba(255,255,255,.82);border-right-color:rgba(255,255,255,.2);}
+body.hero-page .util-topbar .util-link:hover{color:white;}
+body.hero-page .topbar-home-btn{color:rgba(255,255,255,.75);}
+body.hero-page .topbar-ytutpr{color:white;background:rgba(255,255,255,.26);border-color:rgba(255,255,255,.65);}
+
 /* 링크 공통 */
 .util-links{display:flex;align-items:center;}
 .util-link{font-size:13px;color:var(--text2);padding:0 10px;border-right:1px solid var(--border);line-height:1;transition:color .15s;white-space:nowrap;}
