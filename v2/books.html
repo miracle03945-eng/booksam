@@ -12,13 +12,15 @@
 <div class="util-topbar">
   <div class="util-topbar-inner">
     <div class="util-topbar-left">
-      <a href="https://my-first-app-drab-one.vercel.app" target="_blank" class="topbar-brand-link">YBM북스 참고서 <span class="topbar-arrow">↗</span></a>
+      <a href="index.html" class="topbar-home-btn" title="홈">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </a>
+      <a href="https://my-first-app-drab-one.vercel.app" target="_blank" class="topbar-ytutpr">Y튜터 <span class="topbar-arrow">↗</span></a>
     </div>
     <div class="util-links">
-      <a href="login.html" class="util-link">로그인</a>
-      <a href="login.html" class="util-link">회원가입</a>
+      <a href="login.html" class="util-link gnb-login-link">로그인</a>
+      <a href="mypage.html" class="util-link gnb-join-link" style="display:none">로그아웃</a>
       <a href="customer.html" class="util-link">고객센터</a>
-      <a href="cart.html" class="util-link">장바구니 <span class="cart-badge" style="display:none">0</span></a>
       <a href="mypage.html" class="util-link">마이페이지</a>
     </div>
   </div>
@@ -183,6 +185,41 @@
     <span class="breadcrumb-current" id="breadSub"></span>
   </nav>
 
+  <div class="hfilter-section">
+    <div class="hfilter-title-row">
+      <span class="hfilter-title">교재 목록</span>
+      <span class="hfilter-desc">카테고리를 선택하시면 빠르고 쉽게 교재를 찾을 수 있습니다.</span>
+    </div>
+    <div class="hfilter-pills">
+      <div class="hfilter-pill" id="hf-type" onclick="hfToggle(this)">
+        <span class="hf-label">도서 유형 선택</span>
+        <span class="pill-arrow">▼</span>
+        <div class="hfilter-dropdown" id="hfd-type">
+          <div class="hfilter-opt" data-val="" onclick="hfSelect('type','','도서 유형 선택',event)">전체</div>
+          <div class="hfilter-opt" data-val="참고서" onclick="hfSelect('type','참고서','참고서',event)">참고서</div>
+          <div class="hfilter-opt" data-val="교과서" onclick="hfSelect('type','교과서','교과서',event)">교과서</div>
+          <div class="hfilter-opt" data-val="ELT" onclick="hfSelect('type','ELT','ELT',event)">ELT</div>
+          <div class="hfilter-opt" data-val="일반" onclick="hfSelect('type','일반','일반/수험서',event)">일반/수험서</div>
+        </div>
+      </div>
+      <div class="hfilter-pill" id="hf-subject" onclick="hfToggle(this)">
+        <span class="hf-label">과목 선택</span>
+        <span class="pill-arrow">▼</span>
+        <div class="hfilter-dropdown" id="hfd-subject">
+          <div class="hfilter-opt" data-val="" onclick="hfSelect('subject','','과목 선택',event)">전체</div>
+          <div class="hfilter-opt" data-val="영어" onclick="hfSelect('subject','영어','영어',event)">영어</div>
+          <div class="hfilter-opt hf-math" data-val="수학" onclick="hfSelect('subject','수학','수학',event)">수학</div>
+        </div>
+      </div>
+      <div class="hfilter-pill" id="hf-area" onclick="hfToggle(this)">
+        <span class="hf-label">학습 영역 선택</span>
+        <span class="pill-arrow">▼</span>
+        <div class="hfilter-dropdown" id="hfd-area"></div>
+      </div>
+      <button class="hfilter-reset" onclick="hfReset()">✕ 초기화</button>
+    </div>
+  </div>
+
   <div class="books-layout" style="padding-bottom:60px;">
     <!-- 상세검색 사이드바 -->
     <aside class="filter-sidebar">
@@ -264,6 +301,7 @@ const params    = new URLSearchParams(location.search);
 const currentCat = params.get('cat') || '';
 const initType   = params.get('type') || '';
 const initArea   = params.get('area') || '';
+const initSubject = params.get('subject') || '';
 const initQ      = params.get('q') || '';
 let currentPage  = 1;
 const PAGE_SIZE  = 12;
@@ -344,6 +382,116 @@ function setView(btn, view) {
   applyFilter();
 }
 
+// ── Horizontal Filter State ──────────────────────────────────────────────────
+const HF = { type: '', subject: '', area: '' };
+const AREA_OPTS = {
+  '참고서': ['어휘','듣기','문법/구문','독해','쓰기'],
+  '교과서': ['교과서','평가문제집','자습서','지도서','자료집','교구재'],
+};
+
+function hfToggle(pill) {
+  if (pill.classList.contains('disabled')) return;
+  const wasOpen = pill.classList.contains('open');
+  document.querySelectorAll('.hfilter-pill.open').forEach(p => p.classList.remove('open'));
+  if (!wasOpen) pill.classList.add('open');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.hfilter-pill')) {
+    document.querySelectorAll('.hfilter-pill.open').forEach(p => p.classList.remove('open'));
+  }
+});
+
+function hfSelect(key, val, label, e) {
+  e.stopPropagation();
+  if (key === 'type') {
+    HF.type = val; HF.subject = ''; HF.area = '';
+    document.getElementById('hf-subject').querySelector('.hf-label').textContent = '과목 선택';
+    document.getElementById('hf-subject').classList.remove('selected');
+    document.getElementById('hf-area').querySelector('.hf-label').textContent = '학습 영역 선택';
+    document.getElementById('hf-area').classList.remove('selected');
+    // 수학 숨김 (ELT일 때)
+    document.querySelectorAll('.hf-math').forEach(el => el.style.display = val === 'ELT' ? 'none' : '');
+    // 학습 영역 드롭다운 업데이트
+    const areaOpts = AREA_OPTS[val] || [];
+    const areaDD = document.getElementById('hfd-area');
+    areaDD.innerHTML = '';
+    if (areaOpts.length) {
+      areaDD.innerHTML = '<div class="hfilter-opt" data-val="" onclick="hfSelect(\'area\',\'\',' + "'학습 영역 선택'" + ',event)">전체</div>' +
+        areaOpts.map(a => '<div class="hfilter-opt" data-val="' + a + '" onclick="hfSelect(\'area\',\'' + a + '\',\'' + a + '\',event)">' + a + '</div>').join('');
+      document.getElementById('hf-area').classList.remove('disabled');
+    } else {
+      document.getElementById('hf-area').classList.add('disabled');
+    }
+  } else if (key === 'subject') {
+    HF.subject = val;
+  } else if (key === 'area') {
+    HF.area = val;
+  }
+  const pill = document.getElementById('hf-' + key);
+  pill.querySelector('.hf-label').textContent = label || (key === 'type' ? '도서 유형 선택' : key === 'subject' ? '과목 선택' : '학습 영역 선택');
+  pill.classList.toggle('selected', !!val);
+  pill.classList.remove('open');
+  // update active opt
+  pill.querySelectorAll('.hfilter-opt').forEach(opt => opt.classList.toggle('active', opt.dataset.val === val));
+  currentPage = 1;
+  applyFilter();
+}
+
+function hfReset() {
+  HF.type = ''; HF.subject = ''; HF.area = '';
+  ['type','subject','area'].forEach(k => {
+    const pill = document.getElementById('hf-' + k);
+    const defaults = {type:'도서 유형 선택', subject:'과목 선택', area:'학습 영역 선택'};
+    pill.querySelector('.hf-label').textContent = defaults[k];
+    pill.classList.remove('selected','open','disabled');
+    pill.querySelectorAll('.hfilter-opt').forEach(o => o.classList.remove('active'));
+  });
+  document.querySelectorAll('.hf-math').forEach(el => el.style.display = '');
+  document.getElementById('hfd-area').innerHTML = '';
+  document.getElementById('hf-area').classList.add('disabled');
+  currentPage = 1;
+  applyFilter();
+}
+
+// Initialize area pill as disabled
+document.getElementById('hf-area').classList.add('disabled');
+
+// Initialize HF from URL params
+(function initHFFromParams() {
+  const typeLabels = { '참고서':'참고서', '교과서':'교과서', 'ELT':'ELT', '일반':'일반/수험서' };
+  if (initType && typeLabels[initType] !== undefined) {
+    HF.type = initType;
+    document.getElementById('hf-type').querySelector('.hf-label').textContent = typeLabels[initType] || initType;
+    document.getElementById('hf-type').classList.add('selected');
+    document.getElementById('hf-type').querySelectorAll('.hfilter-opt').forEach(opt => opt.classList.toggle('active', opt.dataset.val === initType));
+    // Hide math for ELT
+    if (initType === 'ELT') document.querySelectorAll('.hf-math').forEach(el => el.style.display = 'none');
+    // Build area dropdown
+    const areaOpts = AREA_OPTS[initType] || [];
+    const areaDD = document.getElementById('hfd-area');
+    if (areaOpts.length) {
+      areaDD.innerHTML = '<div class="hfilter-opt" data-val="" onclick="hfSelect(\'area\',\'\',' + "'학습 영역 선택'" + ',event)">전체</div>' +
+        areaOpts.map(a => '<div class="hfilter-opt" data-val="' + a + '" onclick="hfSelect(\'area\',\'' + a + '\',\'' + a + '\',event)">' + a + '</div>').join('');
+      document.getElementById('hf-area').classList.remove('disabled');
+    }
+  }
+  if (initSubject) {
+    HF.subject = initSubject;
+    document.getElementById('hf-subject').querySelector('.hf-label').textContent = initSubject;
+    document.getElementById('hf-subject').classList.add('selected');
+    document.getElementById('hf-subject').querySelectorAll('.hfilter-opt').forEach(opt => opt.classList.toggle('active', opt.dataset.val === initSubject));
+  }
+  if (initArea) {
+    HF.area = initArea;
+    document.getElementById('hf-area').querySelector('.hf-label').textContent = initArea;
+    document.getElementById('hf-area').classList.add('selected');
+    // Mark active in dropdown if opts exist
+    document.getElementById('hf-area').querySelectorAll('.hfilter-opt').forEach(opt => opt.classList.toggle('active', opt.dataset.val === initArea));
+  }
+})();
+
+// ── Filter Application ───────────────────────────────────────────────────────
 function applyFilter(page=1) {
   currentPage = page;
   const types    = getChecked('#typeFilter input');
@@ -359,6 +507,11 @@ function applyFilter(page=1) {
     if (q && !b.title.toLowerCase().includes(q) && !b.author.toLowerCase().includes(q)) return false;
     return true;
   });
+
+  // Apply horizontal filter state
+  if (HF.type) filtered = filtered.filter(b => b.type === HF.type || (HF.type === '일반' && b.type === '일반/수험서'));
+  if (HF.subject) filtered = filtered.filter(b => b.subject === HF.subject);
+  if (HF.area) filtered = filtered.filter(b => b.area === HF.area);
 
   if (currentSort==='sales')   filtered = filtered.filter(b=>b.badge==='best').concat(filtered.filter(b=>b.badge!=='best'));
   if (currentSort==='new')     filtered = filtered.filter(b=>b.badge==='new').concat(filtered.filter(b=>b.badge!=='new'));

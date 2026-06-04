@@ -61,57 +61,41 @@ img{max-width:100%;display:block;}
 .page-body{min-height:calc(100vh - 100px);}
 
 /* ─────────── TOP UTILITY BAR ─────────── */
-/* 모바일/데스크톱 모두 숨김 — 기능이 gnb로 통합됨 */
-.util-topbar{display:none !important;}
-.util-bar{display:none !important;}
+.util-topbar{display:block;}
+.util-bar{display:block;}
+.util-topbar-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:34px;}
+.util-topbar-left{display:flex;align-items:center;gap:10px;}
+.topbar-home-btn{display:flex;align-items:center;justify-content:center;width:28px;height:28px;color:#999;text-decoration:none;border-radius:4px;transition:color .15s;}
+.topbar-home-btn:hover{color:var(--red);}
+.topbar-ytutpr{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--red);background:rgba(192,57,43,.09);border:1px solid rgba(192,57,43,.28);padding:3px 10px;border-radius:20px;text-decoration:none;transition:background .15s;white-space:nowrap;}
+.topbar-ytutpr:hover{background:rgba(192,57,43,.18);}
+.topbar-ytutpr .topbar-arrow{font-size:10px;}
+.util-topbar .util-links{display:flex;align-items:center;}
+.util-topbar .util-link{font-size:12px;color:#666;padding:0 10px;border-right:1px solid #e0e0e0;text-decoration:none;white-space:nowrap;transition:color .15s;line-height:1;}
+.util-topbar .util-link:last-child{border-right:none;}
+.util-topbar .util-link:hover{color:var(--red);}
 
 /* 신규 GNB 요소: 모바일 표시 설정 */
 .topbar-brand-link{display:none;}
-.util-topbar-left{display:none;}
 
-/* ── 모바일 GNB 로고 ── */
-.gnb-logo-link{
-  display:flex;align-items:center;gap:5px;
-  flex-shrink:0;text-decoration:none;
-  order:1;padding:9px 0;
-  margin-right:6px;
-}
+/* ── 모바일 GNB 로고 (util-bar로 이동 — 모바일 숨김) ── */
+.gnb-logo-link{display:none;}
 .gnb-logo-link .logo-mark{font-size:21px;font-weight:900;color:var(--red);letter-spacing:-1px;}
 .gnb-logo-link .logo-badge{background:var(--red);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;}
 
-/* ── 모바일 Y튜터 버튼 ── */
-.gnb-logo-shortcut{
-  order:1;display:flex;align-items:center;gap:3px;
-  font-size:11px;font-weight:700;
-  color:var(--red);
-  background:rgba(192,57,43,.09);
-  border:1px solid rgba(192,57,43,.28);
-  padding:4px 10px;border-radius:20px;
-  text-decoration:none;white-space:nowrap;
-  flex-shrink:0;align-self:center;
-}
+/* ── 모바일 Y튜터 버튼 (util-topbar로 이동 — 모바일 숨김) ── */
+.gnb-logo-shortcut{display:none;}
 .gnb-logo-shortcut .sc-arrow{font-size:9px;}
 
-/* ── 모바일 GNB 우측: 돋보기만 표시 ── */
-.gnb-util-right{
-  order:1;display:flex;align-items:center;
-  margin-left:auto;padding:9px 0;flex-shrink:0;
-}
+/* ── 모바일 GNB 우측 (util-topbar로 이동 — 모바일 숨김) ── */
+.gnb-util-right{display:none;}
 .gnb-util-right .gnb-login-link,
 .gnb-util-right .gnb-join-link,
 .gnb-util-right .gnb-util-link{display:none;}
 .gnb-util-right .gnb-search-btn{display:flex;padding:6px 4px;}
 
-/* ── 모바일 토익단행본 버튼 ── */
-.gnb-toeic-btn{
-  display:flex;align-items:center;gap:3px;
-  margin-left:8px;padding:5px 10px;
-  font-size:11px;font-weight:700;
-  color:var(--red);border:1.5px solid var(--red);
-  border-radius:4px;white-space:nowrap;
-  text-decoration:none;flex-shrink:0;align-self:center;
-  transition:background .15s,color .15s;
-}
+/* ── 모바일 토익단행본 버튼 (모바일 숨김) ── */
+.gnb-toeic-btn{display:none;}
 .gnb-toeic-btn:hover{background:var(--red);color:white;}
 .gnb-toeic-btn span{font-size:10px;}
 
@@ -122,14 +106,10 @@ img{max-width:100%;display:block;}
   border-bottom:1px solid var(--border);
   padding:0 var(--sp-4);
 }
-.util-bar-inner{
-  display:flex;
-  flex-wrap:nowrap;      /* 모바일: 로고+검색 한 줄 */
-  align-items:center;
-  height:52px;           /* 모바일 헤더 높이 */
-  gap:var(--sp-2);
-}
-.util-logo{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.util-bar-inner{display:flex;flex-wrap:nowrap;align-items:center;height:64px;padding:0 16px;gap:20px;max-width:100%;margin:0 auto;}
+.util-logo{display:flex;align-items:center;gap:8px;flex-shrink:0;text-decoration:none;}
+.util-logo .logo-mark{font-size:24px;font-weight:900;color:var(--red);letter-spacing:-1px;}
+.util-logo .logo-badge{background:var(--red);color:white;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;}
 .logo-mark{font-size:20px;font-weight:900;color:var(--red);letter-spacing:-1px;}
 .logo-sub{font-size:13px;color:var(--text2);font-weight:500;}
 .logo-badge{background:var(--red);color:var(--white);font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.3px;flex-shrink:0;}
@@ -216,23 +196,15 @@ img{max-width:100%;display:block;}
 .gnb-inner{
   display:flex;
   align-items:center;
-  height:auto;
-  flex-wrap:wrap;
+  height:48px;
+  flex-wrap:nowrap;
   padding:0 var(--sp-3);
-  overflow-x:visible;
+  overflow-x:auto;
   -webkit-overflow-scrolling:touch;
   scrollbar-width:none;
 }
 .gnb-inner::-webkit-scrollbar{display:none;}
-/* 모바일 행 구분선 */
-.gnb-inner::after{
-  content:'';flex-basis:100%;order:1;
-  height:1px;background:rgba(0,0,0,.07);
-}
-/* 행 2: ☰ + nav */
-.gnb-all{order:2;}
 .gnb-nav{
-  order:2;
   display:flex;align-items:center;flex:1;gap:0;flex-wrap:nowrap;
   overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
 }
@@ -663,11 +635,29 @@ img{max-width:100%;display:block;}
 }
 
 .filter-sidebar{
-  background:var(--white);border:1px solid var(--border);
-  border-radius:var(--radius);overflow:hidden;
-  max-height:0;transition:max-height .3s ease;
+  display:none !important;
 }
-.filter-sidebar.mobile-open{max-height:2000px;}
+
+/* ─────────── HORIZONTAL FILTER BAR ─────────── */
+.hfilter-section{background:white;border:1px solid #eee;border-radius:12px;padding:20px 24px;margin-bottom:28px;}
+.hfilter-title-row{display:flex;align-items:baseline;gap:16px;margin-bottom:16px;}
+.hfilter-title{font-size:22px;font-weight:900;color:#1a2e44;letter-spacing:-.5px;}
+.hfilter-desc{font-size:13px;color:#888;}
+.hfilter-pills{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.hfilter-pill{display:flex;align-items:center;gap:6px;padding:9px 16px;background:white;border:1.5px solid #ddd;border-radius:24px;font-size:14px;font-weight:600;color:#444;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:inherit;user-select:none;position:relative;}
+.hfilter-pill:hover{border-color:var(--red);color:var(--red);}
+.hfilter-pill.selected{border-color:var(--red);color:var(--red);background:#fff8f8;}
+.hfilter-pill.disabled{background:#f5f5f5;border-color:#e0e0e0;color:#bbb;cursor:not-allowed;}
+.hfilter-pill .pill-arrow{font-size:10px;color:#999;transition:transform .2s;}
+.hfilter-pill.open .pill-arrow{transform:rotate(180deg);}
+.hfilter-pill.selected .pill-arrow{color:var(--red);}
+.hfilter-dropdown{position:absolute;top:calc(100% + 6px);left:0;min-width:160px;background:white;border:1.5px solid #ddd;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:500;overflow:hidden;display:none;}
+.hfilter-pill.open .hfilter-dropdown{display:block;}
+.hfilter-opt{padding:10px 16px;font-size:13px;color:#333;cursor:pointer;transition:background .1s,color .1s;}
+.hfilter-opt:hover{background:#fff0f0;color:var(--red);}
+.hfilter-opt.active{font-weight:700;color:var(--red);background:#fff8f8;}
+.hfilter-reset{padding:9px 16px;background:none;border:1.5px solid #e0e0e0;border-radius:24px;font-size:13px;font-weight:600;color:#888;cursor:pointer;transition:all .15s;font-family:inherit;}
+.hfilter-reset:hover{border-color:#333;color:#333;}
 .filter-header{background:var(--navy);color:white;padding:13px var(--sp-4);font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;}
 .filter-group{border-bottom:1px solid var(--bg2);padding:14px var(--sp-4);}
 .filter-group:last-child{border-bottom:none;}
@@ -978,22 +968,24 @@ img{max-width:100%;display:block;}
   /* Container */
   .container{max-width:1280px;margin:0 auto;padding:0 var(--sp-10);}
 
-  /* ─── GNB = 통합 단일 헤더 (로고 + 네비 + 유틸) ─── */
+  /* ─── GNB = 3행 헤더: util-topbar + util-bar + gnb-bar ─── */
 
-  /* GNB 로고 */
-  .gnb-logo-link{
-    display:flex;align-items:center;gap:8px;
-    margin-right:var(--sp-5);
-    flex-shrink:0;text-decoration:none;
-  }
-  .gnb-logo-link .logo-mark{font-size:34px;font-weight:900;color:var(--red);letter-spacing:-1.5px;}
-  .gnb-logo-link .logo-badge{background:var(--red);color:white;font-size:13px;font-weight:700;padding:3px 11px;border-radius:20px;}
+  /* util-topbar desktop */
+  .util-topbar-inner{max-width:1280px;padding:0 40px;height:36px;}
 
-  /* GNB 우측 유틸 */
-  .gnb-util-right{
-    display:flex;align-items:center;gap:0;
-    margin-left:auto;flex-shrink:0;
-  }
+  /* util-bar desktop */
+  .util-bar-inner{max-width:1280px;padding:0 40px;height:64px;}
+  .util-logo .logo-mark{font-size:28px;}
+
+  /* search-select 데스크탑에서 표시 */
+  .search-select{display:block;}
+  .search-select2{display:block;}
+
+  /* GNB 로고 — util-bar로 이동, gnb에서는 숨김 */
+  .gnb-logo-link{display:none;}
+
+  /* GNB 우측 유틸 — util-topbar로 이동, gnb에서는 숨김 */
+  .gnb-util-right{display:none;}
   .gnb-brand-ext{
     font-size:12px;font-weight:700;color:var(--red);
     padding:0 14px 0 0;margin-right:14px;
@@ -1004,25 +996,9 @@ img{max-width:100%;display:block;}
   .gnb-brand-ext span{font-size:11px;font-weight:400;}
   .gnb-brand-ext:hover{opacity:.75;}
 
-  /* ── 로고 옆 Y튜터 바로가기 ── */
-  .gnb-logo-shortcut{
-    order:1;                        /* 로고(order:1)와 같은 행 */
-    display:flex;align-items:center;gap:4px;
-    margin-left:var(--sp-2);
-    align-self:center;
-    font-size:15px;font-weight:700;
-    color:var(--red);
-    background:rgba(192,57,43,.09);
-    border:1px solid rgba(192,57,43,.28);
-    padding:6px 15px;
-    border-radius:20px;
-    text-decoration:none;
-    white-space:nowrap;
-    transition:background .15s, color .15s, border-color .15s;
-    flex-shrink:0;
-  }
+  /* ── Y튜터 바로가기 — util-topbar로 이동, gnb에서는 숨김 ── */
+  .gnb-logo-shortcut{display:none;}
   .gnb-logo-shortcut .sc-arrow{font-size:10px;font-weight:400;}
-  .gnb-logo-shortcut:hover{background:rgba(192,57,43,.18);}
 
   /* hero-page dark 테마: 흰색 pill */
   body.hero-page[data-hero-theme="dark"] .gnb-logo-shortcut{
@@ -1072,7 +1048,7 @@ img{max-width:100%;display:block;}
 
   /* 검색 드롭다운 오버레이 */
   .gnb-search-overlay{
-    position:fixed;top:96px;left:0;right:0;
+    position:fixed;top:150px;left:0;right:0;
     background:white;
     border-bottom:2px solid var(--red);
     padding:18px 40px;
@@ -1168,60 +1144,36 @@ img{max-width:100%;display:block;}
   body.hero-page .gnb-bar.gnb-scrolled .gnb-search-btn{color:#666;}
   body.hero-page .gnb-bar.gnb-scrolled .gnb-toeic-btn{border-color:var(--red);color:var(--red);}
 
-  /* GNB — 2행 헤더 (로고+유틸 위 / 네비 아래) */
+  /* GNB — 단일 행 (3행 헤더의 3번째 행) */
   .gnb-bar{box-shadow:0 2px 8px rgba(0,0,0,.08);}
   .gnb-inner{
     max-width:1280px;margin:0 auto;
-    height:auto;
+    height:52px;
     padding:0 var(--sp-10);
     overflow-x:visible;
     align-items:center;
-    flex-wrap:wrap;        /* 2행 레이아웃 활성화 */
+    flex-wrap:nowrap;
   }
 
-  /* ── 행 1: 로고(좌) + 유틸(우) ── */
-  .gnb-logo-link{ order:1; flex-shrink:0; padding:10px 0; margin-right:var(--sp-5); }
-  .gnb-logo-link .logo-mark{font-size:34px;}
-  .gnb-logo-link .logo-badge{font-size:13px;padding:3px 11px;}
-  .gnb-util-right{ order:1; margin-left:auto; flex-shrink:0; padding:10px 0; }
-  /* 데스크탑에서는 util-right 내 링크들 모두 표시 */
-  .gnb-util-right .gnb-login-link,
-  .gnb-util-right .gnb-join-link,
-  .gnb-util-right .gnb-util-link{display:block;}
-  /* 행 구분선 — ::after가 100% 너비를 차지해 행 강제 분리 */
-  .gnb-inner::after{
-    content:'';flex-basis:100%;order:1;
-    height:1px;
-    background:rgba(0,0,0,.07);
-  }
-  body.hero-page .gnb-inner::after{background:rgba(255,255,255,.15);}
-  body.hero-page[data-hero-theme="light"] .gnb-inner::after{background:rgba(26,46,68,.1);}
-
-  /* ── 행 2: 전체카테고리 + 네비 ── */
-  .gnb-all{ order:2; font-size:16px;font-weight:700;padding:0 12px 0 0;margin-right:8px;gap:6px; }
+  /* 단일 행: 전체카테고리 + 네비 */
+  .gnb-all{ font-size:16px;font-weight:700;padding:0 12px 0 0;margin-right:8px;gap:6px; }
   .hamburger{font-size:24px;}
-  .gnb-nav{ order:2; flex:1; overflow-x:visible; }
-  .gnb-link{ padding:0 22px; height:58px; font-size:20px; letter-spacing:-.3px; }
-  .gnb-logo-shortcut{font-size:15px;padding:6px 15px;}
-  .gnb-toeic-btn{font-size:16px;padding:9px 18px;margin-left:10px;}
-
-  /* GNB 이벤트 옆 외부 링크 버튼 (override) */
+  .gnb-nav{ flex:1; overflow-x:visible; }
+  .gnb-link{ padding:0 16px; height:52px; font-size:15px; letter-spacing:-.3px; }
+  /* 토익 버튼: gnb에 표시 */
   .gnb-toeic-btn{
     display:flex;align-items:center;gap:4px;
     margin-left:10px;
-    padding:9px 18px;
-    height:auto;align-self:center;
-    font-size:16px;font-weight:700;
-    color:var(--red);
-    border:1.5px solid var(--red);
-    border-radius:4px;
-    white-space:nowrap;
-    text-decoration:none;
-    transition:background .15s,color .15s;
-    flex-shrink:0;
+    padding:6px 13px;height:auto;align-self:center;
+    font-size:13px;font-weight:700;
+    color:var(--red);border:1.5px solid var(--red);
+    border-radius:4px;white-space:nowrap;
+    text-decoration:none;transition:background .15s,color .15s;flex-shrink:0;
   }
   .gnb-toeic-btn span{font-size:11px;font-weight:400;}
   .gnb-toeic-btn:hover{background:var(--red);color:white;}
+
+  /* (gnb-toeic-btn 위에서 이미 정의됨) */
 
   /* 데스크톱 드롭다운 — 가로 풀Width 바 */
   .gnb-item{position:static;}  /* gnb-bar 기준으로 배치되도록 */
@@ -1387,11 +1339,9 @@ img{max-width:100%;display:block;}
   .char-tab-avatar{font-size:38px;}
   .char-tab-label{font-size:15px;}
 
-  /* Filter */
-  .books-layout{display:grid;grid-template-columns:220px 1fr;gap:var(--sp-6);align-items:start;}
+  /* Filter — sidebar hidden, horizontal filter used instead */
   .filter-mobile-toggle{display:none !important;}
-  .filter-sidebar{position:sticky;top:70px;max-height:none;overflow:visible;border:1px solid var(--border);}
-  .filter-sidebar.mobile-open{max-height:none;}
+  .books-layout{display:block;}
 
   /* Book detail */
   .book-detail-grid{grid-template-columns:220px 1fr;gap:var(--sp-10);}
